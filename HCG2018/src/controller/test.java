@@ -1,4 +1,5 @@
 package controller;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,7 +29,7 @@ public class test {
         try {
         	// create workbook to open file
             workbook = Workbook.getWorkbook(new File(fileName));
-            // trong 1 file excel co nhieu sheet, chỉ định rõ đọc sheet nào
+            // trong 1 file excel co nhieu sheet, chiÌ‰ Ä‘iÌ£nh roÌƒ Ä‘oÌ£c sheet naÌ€o
             Sheet sheet = workbook.getSheet(0);
             // get number row and col contain data
             int rows = sheet.getRows();
@@ -42,11 +43,11 @@ public class test {
 //                    System.out.println(name1);
 //                    
 //            }
-            // cell là một ô 
+            // cell laÌ€ mÃ´Ì£t Ã´ 
             Cell cell = sheet.getCell(1, 0);
             String xx = cell.getContents();
             System.out.println(xx);
-//            String ck = "Một buổi chiều êm đềm quá, ";
+//            String ck = "MÃ´Ì£t buÃ´Ì‰i chiÃªÌ€u Ãªm Ä‘ÃªÌ€m quaÌ�, ";
 //            if (xx.equals(ck))
 //            { System.out.println(true);}
 //            else
@@ -69,15 +70,15 @@ public class test {
             workbook = Workbook.createWorkbook(new File(fileName));
  
             // create sheet
-            WritableSheet sheet1 = workbook.createSheet("Thống kê", 0);
+            WritableSheet sheet1 = workbook.createSheet("Thống kê", 0);
  
             // create Label and add to sheet
-            //sheet1.addCell(new Label(3, 0, "DANH SÁCH SINH VIÊN TIÊU BIỂU"));
+            //sheet1.addCell(new Label(3, 0, "DANH SÃ�CH SINH VIÃŠN TIÃŠU BIá»‚U"));
             Date dnow = new Date();
             SimpleDateFormat fttt = new SimpleDateFormat ("MM-yyyy");
     	    String month =  fttt.format(dnow);
             // row begin write data
-            sheet1.addCell(new Label(1, 0, "Bản thống kê số lượt win trong tháng "+month));
+            sheet1.addCell(new Label(1, 0, "Bảng thống kê kết quả ai win trong tháng "+month));
             int rowBegin = 1;
             int colBegin = 1;
             
@@ -98,15 +99,15 @@ public class test {
             // close
             workbook.close();
         } catch (IOException e) {
-            System.out.println("Không tìm thấy file");
+            System.out.println("Không tìm thấy file");
         } catch (RowsExceededException e) {
-        	System.out.println("Không tìm thấy file");
+        	System.out.println("Không tìm thấy file");
         } catch (WriteException e) {
-        	System.out.println("Không tìm thấy file");
+        	System.out.println("Không tìm thấy file");
         }
        
     }
-    // mo file excel va ghi de mot ô
+    // mo file excel va ghi de mot 
     public static void openAndWriteFileExcel(String fileName, int dongghi) {
         Workbook workbook;
         WritableWorkbook writeWorkbook;
@@ -183,7 +184,7 @@ public class test {
         
     }
     
-    // kiểm tra tồn tại của một file
+    // kiểm tra tồn tại một file
     public static boolean checkFileExcel(String fileName) {
     	File file = new File(fileName);
         return file.exists();
@@ -192,7 +193,7 @@ public class test {
 		 
 		//readFileExcel("G:\\nguyenvanquan7826.xls");
 		
-		openAndWriteContinusFileExcel("G:\\nguyenvanquan7826.xls", "Một buổi chiều êm đềm quá, lòng bỗng nhớ về một nơi xa, Hà nội bình yêu quá, nơi có những bản tình ca.");
+		openAndWriteContinusFileExcel("E:\\nguyenvanquan7826.xls", "cái gì đấy");
 	}
 	
 	

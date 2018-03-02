@@ -21,7 +21,7 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Color;
 
-public class OpenAdd {
+public class OpenApp {
 
 	private JFrame frmChonViTri;
 	private JTextField textField;
@@ -40,7 +40,7 @@ public class OpenAdd {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					OpenAdd window = new OpenAdd();
+					OpenApp window = new OpenApp();
 					window.frmChonViTri.setVisible(true);
 					
 				} catch (Exception e) {
@@ -53,7 +53,7 @@ public class OpenAdd {
 	/**
 	 * Create the application.
 	 */
-	public OpenAdd() {
+	public OpenApp() {
 		initialize();
 	}
 
@@ -95,8 +95,25 @@ public class OpenAdd {
 			    //    
 			    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) { 
 			      
-			    	textField.setText(chooser.getSelectedFile().getAbsolutePath());
-			        test.openAndWriteContinusFileExcel("G:\\nguyenvanquan7826.xls",textField.getText());
+			    	String path = chooser.getSelectedFile().getAbsolutePath();
+			        
+			        if (path!=null)
+			        {
+			        	String cklink = path+"\\savelink.xls";
+			        	if(test.checkFileExcel(cklink))
+			        	{
+			        		textField.setText(chooser.getSelectedFile().getAbsolutePath());
+			        		test.openAndWriteContinusFileExcel(cklink,path+"\\savelink.xls");
+			        		frmChonViTri.setVisible(false);
+					        //BeforeOpen open = new BeforeOpen();
+							//open.main(null);
+				        	new BeforeOpen().main(cklink);
+			        	}
+			        	else
+			        	{
+			        		JOptionPane.showMessageDialog(null, "Folder không chứa các file cần thiết","Lỗi", JOptionPane.ERROR_MESSAGE);
+			        	}
+			        }
 
 			      }
 			    else {

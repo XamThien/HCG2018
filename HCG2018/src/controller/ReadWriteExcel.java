@@ -21,7 +21,7 @@ import jxl.write.biff.RowsExceededException;
  */
 public class ReadWriteExcel {
  
-    private final String fileName = "G:\\\\thongke23.xls";
+    private final String fileName = "G:/HeChuyenGia/HCG2018/Book1.xls";
  
     // data to write file
     private Object[][] data = { { "STT", "Họ và tên", "Điểm", "Xếp loại" },
@@ -84,14 +84,13 @@ public class ReadWriteExcel {
  
             System.out.println("Data in file:");
             // read data in each cell
-            for (int row = 0; row < rows; row++) {
-                //for (int col = 0; col < cols; col++) {
-                    Cell cell = sheet.getCell(0, row);
-                    if(cell.getContents().equals("Huỷ"))
-					{
-						System.out.println(cell.getContents()+cell.getRow());
-					}
-                //}
+            for (int col = 0; col < cols; col++) {
+            	for (int row = 0; row < rows; row++) {
+                    Cell cell = sheet.getCell(col, row);
+                    
+						System.out.println(cell.getContents());
+					
+                }
                 System.out.println("\n");
             }
             System.out.println( "dòng hiện tại " + rows);
