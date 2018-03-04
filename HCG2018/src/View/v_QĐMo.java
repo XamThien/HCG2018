@@ -12,11 +12,13 @@ import controller.PhuongAnList;
 import controller.Phuongan;
 
 import javax.swing.JRadioButton;
+import javax.swing.JSlider;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
 
 public class v_QĐMo {
 
@@ -45,7 +47,7 @@ public class v_QĐMo {
 		});
 	}
 
-	/**
+	/**namePAs,arr,nameMTs
 	 * Create the application.
 	 */
 	public v_QĐMo(ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs) {
@@ -66,71 +68,88 @@ public class v_QĐMo {
 		frmChnThi.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Ch\u1ECDn th\u00E1i \u0111\u1ED9 mu\u1ED1n quy\u1EBFt \u0111\u1ECBnh:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(28, 48, 434, 150);
+		panel.setBorder(new TitledBorder(null, "L\u01B0\u0323a cho\u0323n tra\u0323ng tha\u0301i", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(37, 31, 422, 158);
 		frmChnThi.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JRadioButton rd1 = new JRadioButton("Bi quan");
-		rd1.setBounds(23, 36, 80, 18);
-		panel.add(rd1);
+		JSlider slider = new JSlider(JSlider.HORIZONTAL, 10, 50, 30);
+		slider.setBounds(42, 45, 345, 73);
+		panel.add(slider);
+		slider.setMinorTickSpacing(10);
+		//slider.setMajorTickSpacing(10);
+		slider.setPaintTicks(true);
+		slider.setPaintLabels(true);
 		
-		JRadioButton rd2 = new JRadioButton("Giữa bi quan và trạng thái trung gian");
-		rd2.setBounds(179, 36, 230, 18);
-		panel.add(rd2);
+		JLabel lblBiQuan = new JLabel("Bi quan");
+		lblBiQuan.setBounds(23, 45, 55, 16);
+		panel.add(lblBiQuan);
 		
-		JRadioButton rd3 = new JRadioButton("Trạng thái trung gian");
-		rd3.setBounds(23, 74, 148, 18);
-		panel.add(rd3);
+		JLabel lblTrungGian = new JLabel("Trung gian");
+		lblTrungGian.setBounds(185, 45, 68, 16);
+		panel.add(lblTrungGian);
 		
-		JRadioButton rd4 = new JRadioButton("Giữa trạng thái trung gian và lạc quan");
-		rd4.setBounds(179, 74, 230, 18);
-		panel.add(rd4);
+		JLabel lblLacQuan = new JLabel("Lạc quan");
+		lblLacQuan.setBounds(350, 45, 55, 16);
+		panel.add(lblLacQuan);
 		
-		JRadioButton rd5 = new JRadioButton("Lạc quan");
-		rd5.setBounds(23, 109, 148, 18);
-		panel.add(rd5);
-		ButtonGroup btnGroup2 = new ButtonGroup();
-		btnGroup2.add(rd1);
-		btnGroup2.add(rd2);
-		btnGroup2.add(rd3);
-		btnGroup2.add(rd4);
-		btnGroup2.add(rd5);
+		// hien thi thuoc do cua slider 0 10 20 30 40 50 ..
+		//slider.setLabelTable(slider.createStandardLabels(10));
 		
 		JButton btnNewButton = new JButton("Xác nhận");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int sel = 0;
+				if (slider.getValue()==10)
+				{
+					sel = 1;
+				}
+				if (slider.getValue()==30)
+				{
+					sel = 3;
+				}
+				if (slider.getValue()==50)
+				{
+					sel = 5;
+				}
+				if (slider.getValue()>10 && slider.getValue()<30)
+				{
+					sel = 2;
+				}
+				if (slider.getValue()>30 && slider.getValue()<50)
+				{
+					sel = 4;
+				}
 				PhuongAnList paList = new PhuongAnList();
 				String dA = "";
-				if(rd1.isSelected())
+				switch (sel)
 				{
+				case 1:
 					frmChnThi.setVisible(false);
 					dA=paList.Maximin(namePAs,arr);
 					new ketqua().main(paList.DisplayPA(arr,dA));
-				}
-				if(rd2.isSelected())
-				{
+					break;
+				case 2:
 					dA = paList.QDMoBTG(namePAs,arr);
 					frmChnThi.setVisible(false);
 					new ketqua().main(paList.DisplayPA(arr,dA));
-				}
-				if(rd3.isSelected())
-				{
+					break;
+				case 3:
 					frmChnThi.setVisible(false);
 					new v_QDMoTG().main(namePAs,arr,nameMTs);
-				}
-				if(rd4.isSelected())
-				{
+					break;
+				case 4:
 					dA = paList.QDMoTGL(namePAs,arr);
 					frmChnThi.setVisible(false);
 					new ketqua().main(paList.DisplayPA(arr,dA));
-				}
-				if(rd5.isSelected())
-				{
+					break;
+				case 5:
 					frmChnThi.setVisible(false);
 					dA=paList.Maximax(namePAs,arr);
 					new ketqua().main(paList.DisplayPA(arr,dA));
+					break;
 				}
+				
 			}
 		});
 		btnNewButton.setBounds(233, 210, 113, 37);
@@ -149,5 +168,9 @@ public class v_QĐMo {
 		});
 		btnong.setBounds(358, 210, 104, 37);
 		frmChnThi.getContentPane().add(btnong);
+		
+		
+		
+		
 	}
 }

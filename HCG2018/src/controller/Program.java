@@ -16,7 +16,7 @@ public class Program {
 			PhuongAnList paList = new PhuongAnList();
 			paList.ReadFromExcel(fileName);
 			System.out.println("Danh sach cac muc tieu cho viec chon lua "+ paList.getNameDSS());
-			paList.Choose("0");
+			paList.Choose("0 1");
 			System.out.println("Danh sach cac phuong phap lua chon: ");
 			System.out.println("1. Phuong phap Maximin");
 			System.out.println("2. Phuong phap Maximax");
@@ -50,7 +50,9 @@ public class Program {
 			case 5:
 				double xx = 34.23;
 				float zz = (float)xx;
-				dA=paList.Bayes(zz,namePAs,arr,nameMTs);
+				ArrayList<Float> xacSuat = new ArrayList<Float>();
+				xacSuat.add(zz);
+				dA=paList.Bayes(xacSuat,namePAs,arr,nameMTs);
 				break;
 			case 6:
 				dA=paList.Laplace(namePAs,arr,nameMTs);
@@ -60,7 +62,9 @@ public class Program {
 				// 0,3 không phải là kiểu float ????
 				double x = 0.3;
 				float z = (float)x;
-				dA=paList.Hodges_Lehmann(z,23,namePAs,arr,nameMTs);
+				ArrayList<Float> xacSuatt = new ArrayList<Float>();
+				xacSuatt.add(z);
+				dA=paList.Hodges_Lehmann(z,xacSuatt,namePAs,arr,nameMTs);
 				break;
 			case 8:
 				dA=paList.QDMo(namePAs,arr,nameMTs);

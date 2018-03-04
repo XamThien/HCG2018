@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 import javax.swing.border.TitledBorder;
 
 import controller.PhuongAnList;
@@ -17,11 +18,11 @@ import javax.swing.UIManager;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class v_HURWICZ {
 
 	private JFrame frmPhngPhapHurwicz;
-	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -66,56 +67,17 @@ public class v_HURWICZ {
 		frmPhngPhapHurwicz.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPhngPhapHurwicz.getContentPane().setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Nh\u1EADp h\u1EC7 s\u1ED1 l\u1EA1c quan anpha: t\u1EEB 0 -> 100", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(26, 52, 379, 105);
-		frmPhngPhapHurwicz.getContentPane().add(panel);
-		panel.setLayout(null);
-		
-		textField = new JTextField();
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setBounds(10, 38, 199, 34);
-		panel.add(textField);
-		textField.setColumns(10);
-		
-		JButton btnNewButton = new JButton("Xác nhận");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (textField.getText().equals(null))
-				{
-					JOptionPane.showMessageDialog(null, "Bạn Chưa Nhập Hệ Số Lạc Quan !!!!","Lỗi", JOptionPane.ERROR_MESSAGE);
-				}
-				else
-				{
-					try
-					{
-						int anpha = Integer.parseInt(textField.getText());
-						if (anpha >0 && anpha< 100)
-						{
-							PhuongAnList paList = new PhuongAnList();
-							
-							String dA = paList.Hurwicz(namePAs,arr,anpha);
-							
-							frmPhngPhapHurwicz.setVisible(false);
-							new ketqua().main(paList.DisplayPA(arr,dA));
-							
-							
-						}
-						else
-						{
-							JOptionPane.showMessageDialog(null, "Hệ số lạc quan phải lớn hơn 0 và nhở hơn 100 !!!!","Lỗi", JOptionPane.ERROR_MESSAGE);
-						}	
-						
-					}
-					catch (Exception ex)
-					{
-						JOptionPane.showMessageDialog(null, "Không đúng định dạng !!!!","Lỗi", JOptionPane.ERROR_MESSAGE);
-					}
-				}
-			}
-		});
-		btnNewButton.setBounds(259, 38, 110, 34);
-		panel.add(btnNewButton);
+		JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
+		slider.setBorder(new TitledBorder(null, "Cho\u0323n h\u00EA\u0323 s\u00F4\u0301 la\u0323c quan :", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(59, 59, 59)));
+		slider.setBounds(21, 36, 395, 110);
+		slider.setMinorTickSpacing(1);
+	    slider.setMajorTickSpacing(10);
+	    slider.setPaintTicks(true);
+	    slider.setPaintLabels(true);
+
+	    // hien thi thuoc do cua slider 0 10 20 30 40 50 ..
+	    slider.setLabelTable(slider.createStandardLabels(10));
+	    frmPhngPhapHurwicz.getContentPane().add(slider);
 		
 		JButton btnNewButton_1 = new JButton("Thoát");
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -130,5 +92,29 @@ public class v_HURWICZ {
 		});
 		btnNewButton_1.setBounds(288, 169, 117, 35);
 		frmPhngPhapHurwicz.getContentPane().add(btnNewButton_1);
+		
+		JButton btnNewButton = new JButton("Xác nhận");
+		btnNewButton.setBounds(155, 169, 110, 34);
+		frmPhngPhapHurwicz.getContentPane().add(btnNewButton);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int anpha = slider.getValue();
+				if (anpha >0 && anpha< 100)
+				{
+					PhuongAnList paList = new PhuongAnList();
+					
+					String dA = paList.Hurwicz(namePAs,arr,anpha);
+					
+					frmPhngPhapHurwicz.setVisible(false);
+					new ketqua().main(paList.DisplayPA(arr,dA));
+					
+					
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Hệ số lạc quan phải lớn hơn 0 và nhở hơn 100 !!!!","Lỗi", JOptionPane.ERROR_MESSAGE);
+				}	
+			}
+		});
 	}
 }

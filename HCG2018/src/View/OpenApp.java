@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.awt.event.ActionEvent;
 import java.awt.Window.Type;
+import javax.swing.JCheckBox;
 
 public class OpenApp {
 
@@ -81,26 +82,23 @@ public class OpenApp {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Ca\u0301c mu\u0323c ti\u00EAu l\u01B0\u0323a cho\u0323n :", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(35, 105, 502, 68);
+		panel.setBounds(35, 105, 502, 72);
 		frmHChuynGia.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JRadioButton mt_rd2 = new JRadioButton("Gần nhà");
-		mt_rd2.setBounds(198, 27, 109, 23);
-		panel.add(mt_rd2);
 		
-		JRadioButton mt_rd1 = new JRadioButton("Lương");
-		mt_rd1.setBounds(37, 27, 109, 23);
-		panel.add(mt_rd1);
 		
-		JRadioButton mt_rd3 = new JRadioButton("Độ hấp dẫn");
-		mt_rd3.setBounds(355, 27, 109, 23);
-		panel.add(mt_rd3);
+		JCheckBox chckbx1 = new JCheckBox("Lương");
+		chckbx1.setBounds(37, 29, 104, 18);
+		panel.add(chckbx1);
 		
-		ButtonGroup btnGroup1 = new ButtonGroup();
-		btnGroup1.add(mt_rd3);
-		btnGroup1.add(mt_rd2);
-		btnGroup1.add(mt_rd1);
+		JCheckBox chckbx2 = new JCheckBox("Gần nhà");
+		chckbx2.setBounds(198, 28, 104, 18);
+		panel.add(chckbx2);
+		
+		JCheckBox chckbx3 = new JCheckBox("Độ hấp dẫn");
+		chckbx3.setBounds(355, 29, 104, 18);
+		panel.add(chckbx3);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Ph\u01B0\u01A1ng pha\u0301p l\u01B0\u0323a cho\u0323n :", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -155,15 +153,10 @@ public class OpenApp {
 			public void actionPerformed(ActionEvent e) {
 				// check panel 1============================================================================================================
 				
-				int dem1=0;
-				for (Enumeration<AbstractButton> buttons = btnGroup1.getElements(); buttons.hasMoreElements();) {
-		            AbstractButton button = buttons.nextElement();
-		            if (!button.isSelected()) {
-		                dem1++;
-		            }
-		        }
-				if(dem1==btnGroup1.getButtonCount())
+				boolean ck = true;
+				if(!chckbx1.isSelected() && !chckbx2.isSelected() && !chckbx3.isSelected())
 				{
+					ck = false;
 					JOptionPane.showMessageDialog(null, "Bạn Chưa Chọn Các Mục Tiêu Lựa Chọn!!!!","Lỗi", JOptionPane.ERROR_MESSAGE);
 				}
 				
@@ -181,7 +174,7 @@ public class OpenApp {
 					JOptionPane.showMessageDialog(null, "Bạn Chưa Chọn Phương Pháp Lựa Chọn!!!!","Lỗi", JOptionPane.ERROR_MESSAGE);
 				}
 				// Thực hiện chương trình ================================================================================================
-				if (dem1!=btnGroup1.getButtonCount() && dem2 != btnGroup2.getButtonCount())
+				if (ck == true && dem2 != btnGroup2.getButtonCount())
 				{
 					String dA = "";
 					 ArrayList<String> nameMTs = new ArrayList<>();
@@ -195,18 +188,34 @@ public class OpenApp {
 					 
 					 paList.ReadFromExcel(fileName);
 					 
-					 if (mt_rd1.isSelected())
+					 String strchs = "";
+					 if (chckbx1.isSelected())
 					 {
-						 paList.Choose("0");	 
+						 	 strchs+="0";
 					 }
-					 if (mt_rd2.isSelected())
+					 if (chckbx2.isSelected())
 					 {
-						 paList.Choose("1");
+						 if(strchs.equals(""))
+						 {
+							 strchs+="1";
+						 }
+						 else
+						 {
+							 strchs+=" 1";
+						 }
 					 }
-					 if (mt_rd3.isSelected())
+					 if (chckbx3.isSelected())
 					 {
-						 paList.Choose("2");
+						 if(strchs.equals(""))
+						 {
+							 strchs+="2";
+						 }
+						 else
+						 {
+							 strchs+=" 2";
+						 }
 					 }
+					 paList.Choose(strchs);
 					 arr = paList.getArr();
 					 nameMTs = paList.getNameMTs();
 					 namePAs = paList.getNamePAs();

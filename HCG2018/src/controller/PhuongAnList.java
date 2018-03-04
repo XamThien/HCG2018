@@ -226,15 +226,15 @@ public class PhuongAnList {
 		
 		return TimMin(maxRows).getNamePA();
 	}
-	public String Bayes(float p,ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs){
-		ArrayList<Float> xacSuat = new ArrayList<>();
+	public String Bayes(ArrayList<Float> xacSuat,ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs){
+		//ArrayList<Float> xacSuat = new ArrayList<>();
 		float tongxs=0;
-		for (String string : nameMTs) {
-			System.out.println("Nhập mức độ xảy ra trạng thái "+ string);
+		for (float p : xacSuat) {
+			//System.out.println("Nhập mức độ xảy ra trạng thái "+ string);
 			// gia tri cua p  0 -> 100; 
 			//float p = nhap.nextFloat();
 			tongxs+=p;
-			xacSuat.add(p);
+			
 		}
 		for (Float f : xacSuat) {
 			f=f/tongxs;
@@ -286,18 +286,23 @@ public class PhuongAnList {
 		
 		return TimMax(sumRows).getNamePA();
 	}
-	public String Hodges_Lehmann(float lamda,float p,ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs){
+	public String Hodges_Lehmann(float lamda,ArrayList<Float> xacSuat,ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs){
 		//System.out.println("Nhập hệ số tin cậy: lamda= ");
 		// gia tri cua p  0 -> 1; 
 		//float lamda = nhap.nextFloat();
-		ArrayList<Float> xacSuat = new ArrayList<>();
+		//ArrayList<Float> xacSuat = new ArrayList<>();
 		float tongxs=0;
+		for (float p : xacSuat)
+		{
+			tongxs+=p;
+		}
+		
 		for (String string : nameMTs) {
 			//System.out.println("Nhập mức độ xảy ra trạng thái "+ string);
 			// gia tri cua p  0 -> 100; 
 			//float p = nhap.nextFloat();
-			tongxs+=p;
-			xacSuat.add(p);
+			
+			
 		}
 		for (double f : xacSuat) {
 			f=f/tongxs;
@@ -358,7 +363,11 @@ public class PhuongAnList {
 			choosePA=QDMoBTG(namePAs,arr);
 			break;
 		case 3:
-			choosePA=QDMoTG(3,namePAs,arr,nameMTs);
+			double x = 0.3;
+			float z = (float)x;
+			ArrayList<Float> trongSo = new ArrayList<Float>();
+			trongSo.add(z);
+			choosePA=QDMoTG(trongSo,namePAs,arr,nameMTs);
 			break;
 		case 4:
 			choosePA=QDMoTGL(namePAs,arr);
@@ -372,15 +381,15 @@ public class PhuongAnList {
 		
 		return choosePA;
 	}
-	public String QDMoTG(float p,ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs){
-		ArrayList<Float> trongSo = new ArrayList<>();
+	public String QDMoTG(ArrayList<Float> trongSo,ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs){
+		//ArrayList<Float> trongSo = new ArrayList<>();
 		float tongxs=0;
-		for (String string : nameMTs) {
+		for (Float p : trongSo) {
 			//System.out.println("Nhập mức độ xảy ra trạng thái "+ string);
 			// gia tri cua p  0 -> 100; 
 			//float p = nhap.nextFloat();
 			tongxs+=p;
-			trongSo.add(p);
+			
 		}
 		for (Float f : trongSo) {
 			f=f/tongxs;

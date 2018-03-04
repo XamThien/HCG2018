@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 import javax.swing.border.TitledBorder;
 
 import controller.PhuongAnList;
@@ -24,7 +25,6 @@ import java.awt.Color;
 public class v_Bayes {
 
 	private JFrame frmPhngPhapBayes;
-	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -40,7 +40,7 @@ public class v_Bayes {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					//
+					//namePAs,arr,nameMTs
 					v_Bayes window = new v_Bayes(namePAs,arr,nameMTs);
 					window.frmPhngPhapBayes.setVisible(true);
 				} catch (Exception e) {
@@ -57,7 +57,19 @@ public class v_Bayes {
 		//initialize();
 	}
 	public v_Bayes(ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs) {
-		initialize(namePAs,arr,nameMTs);
+		int sel = nameMTs.size();
+		if (sel ==1)
+		{
+			initialize(namePAs,arr,nameMTs);
+		}
+		if (sel ==2)
+		{
+			initialize2(namePAs,arr,nameMTs);
+		}
+		if (sel ==3)
+		{
+			initialize3(namePAs,arr,nameMTs);
+		}
 	}
 
 	/**
@@ -70,66 +82,7 @@ public class v_Bayes {
 		frmPhngPhapBayes.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPhngPhapBayes.getContentPane().setLayout(null);
 		
-		String mt = nameMTs.get(nameMTs.size()-1);
-		JLabel lblNewLabel = new JLabel(mt);
-		lblNewLabel.setFont(new Font("SansSerif", Font.BOLD, 12));
-		lblNewLabel.setBounds(226, 54, 110, 14);
-		frmPhngPhapBayes.getContentPane().add(lblNewLabel);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Nh\u1EADp m\u1EE9c \u0111\u1ED9 x\u1EA3y ra tr\u1EA1ng th\u00E1i :                          ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(59, 59, 59)));
-		panel.setBounds(25, 53, 383, 102);
-		frmPhngPhapBayes.getContentPane().add(panel);
-		panel.setLayout(null);
-		
-		textField = new JTextField();
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setBounds(10, 38, 202, 35);
-		panel.add(textField);
-		textField.setColumns(10);
-		
-		JButton btnNewButton = new JButton("Xác nhận");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(textField.getText().equals(null))
-				{
-					JOptionPane.showMessageDialog(null, "Bạn Chưa Nhập Hệ Số Mức độ trạng thái !!!!","Lỗi", JOptionPane.ERROR_MESSAGE);
-				}
-				else
-				{
-					try
-					{
-						String txt = textField.getText();
-						if(txt.contains(","))
-						{
-							txt = txt.replace(",", ".");
-						}
-						double tg = Double.parseDouble(txt);
-						float p = (float)tg;
-						if (p>0 && p<=100)
-						{
-							PhuongAnList paList = new PhuongAnList();
-							String dA = paList.Bayes(p, namePAs, arr, nameMTs);
-							frmPhngPhapBayes.setVisible(false);
-							new ketqua().main(paList.DisplayPA(arr,dA));
-							
-						}
-						else
-						{
-							JOptionPane.showMessageDialog(null, "Hệ Mức độ trạng thái từ 1-100 !!!!","Lỗi", JOptionPane.ERROR_MESSAGE);
-						}
-						
-					}
-					catch(Exception ex)
-					{
-						JOptionPane.showMessageDialog(null, "Không đúng định dạng !!!!","Lỗi", JOptionPane.ERROR_MESSAGE);
-					}
-					
-				}
-			}
-		});
-		btnNewButton.setBounds(247, 37, 126, 36);
-		panel.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Thoát");
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -142,7 +95,234 @@ public class v_Bayes {
                 }
 			}
 		});
-		btnNewButton_1.setBounds(278, 167, 117, 36);
+		btnNewButton_1.setBounds(278, 182, 117, 36);
 		frmPhngPhapBayes.getContentPane().add(btnNewButton_1);
+		
+		JButton btnNewButton = new JButton("Xác nhận");
+		btnNewButton.setBounds(145, 182, 126, 36);
+		frmPhngPhapBayes.getContentPane().add(btnNewButton);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Nh\u00E2\u0323p ca\u0301c h\u00EA\u0323 s\u00F4\u0301 sau \u0111\u00E2y:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(15, 26, 380, 144);
+		frmPhngPhapBayes.getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblNhpMc = new JLabel("Nhập mức độ xảy ra trạng thái cho : ");
+		lblNhpMc.setBounds(21, 31, 232, 16);
+		panel.add(lblNhpMc);
+		/*nameMTs.get(0)*/
+		JLabel lblHpDn = new JLabel(nameMTs.get(0));
+		lblHpDn.setBounds(221, 31, 91, 16);
+		panel.add(lblHpDn);
+		
+		JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
+		slider.setBounds(21, 50, 338, 73);
+		panel.add(slider);
+		slider.setMinorTickSpacing(1);
+		slider.setMajorTickSpacing(10);
+		slider.setPaintTicks(true);
+		slider.setPaintLabels(true);
+		
+			    // hien thi thuoc do cua slider 0 10 20 30 40 50 ..
+			    slider.setLabelTable(slider.createStandardLabels(10));
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				float p = (float)slider.getValue();
+				ArrayList<Float> xacSuat = new ArrayList<Float>();
+				xacSuat.add(p);
+				
+				PhuongAnList paList = new PhuongAnList();
+				String dA = paList.Bayes(xacSuat, namePAs, arr, nameMTs);
+				frmPhngPhapBayes.setVisible(false);
+				new ketqua().main(paList.DisplayPA(arr,dA));
+			}
+		});
+	}
+	private void initialize2(ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs) {
+		frmPhngPhapBayes = new JFrame();
+		frmPhngPhapBayes.setTitle("Phương pháp Bayes");
+		frmPhngPhapBayes.setBounds(100, 100, 450, 355);
+		frmPhngPhapBayes.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmPhngPhapBayes.getContentPane().setLayout(null);
+		
+		
+		
+		JButton btnNewButton_1 = new JButton("Thoát");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int check = JOptionPane.showConfirmDialog(frmPhngPhapBayes, "Bạn chắc chắn muốn thoát?", "Xác Nhận", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				
+                if (check == JOptionPane.YES_OPTION) 
+                {
+                	frmPhngPhapBayes.setVisible(false);
+                }
+			}
+		});
+		btnNewButton_1.setBounds(290, 262, 117, 36);
+		frmPhngPhapBayes.getContentPane().add(btnNewButton_1);
+		
+		JButton btnNewButton = new JButton("Xác nhận");
+		btnNewButton.setBounds(157, 262, 126, 36);
+		frmPhngPhapBayes.getContentPane().add(btnNewButton);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Nh\u00E2\u0323p ca\u0301c h\u00EA\u0323 s\u00F4\u0301 sau \u0111\u00E2y:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(27, 25, 380, 224);
+		frmPhngPhapBayes.getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblNhpMc = new JLabel("Nhập mức độ xảy ra trạng thái cho : ");
+		lblNhpMc.setBounds(21, 31, 232, 16);
+		panel.add(lblNhpMc);
+		/*nameMTs.get(0)*/
+		JLabel lblHpDn = new JLabel(nameMTs.get(0));
+		lblHpDn.setBounds(221, 31, 91, 16);
+		panel.add(lblHpDn);
+		
+		JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
+		slider.setBounds(21, 50, 338, 73);
+		panel.add(slider);
+		slider.setMinorTickSpacing(1);
+		slider.setMajorTickSpacing(10);
+		slider.setPaintTicks(true);
+		slider.setPaintLabels(true);
+		
+		JSlider slider_1 = new JSlider(SwingConstants.HORIZONTAL, 0, 100, 50);
+		slider_1.setPaintTicks(true);
+		slider_1.setPaintLabels(true);
+		slider_1.setMinorTickSpacing(1);
+		slider_1.setMajorTickSpacing(10);
+		slider_1.setBounds(21, 141, 338, 73);
+		panel.add(slider_1);
+		
+		JLabel label = new JLabel("Nhập mức độ xảy ra trạng thái cho : ");
+		label.setBounds(21, 122, 232, 16);
+		panel.add(label);
+		
+		JLabel label_1 = new JLabel(nameMTs.get(1));
+		label_1.setBounds(221, 122, 91, 16);
+		panel.add(label_1);
+		
+			    // hien thi thuoc do cua slider 0 10 20 30 40 50 ..
+			    slider.setLabelTable(slider.createStandardLabels(10));
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				float p = (float)slider.getValue();
+				float p1 = (float)slider_1.getValue();
+				ArrayList<Float> xacSuat = new ArrayList<Float>();
+				xacSuat.add(p);
+				xacSuat.add(p1);
+
+				PhuongAnList paList = new PhuongAnList();
+				String dA = paList.Bayes(xacSuat, namePAs, arr, nameMTs);
+				frmPhngPhapBayes.setVisible(false);
+				new ketqua().main(paList.DisplayPA(arr,dA));
+				
+			}
+		});
+	}
+	private void initialize3(ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs) {
+		frmPhngPhapBayes = new JFrame();
+		frmPhngPhapBayes.setTitle("Phương pháp Bayes");
+		frmPhngPhapBayes.setBounds(100, 100, 450, 443);
+		frmPhngPhapBayes.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmPhngPhapBayes.getContentPane().setLayout(null);
+		
+		
+		
+		JButton btnNewButton_1 = new JButton("Thoát");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int check = JOptionPane.showConfirmDialog(frmPhngPhapBayes, "Bạn chắc chắn muốn thoát?", "Xác Nhận", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				
+                if (check == JOptionPane.YES_OPTION) 
+                {
+                	frmPhngPhapBayes.setVisible(false);
+                }
+			}
+		});
+		btnNewButton_1.setBounds(289, 356, 117, 36);
+		frmPhngPhapBayes.getContentPane().add(btnNewButton_1);
+		
+		JButton btnNewButton = new JButton("Xác nhận");
+		btnNewButton.setBounds(156, 356, 126, 36);
+		frmPhngPhapBayes.getContentPane().add(btnNewButton);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Nh\u00E2\u0323p ca\u0301c h\u00EA\u0323 s\u00F4\u0301 sau \u0111\u00E2y:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(27, 25, 380, 319);
+		frmPhngPhapBayes.getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblNhpMc = new JLabel("Nhập mức độ xảy ra trạng thái cho : ");
+		lblNhpMc.setBounds(21, 31, 232, 16);
+		panel.add(lblNhpMc);
+		/*nameMTs.get(0)*/
+		JLabel lblHpDn = new JLabel(nameMTs.get(0));
+		lblHpDn.setBounds(221, 31, 91, 16);
+		panel.add(lblHpDn);
+		
+		JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
+		slider.setBounds(21, 50, 338, 73);
+		panel.add(slider);
+		slider.setMinorTickSpacing(1);
+		slider.setMajorTickSpacing(10);
+		slider.setPaintTicks(true);
+		slider.setPaintLabels(true);
+		
+		JSlider slider_1 = new JSlider(SwingConstants.HORIZONTAL, 0, 100, 50);
+		slider_1.setPaintTicks(true);
+		slider_1.setPaintLabels(true);
+		slider_1.setMinorTickSpacing(1);
+		slider_1.setMajorTickSpacing(10);
+		slider_1.setBounds(21, 141, 338, 77);
+		panel.add(slider_1);
+		
+		JLabel label = new JLabel("Nhập mức độ xảy ra trạng thái cho : ");
+		label.setBounds(21, 122, 232, 16);
+		panel.add(label);
+		
+		JLabel label_1 = new JLabel(nameMTs.get(1));
+		label_1.setBounds(221, 122, 91, 16);
+		panel.add(label_1);
+		
+		JSlider slider_2 = new JSlider(SwingConstants.HORIZONTAL, 0, 100, 50);
+		slider_2.setPaintTicks(true);
+		slider_2.setPaintLabels(true);
+		slider_2.setMinorTickSpacing(1);
+		slider_2.setMajorTickSpacing(10);
+		slider_2.setBounds(21, 236, 338, 77);
+		panel.add(slider_2);
+		
+		JLabel label_2 = new JLabel("Nhập mức độ xảy ra trạng thái cho : ");
+		label_2.setBounds(21, 217, 232, 16);
+		panel.add(label_2);
+		
+		JLabel label_3 = new JLabel(nameMTs.get(2));
+		label_3.setBounds(221, 217, 91, 16);
+		panel.add(label_3);
+		
+			    // hien thi thuoc do cua slider 0 10 20 30 40 50 ..
+			    slider.setLabelTable(slider.createStandardLabels(10));
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				float p = (float)slider.getValue();
+				float p1 = (float)slider_1.getValue();
+				float p2 = (float)slider_2.getValue();
+				ArrayList<Float> xacSuat = new ArrayList<Float>();
+				xacSuat.add(p);
+				xacSuat.add(p1);
+				xacSuat.add(p2);
+
+				PhuongAnList paList = new PhuongAnList();
+				String dA = paList.Bayes(xacSuat, namePAs, arr, nameMTs);
+				frmPhngPhapBayes.setVisible(false);
+				new ketqua().main(paList.DisplayPA(arr,dA));
+			}
+		});
 	}
 }
