@@ -191,9 +191,7 @@ public class OpenApp {
 					 
 					 String fileName = "Book1.xls";
 					 PhuongAnList paList = new PhuongAnList();
-					 arr = paList.getArr();
-					 nameMTs = paList.getNameMTs();
-					 namePAs = paList.getNamePAs();
+					 
 					 
 					 paList.ReadFromExcel(fileName);
 					 
@@ -209,7 +207,9 @@ public class OpenApp {
 					 {
 						 paList.Choose("2");
 					 }
-					 
+					 arr = paList.getArr();
+					 nameMTs = paList.getNameMTs();
+					 namePAs = paList.getNamePAs();
 					 if (pp_rd1.isSelected())
 					 {
 						 dA=paList.Maximin(namePAs,arr);

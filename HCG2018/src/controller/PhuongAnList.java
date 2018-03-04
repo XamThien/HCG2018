@@ -87,10 +87,10 @@ public class PhuongAnList {
 	}
 	
 	public void Choose(String chon){
-		System.out.println("Danh sach cac muc tieu: Nhan gia tri cac muc tieu de chon");
-		for(int i=0; i< nameMTs.size(); i++){
-			System.out.println((i+1)+": "+nameMTs.get(i));
-		}
+//		System.out.println("Danh sach cac muc tieu: Nhan gia tri cac muc tieu de chon");
+//		for(int i=0; i< nameMTs.size(); i++){
+//			System.out.println((i+1)+": "+nameMTs.get(i));
+//		}
 		// Moi lua chon cach nhau mot dau cach; khi len giao dien thi chuyen phan này thanh check box
 		//String chon = nhap.nextLine();
 		String[] mTs = chon.split("\\s");
@@ -230,7 +230,7 @@ public class PhuongAnList {
 		ArrayList<Float> xacSuat = new ArrayList<>();
 		float tongxs=0;
 		for (String string : nameMTs) {
-			//System.out.println("Nhập mức độ xảy ra trạng thái "+ string);
+			System.out.println("Nhập mức độ xảy ra trạng thái "+ string);
 			// gia tri cua p  0 -> 100; 
 			//float p = nhap.nextFloat();
 			tongxs+=p;
@@ -339,7 +339,7 @@ public class PhuongAnList {
 		
 		return TimMax(sumRows).getNamePA();
 	}
-	public String QDMo(){
+	public String QDMo(ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs){
 		String choosePA="";
 		//Xac dinh thai do cua nguoi ra quyet dinh
 		// gom:biquan, giua bi quan va tgian, trung gian, giua tgian va lac quan, lac quan
@@ -355,13 +355,13 @@ public class PhuongAnList {
 			choosePA=Maximin(namePAs,arr);
 			break;
 		case 2:
-			choosePA=QDMoBTG();
+			choosePA=QDMoBTG(namePAs,arr);
 			break;
 		case 3:
-			choosePA=QDMoTG();
+			choosePA=QDMoTG(3,namePAs,arr,nameMTs);
 			break;
 		case 4:
-			choosePA=QDMoTGL();
+			choosePA=QDMoTGL(namePAs,arr);
 			break;
 		case 5: 
 			choosePA=Maximax(namePAs, arr);
@@ -372,13 +372,13 @@ public class PhuongAnList {
 		
 		return choosePA;
 	}
-	public String QDMoTG(){
+	public String QDMoTG(float p,ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs){
 		ArrayList<Float> trongSo = new ArrayList<>();
 		float tongxs=0;
 		for (String string : nameMTs) {
-			System.out.println("Nhập mức độ xảy ra trạng thái "+ string);
+			//System.out.println("Nhập mức độ xảy ra trạng thái "+ string);
 			// gia tri cua p  0 -> 100; 
-			float p = nhap.nextFloat();
+			//float p = nhap.nextFloat();
 			tongxs+=p;
 			trongSo.add(p);
 		}
@@ -405,7 +405,7 @@ public class PhuongAnList {
 		}
 		return TimMax(TTRows).getNamePA();
 	}
-	public String QDMoBTG(){
+	public String QDMoBTG(ArrayList<String> namePAs,ArrayList<Phuongan> arr){
 		ArrayList<Phuongan> mulRows = new ArrayList<>();
 		for (String namepa : namePAs) {
 			float tich=1;
@@ -419,7 +419,7 @@ public class PhuongAnList {
 		}
 		return TimMax(mulRows).getNamePA();
 	}
-	public String QDMoTGL(){
+	public String QDMoTGL(ArrayList<String> namePAs,ArrayList<Phuongan> arr){
 		ArrayList<Phuongan> sumRows = new ArrayList<>();
 		for (String namepa : namePAs) {
 			float tong=0;

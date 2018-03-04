@@ -110,15 +110,20 @@ public class v_QĐMo {
 				}
 				if(rd2.isSelected())
 				{
+					dA = paList.QDMoBTG(namePAs,arr);
 					frmChnThi.setVisible(false);
+					new ketqua().main(paList.DisplayPA(arr,dA));
 				}
 				if(rd3.isSelected())
 				{
 					frmChnThi.setVisible(false);
+					new v_QDMoTG().main(namePAs,arr,nameMTs);
 				}
 				if(rd4.isSelected())
 				{
+					dA = paList.QDMoTGL(namePAs,arr);
 					frmChnThi.setVisible(false);
+					new ketqua().main(paList.DisplayPA(arr,dA));
 				}
 				if(rd5.isSelected())
 				{

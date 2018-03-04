@@ -16,7 +16,7 @@ public class Program {
 			PhuongAnList paList = new PhuongAnList();
 			paList.ReadFromExcel(fileName);
 			System.out.println("Danh sach cac muc tieu cho viec chon lua "+ paList.getNameDSS());
-			paList.Choose("2");
+			paList.Choose("0");
 			System.out.println("Danh sach cac phuong phap lua chon: ");
 			System.out.println("1. Phuong phap Maximin");
 			System.out.println("2. Phuong phap Maximax");
@@ -63,7 +63,7 @@ public class Program {
 				dA=paList.Hodges_Lehmann(z,23,namePAs,arr,nameMTs);
 				break;
 			case 8:
-				dA=paList.QDMo();
+				dA=paList.QDMo(namePAs,arr,nameMTs);
 				break;
 			default:
 				break;
