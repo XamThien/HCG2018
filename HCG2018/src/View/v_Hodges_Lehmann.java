@@ -13,6 +13,7 @@ import controller.Phuongan;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -83,12 +84,14 @@ public class v_Hodges_Lehmann {
 		
 		textField1 = new JTextField();
 		textField1.setBounds(31, 55, 316, 39);
+		textField1.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(textField1);
 		textField1.setColumns(10);
 		
 		textField2 = new JTextField();
 		textField2.setColumns(10);
 		textField2.setBounds(31, 134, 316, 39);
+		textField2.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(textField2);
 		
 		JLabel lblHpDn = new JLabel("Độ hấp dẫn");
@@ -99,15 +102,17 @@ public class v_Hodges_Lehmann {
 		btnXacNhn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean ck = true;
-				if (textField1.getText().equals(null))
+				if (textField1.getText().equals(null) || textField1.getText().equals(""))
 				{
-					ck = false;
+					
 					JOptionPane.showMessageDialog(null, "Bạn Chưa Nhập Hệ Số Tin Cậy !!!!","Lỗi", JOptionPane.ERROR_MESSAGE);
-				}
-				if (textField2.getText().equals(null))
-				{
 					ck = false;
+				}
+				if (textField2.getText().equals(null) || textField2.getText().equals(""))
+				{
+					
 					JOptionPane.showMessageDialog(null, "Bạn Chưa Nhập Hệ Số Mức Độ Xảy Ra Trạng Thái !!!!","Lỗi", JOptionPane.ERROR_MESSAGE);
+					ck = false;
 				}
 				if (ck == true)
 				{

@@ -212,12 +212,12 @@ public class OpenApp {
 					 
 					 if (pp_rd1.isSelected())
 					 {
-						 dA=paList.Maximin();
+						 dA=paList.Maximin(namePAs,arr);
 						 new ketqua().main(paList.DisplayPA(arr,dA));
 					 }
 					 if (pp_rd2.isSelected())
 					 {
-						 dA=paList.Maximax();
+						 dA=paList.Maximax(namePAs,arr);
 						 new ketqua().main(paList.DisplayPA(arr,dA));
 					 }
 					 if (pp_rd3.isSelected())
@@ -227,7 +227,7 @@ public class OpenApp {
 					 }
 					 if (pp_rd4.isSelected())
 					 {
-						 dA=paList.Savage_Niehans();
+						 dA=paList.Savage_Niehans(namePAs,arr,nameMTs);
 						 new ketqua().main(paList.DisplayPA(arr,dA));
 					 }
 					 if (pp_rd5.isSelected())
@@ -236,7 +236,7 @@ public class OpenApp {
 					 }
 					 if (pp_rd6.isSelected())
 					 {
-						 dA=paList.Laplace();
+						 dA=paList.Laplace(namePAs,arr,nameMTs);
 						 new ketqua().main(paList.DisplayPA(arr,dA));
 					 }
 					 if (pp_rd7.isSelected())
@@ -245,7 +245,7 @@ public class OpenApp {
 					 }
 					 if (pp_rd8.isSelected())
 					 {
-						 
+						 new v_QĐMo().main(namePAs,arr,nameMTs);
 					 }
 				}
 			}

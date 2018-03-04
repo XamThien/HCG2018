@@ -145,7 +145,7 @@ public class PhuongAnList {
 		}
 		return min;
 	}
-	public String Maximin(){
+	public String Maximin(ArrayList<String> namePAs,ArrayList<Phuongan> arr){
 		ArrayList<Phuongan> minRows = new ArrayList<>();
 		for (String namepa : namePAs) {
 			ArrayList<Phuongan> arrRow = new ArrayList<>();
@@ -159,7 +159,7 @@ public class PhuongAnList {
 		
 		return TimMax(minRows).getNamePA();
 	}
-	public String Maximax(){
+	public String Maximax(ArrayList<String> namePAs,ArrayList<Phuongan> arr){
 		ArrayList<Phuongan> maxRows = new ArrayList<>();
 		for (String namepa : namePAs) {
 			ArrayList<Phuongan> arrRow = new ArrayList<>();
@@ -197,7 +197,7 @@ public class PhuongAnList {
 		} else System.out.println("Nhập sai giá trị của hệ số anpha");
 		return "";
 	}
-	public String Savage_Niehans(){
+	public String Savage_Niehans(ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs){
 		ArrayList<Phuongan> matrixTV = arr;
 		for (String namemt : nameMTs) {
 			ArrayList<Phuongan> arrRow = new ArrayList<>();
@@ -262,7 +262,7 @@ public class PhuongAnList {
 		
 		return TimMax(sumRows).getNamePA();
 	}
-	public String Laplace(){
+	public String Laplace(ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs){
 		float xacSuat = 1 / (namePAs.size());
 		ArrayList<Phuongan> matrixTV = arr;
 		for (int i =0; i< nameMTs.size(); i++) {
@@ -352,7 +352,7 @@ public class PhuongAnList {
 		int thaiDo = nhap.nextInt();
 		switch (thaiDo) {
 		case 1:
-			choosePA=Maximin();
+			choosePA=Maximin(namePAs,arr);
 			break;
 		case 2:
 			choosePA=QDMoBTG();
@@ -364,7 +364,7 @@ public class PhuongAnList {
 			choosePA=QDMoTGL();
 			break;
 		case 5: 
-			choosePA=Maximax();
+			choosePA=Maximax(namePAs, arr);
 			break;
 		default:
 			break;

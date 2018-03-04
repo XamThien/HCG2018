@@ -36,16 +36,16 @@ public class Program {
 			int ma = nhap.nextInt();
 			switch (ma) {
 			case 1:
-				dA=paList.Maximin();
+				dA=paList.Maximin(namePAs,arr);
 				break;
 			case 2:
-				dA=paList.Maximax();
+				dA=paList.Maximax(namePAs,arr);
 				break;
 			case 3:
 				dA=paList.Hurwicz(namePAs,arr,23);
 				break;
 			case 4:
-				dA=paList.Savage_Niehans();
+				dA=paList.Savage_Niehans(namePAs,arr,nameMTs);
 				break;
 			case 5:
 				double xx = 34.23;
@@ -53,7 +53,7 @@ public class Program {
 				dA=paList.Bayes(zz,namePAs,arr,nameMTs);
 				break;
 			case 6:
-				dA=paList.Laplace();
+				dA=paList.Laplace(namePAs,arr,nameMTs);
 				break;
 			case 7:
 				
