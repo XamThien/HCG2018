@@ -18,6 +18,7 @@ public class PhuongAnList {
 	private ArrayList<String> namePAs = new ArrayList<>();
 	private ArrayList<Phuongan> arr = new ArrayList<Phuongan>();
 	
+	
 	public ArrayList<Phuongan> getArr() {
 		return arr;
 	}
@@ -85,13 +86,13 @@ public class PhuongAnList {
 		}
 	}
 	
-	public void Choose(){
+	public void Choose(String chon){
 		System.out.println("Danh sach cac muc tieu: Nhan gia tri cac muc tieu de chon");
 		for(int i=0; i< nameMTs.size(); i++){
 			System.out.println((i+1)+": "+nameMTs.get(i));
 		}
 		// Moi lua chon cach nhau mot dau cach; khi len giao dien thi chuyen phan này thanh check box
-		String chon = nhap.nextLine();
+		//String chon = nhap.nextLine();
 		String[] mTs = chon.split("\\s");
 		ArrayList<Phuongan> pa	= new ArrayList<>();
 		ArrayList<String> nameMT= new ArrayList<>();
@@ -114,13 +115,16 @@ public class PhuongAnList {
 		this.setArr(arr);
 	}
 	
-	public void DisplayPA(String namePA){
-		System.out.println("Phương án: "+ namePA);
+	public String DisplayPA(ArrayList<Phuongan> arr,String namePA){
+		//System.out.println("Phương án: "+ namePA);
+		String rtn = namePA;
 		for (Phuongan phuongan : arr) {
 			if(phuongan.getNamePA().contains(namePA)){
-				System.out.println(phuongan.getNameMT()+" : "+ phuongan.getValue());
+				//System.out.println(phuongan.getNameMT()+" : "+ phuongan.getValue());
+				rtn+=","+phuongan.getNameMT()+","+ phuongan.getValue();
 			}
 		}
+		return rtn;
 	}
 	
 	public Phuongan TimMax(ArrayList<Phuongan> list){
@@ -169,11 +173,11 @@ public class PhuongAnList {
 		
 		return TimMax(maxRows).getNamePA();
 	}
-	public String Hurwicz(){
+	public String Hurwicz(ArrayList<String> namePAs,ArrayList<Phuongan> arr,int anpha){
 		// anpha tren thuc te tu 0 den 100; khi tinh se chia cho 100
-		int anpha;
-		System.out.println("Nhập hệ số lạc quan anpha: từ 0 -> 100");
-		anpha = nhap.nextInt();
+		//int anpha;
+		//System.out.println("Nhập hệ số lạc quan anpha: từ 0 -> 100");
+		//anpha = nhap.nextInt();
 		if (anpha>=0 && anpha<=100) {
 			ArrayList<Phuongan> PAs = new ArrayList<>();
 			for (String namepa : namePAs) {
@@ -222,13 +226,13 @@ public class PhuongAnList {
 		
 		return TimMin(maxRows).getNamePA();
 	}
-	public String Bayes(){
+	public String Bayes(float p,ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs){
 		ArrayList<Float> xacSuat = new ArrayList<>();
 		float tongxs=0;
 		for (String string : nameMTs) {
-			System.out.println("Nhập mức độ xảy ra trạng thái "+ string);
+			//System.out.println("Nhập mức độ xảy ra trạng thái "+ string);
 			// gia tri cua p  0 -> 100; 
-			float p = nhap.nextFloat();
+			//float p = nhap.nextFloat();
 			tongxs+=p;
 			xacSuat.add(p);
 		}
@@ -429,4 +433,5 @@ public class PhuongAnList {
 		}
 		return TimMax(sumRows).getNamePA();
 	}
+	
 }
