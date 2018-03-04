@@ -286,20 +286,20 @@ public class PhuongAnList {
 		
 		return TimMax(sumRows).getNamePA();
 	}
-	public String Hodges_Lehmann(){
-		System.out.println("Nhập hệ số tin cậy: lamda= ");
+	public String Hodges_Lehmann(float lamda,float p,ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs){
+		//System.out.println("Nhập hệ số tin cậy: lamda= ");
 		// gia tri cua p  0 -> 1; 
-		float lamda = nhap.nextFloat();
+		//float lamda = nhap.nextFloat();
 		ArrayList<Float> xacSuat = new ArrayList<>();
 		float tongxs=0;
 		for (String string : nameMTs) {
-			System.out.println("Nhập mức độ xảy ra trạng thái "+ string);
+			//System.out.println("Nhập mức độ xảy ra trạng thái "+ string);
 			// gia tri cua p  0 -> 100; 
-			float p = nhap.nextFloat();
+			//float p = nhap.nextFloat();
 			tongxs+=p;
 			xacSuat.add(p);
 		}
-		for (Float f : xacSuat) {
+		for (double f : xacSuat) {
 			f=f/tongxs;
 		}
 		ArrayList<Phuongan> matrixTV = arr;

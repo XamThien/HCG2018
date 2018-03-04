@@ -99,7 +99,13 @@ public class v_Bayes {
 				{
 					try
 					{
-						float p = Float.parseFloat(textField.getText());
+						String txt = textField.getText();
+						if(txt.contains(","))
+						{
+							txt = txt.replace(",", ".");
+						}
+						double tg = Double.parseDouble(txt);
+						float p = (float)tg;
 						if (p>0 && p<=100)
 						{
 							PhuongAnList paList = new PhuongAnList();

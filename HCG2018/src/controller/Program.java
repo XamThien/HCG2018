@@ -48,13 +48,19 @@ public class Program {
 				dA=paList.Savage_Niehans();
 				break;
 			case 5:
-				dA=paList.Bayes(23,namePAs,arr,nameMTs);
+				double xx = 34.23;
+				float zz = (float)xx;
+				dA=paList.Bayes(zz,namePAs,arr,nameMTs);
 				break;
 			case 6:
 				dA=paList.Laplace();
 				break;
 			case 7:
-				dA=paList.Hodges_Lehmann();
+				
+				// 0,3 không phải là kiểu float ????
+				double x = 0.3;
+				float z = (float)x;
+				dA=paList.Hodges_Lehmann(z,23,namePAs,arr,nameMTs);
 				break;
 			case 8:
 				dA=paList.QDMo();

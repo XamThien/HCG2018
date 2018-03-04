@@ -241,7 +241,7 @@ public class OpenApp {
 					 }
 					 if (pp_rd7.isSelected())
 					 {
-						 
+						 new v_Hodges_Lehmann().main(namePAs,arr,nameMTs);
 					 }
 					 if (pp_rd8.isSelected())
 					 {
