@@ -14,6 +14,7 @@ import javax.swing.border.TitledBorder;
 
 import controller.PhuongAnList;
 import controller.Phuongan;
+import controller.test;
 
 import javax.swing.UIManager;
 import java.awt.Color;
@@ -181,8 +182,9 @@ public class OpenApp {
 					 ArrayList<String> namePAs = new ArrayList<>();
 					 ArrayList<Phuongan> arr = new ArrayList<Phuongan>();
 					 
+					 test ts = new test();
 					 
-					 String fileName = "Book1.xls";
+					 String fileName = ts.readFileExcel("D:\\Link.xls");
 					 PhuongAnList paList = new PhuongAnList();
 					 
 					 

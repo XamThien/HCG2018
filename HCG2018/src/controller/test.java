@@ -22,76 +22,38 @@ import jxl.write.biff.RowsExceededException;
 
 public class test {
 	// mo file excel len va doc noi dung
-	public static  int readFileExcel(String fileName) {
+	public static  String readFileExcel(String fileName) {
         Workbook workbook;
         
-        int stt = -1;
+        String xx= null;
         try {
-        	// create workbook to open file
+        	
             workbook = Workbook.getWorkbook(new File(fileName));
-            // trong 1 file excel co nhieu sheet, chiÌ‰ Ä‘iÌ£nh roÌƒ Ä‘oÌ£c sheet naÌ€o
-            Sheet sheet = workbook.getSheet(0);
-            // get number row and col contain data
-            int rows = sheet.getRows();
-            //int cols = sheet.getColumns();
- 
             
-//            for (int row = 1; row < rows; row++) {
-//            		
-//                    Cell cell = sheet.getCell(1, row);
-//                    String name1 = cell.getContents();
-//                    System.out.println(name1);
-//                    
-//            }
-            // cell laÌ€ mÃ´Ì£t Ã´ 
-            Cell cell = sheet.getCell(1, 0);
-            String xx = cell.getContents();
-            System.out.println(xx);
-//            String ck = "MÃ´Ì£t buÃ´Ì‰i chiÃªÌ€u Ãªm Ä‘ÃªÌ€m quaÌ�, ";
-//            if (xx.equals(ck))
-//            { System.out.println(true);}
-//            else
-//            { System.out.println(false);}
-//            
-            // close
+            Sheet sheet = workbook.getSheet(0);
+            
+            Cell cell = sheet.getCell(1, 1);
+            xx = cell.getContents();
+            
             workbook.close();
         } catch (BiffException e) {
-        	return stt;
+        	return xx;
         } catch (IOException e) {
-        	return stt;
+        	return xx;
         }
-		return stt;
+		return xx;
     }
     // tao moi file excel
-    public static void writeNewFileExcel(String fileName,ArrayList<Detail> ten) {
+    public static void writeNewFileExcel(String fileName,String link) {
         WritableWorkbook workbook;
         // create workbook
         try {
             workbook = Workbook.createWorkbook(new File(fileName));
  
             // create sheet
-            WritableSheet sheet1 = workbook.createSheet("Thống kê", 0);
+            WritableSheet sheet1 = workbook.createSheet("Link lưu file CSDL HCG2018", 0);
  
-            // create Label and add to sheet
-            //sheet1.addCell(new Label(3, 0, "DANH SÃ�CH SINH VIÃŠN TIÃŠU BIá»‚U"));
-            Date dnow = new Date();
-            SimpleDateFormat fttt = new SimpleDateFormat ("MM-yyyy");
-    	    String month =  fttt.format(dnow);
-            // row begin write data
-            sheet1.addCell(new Label(1, 0, "Bảng thống kê kết quả ai win trong tháng "+month));
-            int rowBegin = 1;
-            int colBegin = 1;
-            
-            for(Detail x : ten)
-            {
-            	if(x.getTt().equals("Ăn"))
-            	{
-            		String name = x.getName();
-            		sheet1.addCell(new Label(colBegin, rowBegin, String.valueOf(name)));
-                	sheet1.addCell(new Label(colBegin+1, rowBegin, String.valueOf(1)));
-                	rowBegin++;
-            	}
-            }
+            sheet1.addCell(new Label(1, 1,link));
            
             // write file
             workbook.write();
@@ -191,9 +153,10 @@ public class test {
     }
 	public static void main(String[] args) {
 		 
-		//readFileExcel("G:\\nguyenvanquan7826.xls");
-		
-		openAndWriteContinusFileExcel("E:\\nguyenvanquan7826.xls", "cái gì đấy");
+		test ts = new test();
+		 
+		 String fileName = ts.readFileExcel("G:\\Link.xls");
+		 System.out.println(fileName);
 	}
 	
 	
