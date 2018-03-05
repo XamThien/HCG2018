@@ -16,7 +16,7 @@ public class Program {
 			PhuongAnList paList = new PhuongAnList();
 			paList.ReadFromExcel(fileName);
 			System.out.println("Danh sach cac muc tieu cho viec chon lua "+ paList.getNameDSS());
-			paList.Choose("0 1");
+			paList.Choose("0 1 2");
 			System.out.println("Danh sach cac phuong phap lua chon: ");
 			System.out.println("1. Phuong phap Maximin");
 			System.out.println("2. Phuong phap Maximax");
@@ -48,10 +48,16 @@ public class Program {
 				dA=paList.Savage_Niehans(namePAs,arr,nameMTs);
 				break;
 			case 5:
-				double xx = 34.23;
+				double xx = 10;
+				double xxx = 20;
+				double xxxx = 30;
 				float zz = (float)xx;
+				float zzz = (float)xxx;
+				float zzzz = (float)xxxx;
 				ArrayList<Float> xacSuat = new ArrayList<Float>();
 				xacSuat.add(zz);
+				xacSuat.add(zzz);
+				xacSuat.add(zzzz);
 				dA=paList.Bayes(xacSuat,namePAs,arr,nameMTs);
 				break;
 			case 6:
