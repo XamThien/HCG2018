@@ -178,11 +178,16 @@ public class PhuongAnList {
 		//int anpha;
 		//System.out.println("Nhập hệ số lạc quan anpha: từ 0 -> 100");
 		//anpha = nhap.nextInt();
+		ArrayList<Phuongan> matrixTV = new ArrayList<>();
+		for(int i=0; i< arr.size(); i++){
+			Phuongan ps = new Phuongan(arr.get(i).getNamePA(),arr.get(i).getNameMT(),arr.get(i).getValue());
+			matrixTV.add(ps);
+		}
 		if (anpha>=0 && anpha<=100) {
 			ArrayList<Phuongan> PAs = new ArrayList<>();
 			for (String namepa : namePAs) {
 				ArrayList<Phuongan> arrRow = new ArrayList<>();
-				for (Phuongan pa : arr) {
+				for (Phuongan pa : matrixTV) {
 					if (namepa.contains(pa.getNamePA())) {
 						arrRow.add(pa);
 					}
@@ -198,7 +203,11 @@ public class PhuongAnList {
 		return "";
 	}
 	public String Savage_Niehans(ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs){
-		ArrayList<Phuongan> matrixTV = arr;
+		ArrayList<Phuongan> matrixTV = new ArrayList<>();
+		for(int i=0; i< arr.size(); i++){
+			Phuongan ps = new Phuongan(arr.get(i).getNamePA(),arr.get(i).getNameMT(),arr.get(i).getValue());
+			matrixTV.add(ps);
+		}
 		for (String namemt : nameMTs) {
 			ArrayList<Phuongan> arrRow = new ArrayList<>();
 			for (Phuongan pa : matrixTV) {
@@ -240,7 +249,11 @@ public class PhuongAnList {
 			f=f/tongxs;
 		}
 		
-		ArrayList<Phuongan> matrixTV = arr;
+		ArrayList<Phuongan> matrixTV = new ArrayList<>();
+		for(int i=0; i< arr.size(); i++){
+			Phuongan ps = new Phuongan(arr.get(i).getNamePA(),arr.get(i).getNameMT(),arr.get(i).getValue());
+			matrixTV.add(ps);
+		}
 		for (int i =0; i< nameMTs.size(); i++) {
 			for (Phuongan pa : matrixTV) {
 				if (nameMTs.get(i).contains(pa.getNameMT())) {
@@ -264,7 +277,11 @@ public class PhuongAnList {
 	}
 	public String Laplace(ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs){
 		float xacSuat = 1 / (namePAs.size());
-		ArrayList<Phuongan> matrixTV = arr;
+		ArrayList<Phuongan> matrixTV = new ArrayList<>();
+		for(int i=0; i< arr.size(); i++){
+			Phuongan ps = new Phuongan(arr.get(i).getNamePA(),arr.get(i).getNameMT(),arr.get(i).getValue());
+			matrixTV.add(ps);
+		}
 		for (int i =0; i< nameMTs.size(); i++) {
 			for (Phuongan pa : matrixTV) {
 				if (nameMTs.get(i).contains(pa.getNameMT())) {
@@ -297,17 +314,21 @@ public class PhuongAnList {
 			tongxs+=p;
 		}
 		
-		for (String string : nameMTs) {
+		/*for (String string : nameMTs) {
 			//System.out.println("Nhập mức độ xảy ra trạng thái "+ string);
 			// gia tri cua p  0 -> 100; 
 			//float p = nhap.nextFloat();
 			
 			
-		}
+		}*/
 		for (double f : xacSuat) {
 			f=f/tongxs;
 		}
-		ArrayList<Phuongan> matrixTV = arr;
+		ArrayList<Phuongan> matrixTV = new ArrayList<>();
+		for(int i=0; i< arr.size(); i++){
+			Phuongan ps = new Phuongan(arr.get(i).getNamePA(),arr.get(i).getNameMT(),arr.get(i).getValue());
+			matrixTV.add(ps);
+		}
 		for (int i =0; i< nameMTs.size(); i++) {
 			for (Phuongan pa : matrixTV) {
 				if (nameMTs.get(i).contains(pa.getNameMT())) {
@@ -363,10 +384,12 @@ public class PhuongAnList {
 			choosePA=QDMoBTG(namePAs,arr);
 			break;
 		case 3:
-			double x = 0.3;
-			float z = (float)x;
+			//double x = 0.3;
+			//float z = (float)x;
 			ArrayList<Float> trongSo = new ArrayList<Float>();
-			trongSo.add(z);
+			trongSo.add((float)0.5);
+			trongSo.add((float)0.3);
+			trongSo.add((float)0.2);
 			choosePA=QDMoTG(trongSo,namePAs,arr,nameMTs);
 			break;
 		case 4:
@@ -394,7 +417,11 @@ public class PhuongAnList {
 		for (Float f : trongSo) {
 			f=f/tongxs;
 		}
-		ArrayList<Phuongan> matixTV =arr;
+		ArrayList<Phuongan> matixTV = new ArrayList<>();
+		for(int i=0; i< arr.size(); i++){
+			Phuongan ps = new Phuongan(arr.get(i).getNamePA(),arr.get(i).getNameMT(),arr.get(i).getValue());
+			matixTV.add(ps);
+		}
 		for (int i =0; i< nameMTs.size(); i++) {
 			for (Phuongan pa : matixTV) {
 				if (nameMTs.get(i).contains(pa.getNameMT())) {
