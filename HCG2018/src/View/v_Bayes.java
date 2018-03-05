@@ -57,19 +57,7 @@ public class v_Bayes {
 		//initialize();
 	}
 	public v_Bayes(ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs) {
-		int sel = nameMTs.size();
-		if (sel ==1)
-		{
-			initialize(namePAs,arr,nameMTs);
-		}
-		if (sel ==2)
-		{
-			initialize2(namePAs,arr,nameMTs);
-		}
-		if (sel ==3)
-		{
-			initialize3(namePAs,arr,nameMTs);
-		}
+		initialize(namePAs,arr,nameMTs);
 	}
 
 	/**
@@ -78,11 +66,10 @@ public class v_Bayes {
 	private void initialize(ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs) {
 		frmPhngPhapBayes = new JFrame();
 		frmPhngPhapBayes.setTitle("Phương pháp Bayes");
-		frmPhngPhapBayes.setBounds(100, 100, 450, 300);
 		frmPhngPhapBayes.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPhngPhapBayes.getContentPane().setLayout(null);
-		
-		
+		int sl = nameMTs.size();
+		frmPhngPhapBayes.setBounds(100, 100, 450, 300+(sl-1)*95);
 		
 		JButton btnNewButton_1 = new JButton("Thoát");
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -95,50 +82,72 @@ public class v_Bayes {
                 }
 			}
 		});
-		btnNewButton_1.setBounds(278, 182, 117, 36);
+		btnNewButton_1.setBounds(278, 182+(sl-1)*95, 117, 36);
 		frmPhngPhapBayes.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton = new JButton("Xác nhận");
-		btnNewButton.setBounds(145, 182, 126, 36);
+		btnNewButton.setBounds(145, 182+(sl-1)*95, 126, 36);
 		frmPhngPhapBayes.getContentPane().add(btnNewButton);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Nh\u00E2\u0323p ca\u0301c h\u00EA\u0323 s\u00F4\u0301 sau \u0111\u00E2y:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(15, 26, 380, 144);
+		panel.setBounds(15, 26, 385, 144+sl*95);
 		frmPhngPhapBayes.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNhpMc = new JLabel("Nhập mức độ xảy ra trạng thái cho : ");
-		lblNhpMc.setBounds(21, 31, 232, 16);
-		panel.add(lblNhpMc);
-		/*nameMTs.get(0)*/
-		JLabel lblHpDn = new JLabel(nameMTs.get(0));
-		lblHpDn.setBounds(221, 31, 91, 16);
-		panel.add(lblHpDn);
+		ArrayList<JSlider> hihi = new ArrayList<JSlider>();
 		
-		JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
-		slider.setBounds(21, 50, 338, 73);
-		panel.add(slider);
-		slider.setMinorTickSpacing(1);
-		slider.setMajorTickSpacing(10);
-		slider.setPaintTicks(true);
-		slider.setPaintLabels(true);
-		
-			    // hien thi thuoc do cua slider 0 10 20 30 40 50 ..
-			    slider.setLabelTable(slider.createStandardLabels(10));
-		
+		for(int i = 0; i< sl;i++)
+		{
+			
+			JLabel lblNhpMc = new JLabel("Nhập mức độ xảy ra trạng thái cho : ");
+			lblNhpMc.setBounds(21, 31+i*95, 232, 16);
+			panel.add(lblNhpMc);
+			/*nameMTs.get(0)*/
+			JLabel lblHpDn = new JLabel(nameMTs.get(i));
+			lblHpDn.setBounds(221, 31+i*95, 91, 16);
+			panel.add(lblHpDn);
+			
+
+			
+			JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
+			slider.setBounds(21, 50+i*95, 338, 73);
+			
+			slider.setMinorTickSpacing(1);
+			slider.setMajorTickSpacing(10);
+			slider.setPaintTicks(true);
+			slider.setPaintLabels(true);
+			
+			
+			
+			// hien thi thuoc do cua slider 0 10 20 30 40 50 ..
+			slider.setLabelTable(slider.createStandardLabels(10));
+		    
+			hihi.add(slider);
+			}
+		//panel.add(slider);
+		for (JSlider er : hihi)
+		{
+			
+			panel.add(er);
+		}
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				float p = (float)slider.getValue();
 				ArrayList<Float> xacSuat = new ArrayList<Float>();
-				xacSuat.add(p);
 				
+				for (JSlider er : hihi)
+				{
+					float p = (float)er.getValue();
+					
+					xacSuat.add(p);
+				}
 				PhuongAnList paList = new PhuongAnList();
 				String dA = paList.Bayes(xacSuat, namePAs, arr, nameMTs);
 				frmPhngPhapBayes.setVisible(false);
 				new ketqua().main(paList.DisplayPA(arr,dA));
 			}
 		});
+			
 	}
 	private void initialize2(ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs) {
 		frmPhngPhapBayes = new JFrame();

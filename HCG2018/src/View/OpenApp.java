@@ -184,7 +184,7 @@ public class OpenApp {
 					 
 					 test ts = new test();
 					 
-					 String fileName = ts.readFileExcel("D:\\Link.xls");
+					 String fileName = ts.readFileExcel("G:\\Link.xls");
 					 PhuongAnList paList = new PhuongAnList();
 					 
 					 
