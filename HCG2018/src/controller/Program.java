@@ -68,8 +68,11 @@ public class Program {
 				// 0,3 không phải là kiểu float ????
 				double x = 0.3;
 				float z = (float)x;
+				
 				ArrayList<Float> xacSuatt = new ArrayList<Float>();
-				xacSuatt.add(z);
+				xacSuatt.add((float)30);
+				xacSuatt.add((float)50);
+				xacSuatt.add((float) 20);
 				dA=paList.Hodges_Lehmann(z,xacSuatt,namePAs,arr,nameMTs);
 				break;
 			case 8:

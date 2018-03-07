@@ -224,12 +224,12 @@ public class OpenApp {
 					 if (pp_rd1.isSelected())
 					 {
 						 dA=paList.Maximin(namePAs,arr);
-						 new ketqua().main(paList.DisplayPA(arr,dA));
+						 new ketqua().main(arr,dA);
 					 }
 					 if (pp_rd2.isSelected())
 					 {
 						 dA=paList.Maximax(namePAs,arr);
-						 new ketqua().main(paList.DisplayPA(arr,dA));
+						 new ketqua().main(arr,dA);
 					 }
 					 if (pp_rd3.isSelected())
 					 {
@@ -239,7 +239,7 @@ public class OpenApp {
 					 if (pp_rd4.isSelected())
 					 {
 						 dA=paList.Savage_Niehans(namePAs,arr,nameMTs);
-						 new ketqua().main(paList.DisplayPA(arr,dA));
+						 new ketqua().main(arr,dA);
 					 }
 					 if (pp_rd5.isSelected())
 					 {
@@ -248,7 +248,7 @@ public class OpenApp {
 					 if (pp_rd6.isSelected())
 					 {
 						 dA=paList.Laplace(namePAs,arr,nameMTs);
-						 new ketqua().main(paList.DisplayPA(arr,dA));
+						 new ketqua().main(arr,dA);
 					 }
 					 if (pp_rd7.isSelected())
 					 {

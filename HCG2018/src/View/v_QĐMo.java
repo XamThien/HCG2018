@@ -19,12 +19,13 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class v_QĐMo {
 
 	private JFrame frmChnThi;
 
-	/**
+	/**ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs
 	 * Launch the application.
 	 */
 	public static void main(ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs) {
@@ -47,7 +48,7 @@ public class v_QĐMo {
 		});
 	}
 
-	/**namePAs,arr,nameMTs
+	/**
 	 * Create the application.
 	 */
 	public v_QĐMo(ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs) {
@@ -57,9 +58,9 @@ public class v_QĐMo {
 		//initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+//	/**
+//	 * Initialize the contents of the frame.
+//	 */
 	private void initialize(ArrayList<String> namePAs,ArrayList<Phuongan> arr,ArrayList<String> nameMTs) {
 		frmChnThi = new JFrame();
 		frmChnThi.setTitle("Chọn thái độ muốn quyết định");
@@ -73,10 +74,10 @@ public class v_QĐMo {
 		frmChnThi.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JSlider slider = new JSlider(JSlider.HORIZONTAL, 10, 50, 30);
+		JSlider slider = new JSlider(JSlider.HORIZONTAL, 1, 5, 3);
 		slider.setBounds(42, 45, 345, 73);
 		panel.add(slider);
-		slider.setMinorTickSpacing(10);
+		slider.setMinorTickSpacing(1);
 		//slider.setMajorTickSpacing(10);
 		slider.setPaintTicks(true);
 		slider.setPaintLabels(true);
@@ -93,33 +94,32 @@ public class v_QĐMo {
 		lblLacQuan.setBounds(350, 45, 55, 16);
 		panel.add(lblLacQuan);
 		
+		JLabel lblNewLabel = new JLabel("Giữa bi quan và ");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(77, 88, 114, 22);
+		panel.add(lblNewLabel);
+		
+		JLabel lblTrngThiTrung = new JLabel("trạng thái trung gian");
+		lblTrngThiTrung.setBounds(77, 105, 114, 16);
+		panel.add(lblTrngThiTrung);
+		
+		JLabel lblGiaTrngThi = new JLabel("Giữa trạng thái");
+		lblGiaTrngThi.setHorizontalAlignment(SwingConstants.CENTER);
+		lblGiaTrngThi.setBounds(243, 88, 114, 22);
+		panel.add(lblGiaTrngThi);
+		
+		JLabel lblTrungGianV = new JLabel(" trung gian và lạc quan");
+		lblTrungGianV.setBounds(243, 105, 128, 16);
+		panel.add(lblTrungGianV);
+		
 		// hien thi thuoc do cua slider 0 10 20 30 40 50 ..
-		//slider.setLabelTable(slider.createStandardLabels(10));
+		//slider.setLabelTable(slider.createStandardLabels(1));
 		
 		JButton btnNewButton = new JButton("Xác nhận");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int sel = 0;
-				if (slider.getValue()==10)
-				{
-					sel = 1;
-				}
-				if (slider.getValue()==30)
-				{
-					sel = 3;
-				}
-				if (slider.getValue()==50)
-				{
-					sel = 5;
-				}
-				if (slider.getValue()>10 && slider.getValue()<30)
-				{
-					sel = 2;
-				}
-				if (slider.getValue()>30 && slider.getValue()<50)
-				{
-					sel = 4;
-				}
+				int sel = slider.getValue();
+
 				PhuongAnList paList = new PhuongAnList();
 				String dA = "";
 				switch (sel)
@@ -127,12 +127,12 @@ public class v_QĐMo {
 				case 1:
 					frmChnThi.setVisible(false);
 					dA=paList.Maximin(namePAs,arr);
-					new ketqua().main(paList.DisplayPA(arr,dA));
+					new ketqua().main(arr,dA);
 					break;
 				case 2:
 					dA = paList.QDMoBTG(namePAs,arr);
 					frmChnThi.setVisible(false);
-					new ketqua().main(paList.DisplayPA(arr,dA));
+					new ketqua().main(arr,dA);
 					break;
 				case 3:
 					frmChnThi.setVisible(false);
@@ -141,12 +141,12 @@ public class v_QĐMo {
 				case 4:
 					dA = paList.QDMoTGL(namePAs,arr);
 					frmChnThi.setVisible(false);
-					new ketqua().main(paList.DisplayPA(arr,dA));
+					new ketqua().main(arr,dA);
 					break;
 				case 5:
 					frmChnThi.setVisible(false);
 					dA=paList.Maximax(namePAs,arr);
-					new ketqua().main(paList.DisplayPA(arr,dA));
+					new ketqua().main(arr,dA);
 					break;
 				}
 				

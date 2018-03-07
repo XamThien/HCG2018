@@ -19,12 +19,16 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.JLabel;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseEvent;
 
 public class v_HURWICZ {
 
 	private JFrame frmPhngPhapHurwicz;
+	private JTextField textField;
 
-	/**
+	/**ArrayList<String> namePAs,ArrayList<Phuongan> arr
 	 * Launch the application.
 	 */
 	public static void main(ArrayList<String> namePAs,ArrayList<Phuongan> arr) {
@@ -57,7 +61,7 @@ public class v_HURWICZ {
 		initialize(namePAs,arr);
 	}
 
-	/**
+	/**ArrayList<String> namePAs,ArrayList<Phuongan> arr
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(ArrayList<String> namePAs,ArrayList<Phuongan> arr) {
@@ -67,9 +71,27 @@ public class v_HURWICZ {
 		frmPhngPhapHurwicz.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPhngPhapHurwicz.getContentPane().setLayout(null);
 		
+		textField = new JTextField();
+		textField.setHorizontalAlignment(SwingConstants.CENTER);
+		//textField.setEnabled(false);
+		textField.setEditable(false);
+		textField.setBounds(188, 49, 60, 28);
+		frmPhngPhapHurwicz.getContentPane().add(textField);
+		textField.setColumns(10);
+		
 		JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
+		slider.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				textField.setText(String.valueOf(slider.getValue()));
+				
+			}
+		});
+		
+		
+		
 		slider.setBorder(new TitledBorder(null, "Cho\u0323n h\u00EA\u0323 s\u00F4\u0301 la\u0323c quan :", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(59, 59, 59)));
-		slider.setBounds(21, 36, 395, 110);
+		slider.setBounds(21, 36, 395, 121);
 		slider.setMinorTickSpacing(1);
 	    slider.setMajorTickSpacing(10);
 	    slider.setPaintTicks(true);
@@ -96,6 +118,10 @@ public class v_HURWICZ {
 		JButton btnNewButton = new JButton("Xác nhận");
 		btnNewButton.setBounds(155, 169, 110, 34);
 		frmPhngPhapHurwicz.getContentPane().add(btnNewButton);
+		
+		
+		
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int anpha = slider.getValue();
@@ -106,7 +132,7 @@ public class v_HURWICZ {
 					String dA = paList.Hurwicz(namePAs,arr,anpha);
 					
 					frmPhngPhapHurwicz.setVisible(false);
-					new ketqua().main(paList.DisplayPA(arr,dA));
+					new ketqua().main(arr,dA);
 					
 					
 				}

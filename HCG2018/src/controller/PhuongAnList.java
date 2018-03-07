@@ -321,8 +321,8 @@ public class PhuongAnList {
 			
 			
 		}*/
-		for (double f : xacSuat) {
-			f=f/tongxs;
+		for (int i = 0; i< xacSuat.size(); i++) {
+			xacSuat.set(i, xacSuat.get(i)/tongxs);
 		}
 		ArrayList<Phuongan> matrixTV = new ArrayList<>();
 		for(int i=0; i< arr.size(); i++){
@@ -350,9 +350,10 @@ public class PhuongAnList {
 		ArrayList<Phuongan> minRows = new ArrayList<>();
 		for (String namepa : namePAs) {
 			ArrayList<Phuongan> arrRow = new ArrayList<>();
-			for (Phuongan pa : arr) {
-				if (namepa.contains(pa.getNamePA())) {
-					arrRow.add(pa);
+			for(int i=0; i< arr.size(); i++){
+				if (namepa.contains(arr.get(i).getNamePA())) {
+					Phuongan ps = new Phuongan(arr.get(i).getNamePA(),arr.get(i).getNameMT(),arr.get(i).getValue());
+					arrRow.add(ps);
 				}
 			}
 			Phuongan min = TimMin(arrRow);
