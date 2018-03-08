@@ -93,7 +93,7 @@ public class PhuongAnList {
 //		}
 		// Moi lua chon cach nhau mot dau cach; khi len giao dien thi chuyen phan này thanh check box
 		//String chon = nhap.nextLine();
-		String[] mTs = chon.split("\\s");
+		String[] mTs = chon.split(",");
 		ArrayList<Phuongan> pa	= new ArrayList<>();
 		ArrayList<String> nameMT= new ArrayList<>();
 		ArrayList<String> namePA= new ArrayList<>();

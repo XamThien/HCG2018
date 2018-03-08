@@ -56,22 +56,22 @@ public class BeforeOpenApp {
 	 */
 	public BeforeOpenApp() {
 		test ts = new test();
-		//C:\\Program Files\\Microsoft Office\\Link.xls
+		// tạo file excel luu địa chỉ của file database, nếu không tồn tại file này, sẽ dc tạo mới theo địa chỉ này
 		String link = "G:\\Link.xls";
 		if(!ts.checkFileExcel(link))
 		{
-			initialize();
+			initialize(link);
 		}
 		else
 		{
-			new OpenApp().main(null);
+			new v_SelectMT().main(null);
 		}
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(String Link) {
 		frmChonViTri = new JFrame();
 		frmChonViTri.setTitle("Chọn vị trí lưu các file");
 		frmChonViTri.setBounds(500, 150, 541, 296);
@@ -106,9 +106,9 @@ public class BeforeOpenApp {
 			        	if(test.checkFileExcel(cklink))
 			        	{
 			        		textField.setText(fileChooser.getSelectedFile().getAbsolutePath());
-			        		test.writeNewFileExcel("G:\\Link.xls",cklink);
+			        		test.writeNewFileExcel(Link,cklink);
 			        		frmChonViTri.setVisible(false);
-			        		new OpenApp().main(null);
+			        		new v_SelectMT().main(null);
 			        	}
 			        	else
 			        	{
@@ -120,41 +120,7 @@ public class BeforeOpenApp {
 			    	JOptionPane.showMessageDialog(null, "Chưa chọn vị trí tệp","Lỗi", JOptionPane.ERROR_MESSAGE);
 			      }
 				
-//				JFileChooser chooser;
-//				String choosertitle = null;
-//				chooser = new JFileChooser(); 
-//			    chooser.setCurrentDirectory(new java.io.File("."));
-//			    chooser.setDialogTitle(choosertitle);
-//			    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-//			    //
-//			    // disable the "All files" option.
-//			    //
-//			    chooser.setAcceptAllFileFilterUsed(false);
-//			    //    
-//			    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) { 
-//			      
-//			    	String path = chooser.getSelectedFile().getAbsolutePath();
-//			        
-//			        if (path!=null)
-//			        {
-//			        	String cklink = path+"\\Link.xls";
-//			        	if(test.checkFileExcel(cklink))
-//			        	{
-//			        		textField.setText(chooser.getSelectedFile().getAbsolutePath());
-//			        		test.writeNewFileExcel("G:\\Link.xls",cklink);
-//			        		frmChonViTri.setVisible(false);
-//			        		new OpenApp().main(null);
-//			        	}
-//			        	else
-//			        	{
-//			        		JOptionPane.showMessageDialog(null, "Folder không chứa các file cần thiết","Lỗi", JOptionPane.ERROR_MESSAGE);
-//			        	}
-//			        }
-//
-//			      }
-//			    else {
-//			    	JOptionPane.showMessageDialog(null, "Chưa chọn vị trí tệp","Lỗi", JOptionPane.ERROR_MESSAGE);
-//			      }
+
 			}
 		});
 		btnNewButton.setBounds(351, 46, 112, 28);

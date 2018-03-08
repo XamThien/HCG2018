@@ -16,7 +16,7 @@ public class Program {
 			PhuongAnList paList = new PhuongAnList();
 			paList.ReadFromExcel(fileName);
 			System.out.println("Danh sach cac muc tieu cho viec chon lua "+ paList.getNameDSS());
-			paList.Choose("0 1 2");
+			paList.Choose("0,1,2");
 			System.out.println("Danh sach cac phuong phap lua chon: ");
 			System.out.println("1. Phuong phap Maximin");
 			System.out.println("2. Phuong phap Maximax");

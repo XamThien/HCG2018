@@ -34,7 +34,7 @@ public class OpenApp {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String name_de_tai,String strch) {
 		try
 		{
 			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -45,7 +45,7 @@ public class OpenApp {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					OpenApp window = new OpenApp();
+					OpenApp window = new OpenApp(name_de_tai,strch);
 					window.frmHChuynGia.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,17 +57,22 @@ public class OpenApp {
 	/**
 	 * Create the application.
 	 */
-	public OpenApp() {
-		initialize();
+	public OpenApp(String name_de_tai,String strch/*,ArrayList<String> nameMTs,ArrayList<String> namePAs,ArrayList<Phuongan> arr*/) {
+		
+		initialize(name_de_tai,strch);
 	}
-
+	public OpenApp() {
+		//initialize(paList,name_de_tai, nameMTs, namePAs, arr);
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(String name_de_tai,String strch) {
+		
+		 
 		frmHChuynGia = new JFrame();
 		frmHChuynGia.setTitle("Hệ Chuyên Gia 2018");
-		frmHChuynGia.setBounds(400, 100, 592, 504);
+		frmHChuynGia.setBounds(400, 100, 592, 413);
 		frmHChuynGia.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmHChuynGia.getContentPane().setLayout(null);
 		
@@ -77,33 +82,17 @@ public class OpenApp {
 		lblPhnMmH.setBounds(67, 18, 402, 43);
 		frmHChuynGia.getContentPane().add(lblPhnMmH);
 		
-		JLabel lblDanhSachChon = new JLabel("Danh sách các mục tiêu chọn lựa cho việc đi làm");
-		lblDanhSachChon.setBounds(132, 60, 293, 14);
+		JLabel lblDanhSachChon = new JLabel("Danh sách các mục tiêu chọn lựa cho việc");
+		lblDanhSachChon.setBounds(123, 60, 237, 14);
 		frmHChuynGia.getContentPane().add(lblDanhSachChon);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Ca\u0301c mu\u0323c ti\u00EAu l\u01B0\u0323a cho\u0323n :", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(35, 105, 502, 72);
-		frmHChuynGia.getContentPane().add(panel);
-		panel.setLayout(null);
-		
-		
-		
-		JCheckBox chckbx1 = new JCheckBox("Lương");
-		chckbx1.setBounds(37, 29, 104, 18);
-		panel.add(chckbx1);
-		
-		JCheckBox chckbx2 = new JCheckBox("Gần nhà");
-		chckbx2.setBounds(198, 28, 104, 18);
-		panel.add(chckbx2);
-		
-		JCheckBox chckbx3 = new JCheckBox("Độ hấp dẫn");
-		chckbx3.setBounds(355, 29, 104, 18);
-		panel.add(chckbx3);
+		JLabel lbliDuLich = new JLabel(name_de_tai.toLowerCase());
+		lbliDuLich.setBounds(357, 59, 91, 16);
+		frmHChuynGia.getContentPane().add(lbliDuLich);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Ph\u01B0\u01A1ng pha\u0301p l\u01B0\u0323a cho\u0323n :", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(35, 206, 502, 198);
+		panel_1.setBounds(38, 103, 502, 198);
 		frmHChuynGia.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -152,14 +141,19 @@ public class OpenApp {
 		JButton btnNewButton = new JButton("Kết Quả");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// check panel 1============================================================================================================
 				
-				boolean ck = true;
-				if(!chckbx1.isSelected() && !chckbx2.isSelected() && !chckbx3.isSelected())
-				{
-					ck = false;
-					JOptionPane.showMessageDialog(null, "Bạn Chưa Chọn Các Mục Tiêu Lựa Chọn!!!!","Lỗi", JOptionPane.ERROR_MESSAGE);
-				}
+				PhuongAnList paList = new PhuongAnList();
+				test ts = new test();
+				String fileName = ts.readFileExcel("G:\\Link.xls");
+				paList.ReadFromExcel(fileName);
+				 ArrayList<String> nameMTs = new ArrayList<>();
+				 ArrayList<String> namePAs = new ArrayList<>();
+				 ArrayList<Phuongan> arr = new ArrayList<Phuongan>();
+				 paList.Choose(strch);
+				 arr = paList.getArr();
+				 nameMTs = paList.getNameMTs();
+				 namePAs = paList.getNamePAs();
+				 
 				
 				// check panel 2 ==========================================================================================================
 				
@@ -175,52 +169,13 @@ public class OpenApp {
 					JOptionPane.showMessageDialog(null, "Bạn Chưa Chọn Phương Pháp Lựa Chọn!!!!","Lỗi", JOptionPane.ERROR_MESSAGE);
 				}
 				// Thực hiện chương trình ================================================================================================
-				if (ck == true && dem2 != btnGroup2.getButtonCount())
+				if (dem2 != btnGroup2.getButtonCount())
 				{
 					String dA = "";
-					 ArrayList<String> nameMTs = new ArrayList<>();
-					 ArrayList<String> namePAs = new ArrayList<>();
-					 ArrayList<Phuongan> arr = new ArrayList<Phuongan>();
-					 
-					 test ts = new test();
-					 
-					 String fileName = ts.readFileExcel("G:\\Link.xls");
-					 PhuongAnList paList = new PhuongAnList();
 					 
 					 
-					 paList.ReadFromExcel(fileName);
 					 
-					 String strchs = "";
-					 if (chckbx1.isSelected())
-					 {
-						 	 strchs+="0";
-					 }
-					 if (chckbx2.isSelected())
-					 {
-						 if(strchs.equals(""))
-						 {
-							 strchs+="1";
-						 }
-						 else
-						 {
-							 strchs+=" 1";
-						 }
-					 }
-					 if (chckbx3.isSelected())
-					 {
-						 if(strchs.equals(""))
-						 {
-							 strchs+="2";
-						 }
-						 else
-						 {
-							 strchs+=" 2";
-						 }
-					 }
-					 paList.Choose(strchs);
-					 arr = paList.getArr();
-					 nameMTs = paList.getNameMTs();
-					 namePAs = paList.getNamePAs();
+					 
 					 if (pp_rd1.isSelected())
 					 {
 						 dA=paList.Maximin(namePAs,arr);
@@ -261,7 +216,7 @@ public class OpenApp {
 				}
 			}
 		});
-		btnNewButton.setBounds(349, 416, 133, 34);
+		btnNewButton.setBounds(352, 313, 133, 34);
 		frmHChuynGia.getContentPane().add(btnNewButton);
 	}
 }
