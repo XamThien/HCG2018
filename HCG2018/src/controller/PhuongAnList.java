@@ -9,6 +9,11 @@ import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
 
 public class PhuongAnList {
 	
@@ -50,7 +55,66 @@ public class PhuongAnList {
 	public void setNamePAs(ArrayList<String> namePAs) {
 		this.namePAs = namePAs;
 	}
-
+	// tao moi file excel csdl
+	public static void writeNewFileExcel(String fileName,String link) {
+        WritableWorkbook workbook;
+        // create workbook
+        try {
+            workbook = Workbook.createWorkbook(new File(fileName));
+ 
+            // create sheet
+            WritableSheet sheet1 = workbook.createSheet("Link lưu file CSDL HCG2018", 0);
+ 
+            sheet1.addCell(new Label(1, 1,link));
+           
+            // write file
+            workbook.write();
+ 
+            // close
+            workbook.close();
+        } catch (IOException e) {
+            System.out.println("Không tìm thấy file");
+        } catch (RowsExceededException e) {
+        	System.out.println("Không tìm thấy file");
+        } catch (WriteException e) {
+        	System.out.println("Không tìm thấy file");
+        }
+       
+    }
+	// mo file excel va ghi them mot dong moi
+    public static void openAndWriteContinusFileExcel(String fileName,String name) {
+        Workbook workbook;
+        WritableWorkbook writeWorkbook;
+        try {
+            // open file
+            workbook = Workbook.getWorkbook(new File(fileName));
+            // create file copy of root file to write file
+            writeWorkbook = Workbook.createWorkbook(new File(fileName),
+                    workbook);
+ 
+            // get sheet to write
+            WritableSheet sheet1 = writeWorkbook.getSheet(0);
+            //int colcontinus = sheet1.getRows();
+            int rowcontinus = sheet1.getRows();
+            	sheet1.addCell(new Label(1, rowcontinus, name.toString()));
+                sheet1.addCell(new Label(2, rowcontinus, String.valueOf("1")));
+            System.out.println(rowcontinus);
+            writeWorkbook.write();
+ 
+            // close
+            writeWorkbook.close();
+        } catch (IOException e) {
+            System.out.println("File not found\n" + e.toString());
+        } catch (RowsExceededException e) {
+            System.out.println("File not found\n" + e.toString());
+        } catch (WriteException e) {
+            System.out.println("File not found\n" + e.toString());
+        } catch (BiffException e) {
+            System.out.println("File not found\n" + e.toString());
+        }
+        
+    }
+    
 	public void ReadFromExcel(String nameFile){
 		Workbook workbook;
 		// create workbook to open file

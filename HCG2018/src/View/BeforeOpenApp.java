@@ -64,7 +64,7 @@ public class BeforeOpenApp {
 		}
 		else
 		{
-			new v_SelectMT().main(null);
+			new v_SelectMT().main(link);
 		}
 	}
 
@@ -90,7 +90,7 @@ public class BeforeOpenApp {
 		panel.add(textField);
 		textField.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Chọn folder");
+		JButton btnNewButton = new JButton("Chọn excel");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser fileChooser = new JFileChooser();

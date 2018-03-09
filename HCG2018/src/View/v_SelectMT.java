@@ -29,7 +29,7 @@ public class v_SelectMT {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String link) {
 		try
 		{
 			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -40,7 +40,7 @@ public class v_SelectMT {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					v_SelectMT window = new v_SelectMT();
+					v_SelectMT window = new v_SelectMT( link);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,10 +52,10 @@ public class v_SelectMT {
 	/**
 	 * Create the application.
 	 */
-	public v_SelectMT() {
+	public v_SelectMT(String link) {
 		PhuongAnList paList = new PhuongAnList();
 		test ts = new test();
-		String fileName = ts.readFileExcel("G:\\Link.xls");
+		String fileName = ts.readFileExcel(link);
 		paList.ReadFromExcel(fileName);
 		 ArrayList<String> nameMTs = new ArrayList<>();
 		 ArrayList<String> namePAs = new ArrayList<>();
@@ -67,6 +67,11 @@ public class v_SelectMT {
 		
 		initialize( paList,name_de_tai, nameMTs, namePAs, arr);
 		//paList.Choose(strch);
+	}
+	public v_SelectMT() {
+		
+		
+		
 	}
 
 	/**
