@@ -12,6 +12,9 @@ import javax.swing.UIManager;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
+import controller.test;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -112,7 +115,8 @@ public class v_Add_Data {
 				}
 				if(ck)
 				{
-					
+					test ts = new test();
+					String fileName = ts.readFileExcel("G:\\Link.xls");
 				}
 			}
 		});
