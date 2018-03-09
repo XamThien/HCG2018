@@ -111,6 +111,10 @@ public class v_New_Data {
 					ck = false;
 					JOptionPane.showMessageDialog(null, "Chưa nhập tên đề tài","Lỗi", JOptionPane.ERROR_MESSAGE);
 				}
+				else
+				{
+					ten_de_tai = txtName.getText();
+				}
 				if(txtSLMT.getText().equals("") || txtSLMT.getText().equals(null))
 				{
 					ck = false;
@@ -136,7 +140,9 @@ public class v_New_Data {
 				
 				if(ck)
 				{
-					
+					frame_1.setVisible(false);
+					frame.setVisible(false);
+					new v_Add_Data().main(ten_de_tai,so_mt);
 					
 				}
 				

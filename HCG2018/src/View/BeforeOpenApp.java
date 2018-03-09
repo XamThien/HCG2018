@@ -108,7 +108,7 @@ public class BeforeOpenApp {
 			        		textField.setText(fileChooser.getSelectedFile().getAbsolutePath());
 			        		test.writeNewFileExcel(Link,cklink);
 			        		frmChonViTri.setVisible(false);
-			        		new v_SelectMT().main(null);
+			        		new v_SelectMT().main(Link);
 			        	}
 			        	else
 			        	{

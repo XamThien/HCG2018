@@ -3,6 +3,7 @@ package View;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,10 +14,20 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import controller.Detail;
 import controller.test;
+import jxl.Workbook;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 
 public class v_Add_Data {
@@ -26,7 +37,7 @@ public class v_Add_Data {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String ten_de_tai,int so_mt) {
 		try
 		{
 			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -37,7 +48,7 @@ public class v_Add_Data {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					v_Add_Data window = new v_Add_Data();
+					v_Add_Data window = new v_Add_Data(ten_de_tai, so_mt);
 					window.frmThmMiMuc.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,16 +60,54 @@ public class v_Add_Data {
 	/**
 	 * Create the application.
 	 */
+	public v_Add_Data(String ten_de_tai,int so_mt) {
+		String linksavelinkDB = "G:\\Link.xls";
+		initialize(linksavelinkDB,ten_de_tai, so_mt);
+	}
 	public v_Add_Data() {
-		String ten_de_tai = "Chời đụ";
-		int so_mt = 4;
-		initialize( ten_de_tai, so_mt);
+		//initialize( ten_de_tai, so_mt);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(String ten_de_tai,int so_mt) {
+	private void writeNewFileExcel(String ten_de_tai,String fileName,ArrayList<JTextField> hihi) {
+        WritableWorkbook workbook;
+        // create workbook
+        try {
+            workbook = Workbook.createWorkbook(new File(fileName));
+ 
+            // create sheet
+            WritableSheet sheet1 = workbook.createSheet("CSDL HCG", 0);
+ 
+           
+            
+            // row begin write data
+            sheet1.addCell(new Label(0, 0, ten_de_tai.toLowerCase()));
+            
+            int cols = hihi.size();
+            for(int col=1; col<=cols; col++)
+            {
+            	
+            	sheet1.addCell(new Label(col, 0, hihi.get(col-1).getText()));
+                
+            }
+           
+            // write file
+            workbook.write();
+ 
+            // close
+            workbook.close();
+        } catch (IOException e) {
+            System.out.println("Không tìm thấy file");
+        } catch (RowsExceededException e) {
+        	System.out.println("Không tìm thấy file");
+        } catch (WriteException e) {
+        	System.out.println("Không tìm thấy file");
+        }
+       
+    }
+	private void initialize(String linksavelinkDB,String ten_de_tai,int so_mt) {
 		frmThmMiMuc = new JFrame();
 		frmThmMiMuc.setTitle("Thêm mới mục tiêu");
 		frmThmMiMuc.setBounds(400, 100, 592, 316+(so_mt-1)*40);
@@ -116,7 +165,18 @@ public class v_Add_Data {
 				if(ck)
 				{
 					test ts = new test();
-					String fileName = ts.readFileExcel("G:\\Link.xls");
+					String fileName = ts.readFileExcel(linksavelinkDB);
+					
+					int last = fileName.lastIndexOf('\\');
+					String folderName = fileName.substring(0, last+1);
+					String newfileName = folderName+ten_de_tai+".xls";
+					if(ts.checkFileExcel(newfileName))
+					{
+						newfileName = folderName+ten_de_tai+"-1.xls";
+					}
+					writeNewFileExcel(ten_de_tai,newfileName,hihi);
+					frmThmMiMuc.setVisible(false);
+					new v_Add_PA().main(newfileName, hihi);
 				}
 			}
 		});

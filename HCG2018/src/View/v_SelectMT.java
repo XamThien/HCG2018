@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 
 import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -19,6 +20,7 @@ import controller.test;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
@@ -65,7 +67,7 @@ public class v_SelectMT {
 		 nameMTs = paList.getNameMTs();
 		 namePAs = paList.getNamePAs();
 		
-		initialize( paList,name_de_tai, nameMTs, namePAs, arr);
+		initialize(link, paList,name_de_tai, nameMTs, namePAs, arr);
 		//paList.Choose(strch);
 	}
 	public v_SelectMT() {
@@ -77,7 +79,7 @@ public class v_SelectMT {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(PhuongAnList paList,String name_de_tai,ArrayList<String> nameMTs,ArrayList<String> namePAs,ArrayList<Phuongan> arr) {
+	private void initialize(String link,PhuongAnList paList,String name_de_tai,ArrayList<String> nameMTs,ArrayList<String> namePAs,ArrayList<Phuongan> arr) {
 		
 		
 		frame = new JFrame();
@@ -140,34 +142,108 @@ public class v_SelectMT {
 			public void actionPerformed(ActionEvent e) {
 				
 				String strch="";
-				
-				
-				for(int i=0;i<hihi.size();i++)
+				boolean ck = false;
+				for(JCheckBox x : hihi)
 				{
-					JCheckBox x =hihi.get(i);
 					if(x.isSelected())
 					{
-						if(strch.equals(""))
-						{
-							strch=String.valueOf(i);
-						}
-						else
-						{
-							strch+=","+String.valueOf(i);
-						}
-						
-						
+						ck= true;
 					}
+				}
+				
+				if(ck== true)
+				{
+					for(int i=0;i<hihi.size();i++)
+					{
+						JCheckBox x =hihi.get(i);
+						if(x.isSelected())
+						{
+							if(strch.equals(""))
+							{
+								strch=String.valueOf(i);
+							}
+							else
+							{
+								strch+=","+String.valueOf(i);
+							}
+							
+							
+						}
+					}
+					frame.setVisible(false);
+					new OpenApp().main(name_de_tai,strch);
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Bạn chưa chọn mục tiêu","Lỗi", JOptionPane.ERROR_MESSAGE);
 				}
 				
 				//paList.Choose(strch);
 				//OptionPane.showMessageDialog(null, strch,"Lỗi", JOptionPane.ERROR_MESSAGE);
-				frame.setVisible(false);
-				new OpenApp().main(name_de_tai,strch);
+				
 				
 			}
 		});
-		btnNewButton.setBounds(413, 196+(so_dong-1)*40, 124, 36);
+		btnNewButton.setBounds(418, 196+(so_dong-1)*40, 114, 36);
 		frame.getContentPane().add(btnNewButton);
+		
+		JButton btnNewMT = new JButton("Thêm mục tiêu");
+		btnNewMT.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				JOptionPane.showMessageDialog(null, "Chưa có gì hihi","Lỗi", JOptionPane.INFORMATION_MESSAGE);
+				
+			}
+		});
+		btnNewMT.setBounds(289, 196+(so_dong-1)*40, 114, 36);
+		frame.getContentPane().add(btnNewMT);
+		
+		JButton btnChuyen = new JButton("Chuyển CSDL");
+		btnChuyen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				JFileChooser fileChooser = new JFileChooser();
+				fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+				int result = fileChooser.showOpenDialog(null);
+				if (result == JFileChooser.APPROVE_OPTION) 
+				{
+					String path = fileChooser.getSelectedFile().getAbsolutePath();
+			        
+			        if (path!=null)
+			        {
+			        	String cklink = path;
+			        	if(test.checkFileExcel(cklink))
+			        	{
+			        		//textField.setText(fileChooser.getSelectedFile().getAbsolutePath());
+			        		test.writeNewFileExcel(link,cklink);
+			        		frame.setVisible(false);
+			        		new v_SelectMT().main(link);
+			        	}
+			        	else
+			        	{
+			        		JOptionPane.showMessageDialog(null, "Folder không chứa các file cần thiết","Lỗi", JOptionPane.ERROR_MESSAGE);
+			        	}
+			        }
+				}
+				else {
+			    	JOptionPane.showMessageDialog(null, "Chưa chọn vị trí tệp","Lỗi", JOptionPane.ERROR_MESSAGE);
+			    	//new BeforeOpenApp().main(null);
+			      }
+				
+			}
+		});
+		btnChuyen.setBounds(160, 196+(so_dong-1)*40, 114, 36);
+		frame.getContentPane().add(btnChuyen);
+		
+		JButton btnNewCSDL = new JButton("Thêm CSDL");
+		btnNewCSDL.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				new v_New_Data().main(null);
+				
+			}
+		});
+		btnNewCSDL.setBounds(32, 196+(so_dong-1)*40, 114, 36);
+		frame.getContentPane().add(btnNewCSDL);
 	}
 }
