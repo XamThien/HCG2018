@@ -191,6 +191,46 @@ public class PhuongAnList {
 		return rtn;
 	}
 	
+	public Boolean KtraChuanhoa(ArrayList<Phuongan> arr){
+		Boolean check= true;
+		for (Phuongan phuongan : arr) {
+			if((phuongan.getValue()<0)||(phuongan.getValue()>1)){
+				check = false;
+				break;
+			}
+		}
+		return check;
+	}
+	
+	public ArrayList<Phuongan> Chuanhoa(ArrayList<Phuongan> arr, ArrayList<String> nameMTs){
+		ArrayList<Phuongan> maxMT = new ArrayList<Phuongan>();
+		ArrayList<Phuongan> minMT = new ArrayList<Phuongan>();
+		for (String namemt : nameMTs) {
+			ArrayList<Phuongan> arrRow = new ArrayList<>();
+			for (Phuongan pa : arr) {
+				if (namemt.contains(pa.getNameMT())) {
+					arrRow.add(pa);
+				}
+			}
+			minMT.add(TimMin(arrRow));
+			maxMT.add(TimMax(arrRow));
+		}
+		ArrayList<Phuongan> matrixTV = new ArrayList<>();
+		for(int i=0; i< arr.size(); i++){
+			Phuongan ps = new Phuongan(arr.get(i).getNamePA(),arr.get(i).getNameMT(),arr.get(i).getValue());
+			matrixTV.add(ps);
+		}
+		for(int i=0; i<nameMTs.size(); i++){
+			for (Phuongan pa : matrixTV) {
+				if (nameMTs.get(i).contains(pa.getNameMT())) {
+					float value =(pa.getValue()-minMT.get(i).getValue())/(maxMT.get(i).getValue()-minMT.get(i).getValue());
+					pa.setValue(value);
+				}
+			}
+		}
+		return matrixTV;
+	}
+	
 	public Phuongan TimMax(ArrayList<Phuongan> list){
 		Phuongan max = list.get(0);
 		for (int i = 1; i< list.size(); i++){
