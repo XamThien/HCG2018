@@ -99,9 +99,11 @@ public class v_View_PA_ChuanHoa {
 		
 		
         dtm.setColumnIdentifiers(colsName);
+        //int j = 0; j<nameMTs.size();j++
         for(String mt : namePAs)
         {
-        	ArrayList<Phuongan> lst = new ArrayList<Phuongan>();
+        	ArrayList<Phuongan> lst = null;
+        	lst = new ArrayList<Phuongan>();
         	for (Phuongan pa : arr) {
         		if(pa.getNamePA().contains(mt))
         		{

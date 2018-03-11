@@ -10,13 +10,13 @@ public class Program {
 		Scanner nhap = new Scanner(System.in);
 		//System.out.print("Nhap ten file :");
 		String dA="";
-		String fileName = "G:\\dhmt2\\Link.xls";//nhap.nextLine();
+		String fileName = "Book1.xls";//nhap.nextLine();
 		String as;
 		do{
 			PhuongAnList paList = new PhuongAnList();
 			paList.ReadFromExcel(fileName);
 			System.out.println("Danh sach cac muc tieu cho viec chon lua "+ paList.getNameDSS());
-			paList.Choose("0,1");
+			paList.Choose("0");
 			System.out.println("Danh sach cac phuong phap lua chon: ");
 			System.out.println("1. Phuong phap Maximin");
 			System.out.println("2. Phuong phap Maximax");
@@ -77,13 +77,10 @@ public class Program {
 				break;
 			case 8:
 				ArrayList<Phuongan>arr1 = new ArrayList<Phuongan>();
-				if (!paList.KtraChuanhoa(arr)) {
-					arr1 = paList.Chuanhoa(arr, nameMTs);
+				if (!paList.KtraChuanhoa(paList.getArrGoc())) {
+					arr1 = paList.Chuanhoa(paList.getArrGoc(), paList.getNameMTsGoc());
 				
-				} else 
-				{
-					arr1 = arr;
-				}
+				} else arr1 = paList.getArrGoc();
 				for(int i=0; i< arr1.size(); i++){
 					System.out.println(arr1.get(i).getNamePA()+" "+arr1.get(i).getNameMT()+" "+arr1.get(i).getValue());
 				}

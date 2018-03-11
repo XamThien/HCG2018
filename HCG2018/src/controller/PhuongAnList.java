@@ -20,12 +20,28 @@ public class PhuongAnList {
 	Scanner nhap = new Scanner(System.in);
 	private String nameDSS;
 	private ArrayList<String> nameMTs = new ArrayList<>();
+	private ArrayList<String> nameMTsGoc = new ArrayList<>();
 	private ArrayList<String> namePAs = new ArrayList<>();
 	private ArrayList<Phuongan> arr = new ArrayList<Phuongan>();
-	
-	
+	private ArrayList<Phuongan> arrGoc = new ArrayList<Phuongan>();
+
+	public ArrayList<String> getNameMTsGoc() {
+		return nameMTsGoc;
+	}
+
+	public void setNameMTsGoc(ArrayList<String> nameMTsGoc) {
+		this.nameMTsGoc = nameMTsGoc;
+	}
 	public ArrayList<Phuongan> getArr() {
 		return arr;
+	}
+
+	public ArrayList<Phuongan> getArrGoc() {
+		return arrGoc;
+	}
+
+	public void setArrGoc(ArrayList<Phuongan> arrGoc) {
+		this.arrGoc = arrGoc;
 	}
 
 	public void setArr(ArrayList<Phuongan> arr) {
@@ -129,6 +145,7 @@ public class PhuongAnList {
 	        for (int col=1; col<cols; col++){
 	        	String nameMT = sheet.getCell(col, 0).getContents();
 	        	nameMTs.add(nameMT);
+	        	nameMTsGoc.add(nameMT);
 	        }
 	        for	(int row = 1; row < rows; row++){
 	        	String namePa = (sheet.getCell(0, row)).getContents();
@@ -140,6 +157,7 @@ public class PhuongAnList {
 	        		Float value = Float.parseFloat(cell.getContents());
 	        		Phuongan pa= new Phuongan(namePAs.get(row-1),nameMTs.get(col-1),value);
 	        		arr.add(pa);
+	        		arrGoc.add(pa);
 	        	}
 	        }
 	        workbook.close();
@@ -191,9 +209,9 @@ public class PhuongAnList {
 		return rtn;
 	}
 	
-	public Boolean KtraChuanhoa(ArrayList<Phuongan> arr){
+	public Boolean KtraChuanhoa(ArrayList<Phuongan> arrGoc){
 		Boolean check= true;
-		for (Phuongan phuongan : arr) {
+		for (Phuongan phuongan : arrGoc) {
 			if((phuongan.getValue()<0)||(phuongan.getValue()>1)){
 				check = false;
 				break;
@@ -202,12 +220,12 @@ public class PhuongAnList {
 		return check;
 	}
 	
-	public ArrayList<Phuongan> Chuanhoa(ArrayList<Phuongan> arr, ArrayList<String> nameMTs){
+	public ArrayList<Phuongan> Chuanhoa(ArrayList<Phuongan> arrGoc, ArrayList<String> nameMTsGoc){
 		ArrayList<Phuongan> maxMT = new ArrayList<Phuongan>();
 		ArrayList<Phuongan> minMT = new ArrayList<Phuongan>();
-		for (String namemt : nameMTs) {
+		for (String namemt : nameMTsGoc) {
 			ArrayList<Phuongan> arrRow = new ArrayList<>();
-			for (Phuongan pa : arr) {
+			for (Phuongan pa : arrGoc) {
 				if (namemt.contains(pa.getNameMT())) {
 					arrRow.add(pa);
 				}
@@ -216,13 +234,13 @@ public class PhuongAnList {
 			maxMT.add(TimMax(arrRow));
 		}
 		ArrayList<Phuongan> matrixTV = new ArrayList<>();
-		for(int i=0; i< arr.size(); i++){
-			Phuongan ps = new Phuongan(arr.get(i).getNamePA(),arr.get(i).getNameMT(),arr.get(i).getValue());
+		for(int i=0; i< arrGoc.size(); i++){
+			Phuongan ps = new Phuongan(arrGoc.get(i).getNamePA(),arrGoc.get(i).getNameMT(),arrGoc.get(i).getValue());
 			matrixTV.add(ps);
 		}
-		for(int i=0; i<nameMTs.size(); i++){
+		for(int i=0; i<nameMTsGoc.size(); i++){
 			for (Phuongan pa : matrixTV) {
-				if (nameMTs.get(i).contains(pa.getNameMT())) {
+				if (nameMTsGoc.get(i).contains(pa.getNameMT())) {
 					float value =(pa.getValue()-minMT.get(i).getValue())/(maxMT.get(i).getValue()-minMT.get(i).getValue());
 					pa.setValue(value);
 				}

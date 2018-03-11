@@ -147,7 +147,11 @@ public class OpenApp {
 				String fileName = ts.readFileExcel("G:\\Link.xls");
 				paList.ReadFromExcel(fileName);
 				 ArrayList<String> nameMTs = new ArrayList<>();
+				 ArrayList<String> nameMTs_root = new ArrayList<>();
+				 nameMTs_root = paList.getNameMTs();
 				 ArrayList<String> namePAs = new ArrayList<>();
+				 ArrayList<String> namePAs_root = new ArrayList<>();
+				 namePAs_root = paList.getNamePAs();
 				 ArrayList<Phuongan> arr = new ArrayList<Phuongan>();
 				 paList.Choose(strch);
 				 arr = paList.getArr();
@@ -211,17 +215,15 @@ public class OpenApp {
 					 }
 					 if (pp_rd8.isSelected())
 					 {
-						ArrayList<Phuongan>arr1 = new ArrayList<Phuongan>();
-						if (!paList.KtraChuanhoa(arr)) {
-							arr1 = paList.Chuanhoa(arr, nameMTs);
+						 ArrayList<Phuongan>arr1 = new ArrayList<Phuongan>();
+							if (!paList.KtraChuanhoa(paList.getArrGoc())) {
+								arr1 = paList.Chuanhoa(paList.getArrGoc(), paList.getNameMTsGoc());
+								new v_View_PA_ChuanHoa().main(420,link,"Danh sách các phương án sau chuẩn hoá", nameMTs_root, namePAs_root, arr1);
 							
-						} else 
-						{
-							arr1 = arr;
-						}
+							} else arr1 = paList.getArrGoc();
 						
 						 new v_QĐMo().main(namePAs,arr1,nameMTs);
-						 new v_View_PA_ChuanHoa().main(420,link,"Danh sách các phương án sau chuẩn hoá", nameMTs, namePAs, arr1);
+						 
 					 }
 				}
 			}
