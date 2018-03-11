@@ -181,7 +181,7 @@ public class v_Add_Data {
 					{
 						hehe.add(ee.getText());
 					}
-					new v_Add_PA().main(newfileName, hehe);
+					new v_Add_PA().main(link,newfileName, hehe);
 				}
 			}
 		});

@@ -36,7 +36,7 @@ public class v_Add_PA {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String newfileName,ArrayList<String> hihi) {
+	public static void main(String link,String newfileName,ArrayList<String> hihi) {
 		try
 		{
 			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -47,7 +47,7 @@ public class v_Add_PA {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					v_Add_PA window = new v_Add_PA(newfileName,hihi);
+					v_Add_PA window = new v_Add_PA(link,newfileName,hihi);
 					window.frmThmPhngAn.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -59,9 +59,9 @@ public class v_Add_PA {
 	/**
 	 * Create the application.
 	 */
-	public v_Add_PA(String newfileName,ArrayList<String> hihi) {
-		String linksavelinkDB = "G:\\Link.xls";
-		initialize(linksavelinkDB,newfileName,hihi);
+	public v_Add_PA(String link,String newfileName,ArrayList<String> hihi) {
+		//String linksavelinkDB = "G:\\Link.xls";
+		initialize(link,newfileName,hihi);
 	}
 	public v_Add_PA() {
 		//initialize(newfileName,hihi);
@@ -139,7 +139,7 @@ public class v_Add_PA {
         }
         
     }
-	private void initialize(String linksavelinkDB,String newfileName,ArrayList<String> hihi) {
+	private void initialize(String link,String newfileName,ArrayList<String> hihi) {
 		frmThmPhngAn = new JFrame();
 		frmThmPhngAn.setTitle("Thêm Phương Án");
 		int so_mt = hihi.size();
@@ -271,10 +271,10 @@ public class v_Add_PA {
 		
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				openAndWriteFileExcel( linksavelinkDB,  newfileName);
+				openAndWriteFileExcel( link,  newfileName);
 				frmThmPhngAn.setVisible(false);
 				//new BeforeOpenApp().main(null);
-				new v_SelectMT().main(linksavelinkDB);
+				new v_SelectMT().main(link);
 				
 			}
 		});

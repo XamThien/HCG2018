@@ -133,7 +133,7 @@ public class v_View_PA {
 				String fileName = ts.readFileExcel(link);
 				
 				frmDanhSachCac.setVisible(false);
-				new v_Add_PA().main(fileName, nameMTs);
+				new v_Add_PA().main(link,fileName, nameMTs);
         	}
         });
         btnNewPA.setBounds(177, 239, 130, 28);

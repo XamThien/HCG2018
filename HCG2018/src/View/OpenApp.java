@@ -144,7 +144,7 @@ public class OpenApp {
 				
 				PhuongAnList paList = new PhuongAnList();
 				test ts = new test();
-				String fileName = ts.readFileExcel("G:\\Link.xls");
+				String fileName = ts.readFileExcel(link);
 				paList.ReadFromExcel(fileName);
 				 ArrayList<String> nameMTs = new ArrayList<>();
 				 ArrayList<String> nameMTs_root = new ArrayList<>();
