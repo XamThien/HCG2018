@@ -254,7 +254,7 @@ public class v_SelectMT {
 		btnNewCSDL.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				new v_New_Data().main(null);
+				new v_New_Data().main(link);
 				
 			}
 		});

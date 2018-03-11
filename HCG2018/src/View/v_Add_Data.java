@@ -37,7 +37,7 @@ public class v_Add_Data {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String ten_de_tai,int so_mt) {
+	public static void main(String link,String ten_de_tai,int so_mt) {
 		try
 		{
 			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -48,7 +48,7 @@ public class v_Add_Data {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					v_Add_Data window = new v_Add_Data(ten_de_tai, so_mt);
+					v_Add_Data window = new v_Add_Data(link,ten_de_tai, so_mt);
 					window.frmThmMiMuc.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -60,9 +60,9 @@ public class v_Add_Data {
 	/**
 	 * Create the application.
 	 */
-	public v_Add_Data(String ten_de_tai,int so_mt) {
-		String linksavelinkDB = "G:\\Link.xls";
-		initialize(linksavelinkDB,ten_de_tai, so_mt);
+	public v_Add_Data(String link,String ten_de_tai,int so_mt) {
+		//String linksavelinkDB = "G:\\Link.xls";
+		initialize(link,ten_de_tai, so_mt);
 	}
 	public v_Add_Data() {
 		//initialize( ten_de_tai, so_mt);
@@ -107,7 +107,7 @@ public class v_Add_Data {
         }
        
     }
-	private void initialize(String linksavelinkDB,String ten_de_tai,int so_mt) {
+	private void initialize(String link,String ten_de_tai,int so_mt) {
 		frmThmMiMuc = new JFrame();
 		frmThmMiMuc.setTitle("Thêm mới mục tiêu");
 		frmThmMiMuc.setBounds(400, 100, 592, 316+(so_mt-1)*40);
@@ -165,7 +165,7 @@ public class v_Add_Data {
 				if(ck)
 				{
 					test ts = new test();
-					String fileName = ts.readFileExcel(linksavelinkDB);
+					String fileName = ts.readFileExcel(link);
 					
 					int last = fileName.lastIndexOf('\\');
 					String folderName = fileName.substring(0, last+1);

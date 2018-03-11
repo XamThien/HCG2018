@@ -273,7 +273,8 @@ public class v_Add_PA {
 			public void actionPerformed(ActionEvent e) {
 				openAndWriteFileExcel( linksavelinkDB,  newfileName);
 				frmThmPhngAn.setVisible(false);
-				new BeforeOpenApp().main(null);
+				//new BeforeOpenApp().main(null);
+				new v_SelectMT().main(linksavelinkDB);
 				
 			}
 		});

@@ -25,7 +25,7 @@ public class v_New_Data {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String link) {
 		try
 		{
 			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -36,7 +36,7 @@ public class v_New_Data {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					v_New_Data window = new v_New_Data();
+					v_New_Data window = new v_New_Data(link);
 					window.frame_1.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,14 +48,17 @@ public class v_New_Data {
 	/**
 	 * Create the application.
 	 */
+	public v_New_Data(String link) {
+		initialize(link);
+	}
 	public v_New_Data() {
-		initialize();
+		//initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(String link) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -142,7 +145,7 @@ public class v_New_Data {
 				{
 					frame_1.setVisible(false);
 					frame.setVisible(false);
-					new v_Add_Data().main(ten_de_tai,so_mt);
+					new v_Add_Data().main(link,ten_de_tai,so_mt);
 					
 				}
 				
