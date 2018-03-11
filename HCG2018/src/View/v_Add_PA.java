@@ -36,7 +36,7 @@ public class v_Add_PA {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String newfileName,ArrayList<JTextField> hihi) {
+	public static void main(String newfileName,ArrayList<String> hihi) {
 		try
 		{
 			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -59,7 +59,7 @@ public class v_Add_PA {
 	/**
 	 * Create the application.
 	 */
-	public v_Add_PA(String newfileName,ArrayList<JTextField> hihi) {
+	public v_Add_PA(String newfileName,ArrayList<String> hihi) {
 		String linksavelinkDB = "G:\\Link.xls";
 		initialize(linksavelinkDB,newfileName,hihi);
 	}
@@ -139,7 +139,7 @@ public class v_Add_PA {
         }
         
     }
-	private void initialize(String linksavelinkDB,String newfileName,ArrayList<JTextField> hihi) {
+	private void initialize(String linksavelinkDB,String newfileName,ArrayList<String> hihi) {
 		frmThmPhngAn = new JFrame();
 		frmThmPhngAn.setTitle("Thêm Phương Án");
 		int so_mt = hihi.size();
@@ -180,7 +180,7 @@ public class v_Add_PA {
 		
 		for(int i = 1; i<=so_mt;i++)
 		{
-			JLabel lblTnTai = new JLabel(hihi.get(i-1).getText());
+			JLabel lblTnTai = new JLabel(hihi.get(i-1));
 			lblTnTai.setFont(new Font("SansSerif", Font.PLAIN, 14));
 			lblTnTai.setBounds(36, 38+i*40, 75, 16);
 			panel.add(lblTnTai);

@@ -190,8 +190,14 @@ public class v_SelectMT {
 		JButton btnNewMT = new JButton("Thêm mục tiêu");
 		btnNewMT.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+//				test ts = new test();
+//				String fileName = ts.readFileExcel(link);
+//				frame.setVisible(false);
+//				new v_Add_PA().main(fileName, nameMTs);
 				
-				JOptionPane.showMessageDialog(null, "Chưa có gì hihi","Lỗi", JOptionPane.INFORMATION_MESSAGE);
+				//JOptionPane.showMessageDialog(null, "Chưa có gì hihi","Lỗi", JOptionPane.INFORMATION_MESSAGE);
+				frame.setVisible(false);
+				new v_AddNewMT().main(namePAs, link);
 				
 			}
 		});

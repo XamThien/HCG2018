@@ -176,7 +176,12 @@ public class v_Add_Data {
 					}
 					writeNewFileExcel(ten_de_tai,newfileName,hihi);
 					frmThmMiMuc.setVisible(false);
-					new v_Add_PA().main(newfileName, hihi);
+					ArrayList<String> hehe = new ArrayList<String>();
+					for(JTextField ee : hihi)
+					{
+						hehe.add(ee.getText());
+					}
+					new v_Add_PA().main(newfileName, hehe);
 				}
 			}
 		});
