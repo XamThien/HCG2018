@@ -34,7 +34,7 @@ public class OpenApp {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String name_de_tai,String strch) {
+	public static void main(String link,String name_de_tai,String strch) {
 		try
 		{
 			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -45,7 +45,7 @@ public class OpenApp {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					OpenApp window = new OpenApp(name_de_tai,strch);
+					OpenApp window = new OpenApp(link,name_de_tai,strch);
 					window.frmHChuynGia.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,9 +57,9 @@ public class OpenApp {
 	/**
 	 * Create the application.
 	 */
-	public OpenApp(String name_de_tai,String strch/*,ArrayList<String> nameMTs,ArrayList<String> namePAs,ArrayList<Phuongan> arr*/) {
+	public OpenApp(String link,String name_de_tai,String strch/*,ArrayList<String> nameMTs,ArrayList<String> namePAs,ArrayList<Phuongan> arr*/) {
 		
-		initialize(name_de_tai,strch);
+		initialize(link,name_de_tai,strch);
 	}
 	public OpenApp() {
 		//initialize(paList,name_de_tai, nameMTs, namePAs, arr);
@@ -67,7 +67,7 @@ public class OpenApp {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(String name_de_tai,String strch) {
+	private void initialize(String link,String name_de_tai,String strch) {
 		
 		 
 		frmHChuynGia = new JFrame();
@@ -211,7 +211,17 @@ public class OpenApp {
 					 }
 					 if (pp_rd8.isSelected())
 					 {
-						 new v_QĐMo().main(namePAs,arr,nameMTs);
+						ArrayList<Phuongan>arr1 = new ArrayList<Phuongan>();
+						if (!paList.KtraChuanhoa(arr)) {
+							arr1 = paList.Chuanhoa(arr, nameMTs);
+							
+						} else 
+						{
+							arr1 = arr;
+						}
+						
+						 new v_QĐMo().main(namePAs,arr1,nameMTs);
+						 new v_View_PA_ChuanHoa().main(420,link,"Danh sách các phương án sau chuẩn hoá", nameMTs, namePAs, arr1);
 					 }
 				}
 			}

@@ -10,7 +10,7 @@ public class Program {
 		Scanner nhap = new Scanner(System.in);
 		//System.out.print("Nhap ten file :");
 		String dA="";
-		String fileName = "E:\\hoctap\\HeChuyenGia\\Dulich.xls";//nhap.nextLine();
+		String fileName = "G:\\dhmt2\\Link.xls";//nhap.nextLine();
 		String as;
 		do{
 			PhuongAnList paList = new PhuongAnList();
@@ -80,7 +80,10 @@ public class Program {
 				if (!paList.KtraChuanhoa(arr)) {
 					arr1 = paList.Chuanhoa(arr, nameMTs);
 				
-				} else arr1 = arr;
+				} else 
+				{
+					arr1 = arr;
+				}
 				for(int i=0; i< arr1.size(); i++){
 					System.out.println(arr1.get(i).getNamePA()+" "+arr1.get(i).getNameMT()+" "+arr1.get(i).getValue());
 				}

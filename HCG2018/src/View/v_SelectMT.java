@@ -54,6 +54,7 @@ public class v_SelectMT {
 	/**
 	 * Create the application.
 	 */
+	
 	public v_SelectMT(String link) {
 		PhuongAnList paList = new PhuongAnList();
 		test ts = new test();
@@ -68,8 +69,16 @@ public class v_SelectMT {
 		 namePAs = paList.getNamePAs();
 		
 		initialize(link, paList,name_de_tai, nameMTs, namePAs, arr);
-		//paList.Choose(strch);
+		new v_View_PA().main(100,link,"Danh sách các phương án", nameMTs, namePAs, arr);
 	}
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
+	}
+
 	public v_SelectMT() {
 		
 		
@@ -171,7 +180,7 @@ public class v_SelectMT {
 						}
 					}
 					frame.setVisible(false);
-					new OpenApp().main(name_de_tai,strch);
+					new OpenApp().main(link,name_de_tai,strch);
 				}
 				else
 				{
