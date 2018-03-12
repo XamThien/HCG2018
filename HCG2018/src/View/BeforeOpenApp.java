@@ -7,6 +7,8 @@ import javax.swing.UIManager;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import controller.PhuongAnList;
+import controller.Phuongan;
 import controller.test;
 
 import javax.swing.JTextField;
@@ -15,6 +17,8 @@ import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -105,10 +109,49 @@ public class BeforeOpenApp {
 			        	String cklink = path;
 			        	if(test.checkFileExcel(cklink))
 			        	{
-			        		textField.setText(fileChooser.getSelectedFile().getAbsolutePath());
-			        		test.writeNewFileExcel(Link,cklink);
-			        		frmChonViTri.setVisible(false);
-			        		new v_SelectMT().main(Link);
+			        			boolean ck = true;
+			        			int len = cklink.length();
+			        			int last = cklink.lastIndexOf('.');
+			        			String filettpe = cklink.substring( last+1,len);
+			        			if(filettpe.equals("xls"))
+			        			{
+			        				try {
+			        					PhuongAnList paList = new PhuongAnList();
+			        					test ts = new test();
+			        					
+			        					try {
+			        						paList.ReadFromExcel(cklink);
+			        						ck = true;
+										} catch (Exception e2) {
+											ck = false;
+											JOptionPane.showMessageDialog(null, "File lỗi. Yêu cầu chọn file khác","Lỗi", JOptionPane.ERROR_MESSAGE);
+										}
+			        					
+			        					
+
+			        				}
+					        		catch (Exception eq)
+					        		{
+					        			ck = false;
+					        			JOptionPane.showMessageDialog(null, "File lỗi. Yêu cầu chọn file khác","Lỗi", JOptionPane.ERROR_MESSAGE);
+					        		}
+			        				if(ck==true)
+			        				{
+				        				textField.setText(fileChooser.getSelectedFile().getAbsolutePath());
+						        		test.writeNewFileExcel(Link,cklink);
+						        		frmChonViTri.setVisible(false);
+						        		new v_SelectMT().main(Link);
+			        				}
+			        			}
+			        			else
+			        			{
+			        				ck = false;
+			        				JOptionPane.showMessageDialog(null, "File lỗi. Yêu cầu chọn file khác","Lỗi", JOptionPane.ERROR_MESSAGE);
+			        			}
+			        			
+			        		
+			        		
+			        		
 			        	}
 			        	else
 			        	{
