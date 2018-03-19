@@ -10,9 +10,15 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
+
+import controller.test;
+
 import javax.swing.JTextField;
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.awt.event.ActionEvent;
 
 public class v_New_Data {
@@ -21,6 +27,7 @@ public class v_New_Data {
 	private JFrame frame_1;
 	private JTextField txtName;
 	private JTextField txtSLMT;
+	private JTextField txtSLPA;
 
 	/**
 	 * Launch the application.
@@ -52,7 +59,7 @@ public class v_New_Data {
 		initialize(link);
 	}
 	public v_New_Data() {
-		//initialize();
+//		initialize();
 	}
 
 	/**
@@ -75,6 +82,26 @@ public class v_New_Data {
 		lblPhnMmH.setBounds(92, 23, 402, 43);
 		frame_1.getContentPane().add(lblPhnMmH);
 		
+		test ts = new test();
+		String fileName = ts.readFileExcel(link,1,2);
+		int len = fileName.length();
+		int last = fileName.lastIndexOf('\\');
+		String folderName = fileName.substring( 0,last+1);
+		BufferedImage image = null;
+        try
+        {
+        	
+          image = ImageIO.read(new File(folderName+"image.png"));
+        }
+        catch (Exception e)
+        {
+          e.printStackTrace();
+          System.exit(1);
+        }
+        
+        frame_1.setIconImage(image);
+        
+		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Th\u00EAm m\u01A1\u0301i CSDL :", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(61, 98, 467, 232);
@@ -83,24 +110,24 @@ public class v_New_Data {
 		
 		txtName = new JTextField();
 		txtName.setHorizontalAlignment(SwingConstants.CENTER);
-		txtName.setBounds(150, 53, 247, 28);
+		txtName.setBounds(150, 33, 247, 28);
 		panel.add(txtName);
 		txtName.setColumns(10);
 		
 		JLabel lblTnTai = new JLabel("Tên đề tài :");
 		lblTnTai.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		lblTnTai.setBounds(56, 58, 75, 16);
+		lblTnTai.setBounds(56, 38, 75, 16);
 		panel.add(lblTnTai);
 		
 		JLabel lblSMucTiu = new JLabel("Số mục tiêu :");
 		lblSMucTiu.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		lblSMucTiu.setBounds(56, 108, 96, 16);
+		lblSMucTiu.setBounds(56, 88, 96, 16);
 		panel.add(lblSMucTiu);
 		
 		txtSLMT = new JTextField();
 		txtSLMT.setHorizontalAlignment(SwingConstants.CENTER);
 		txtSLMT.setColumns(10);
-		txtSLMT.setBounds(150, 103, 247, 28);
+		txtSLMT.setBounds(150, 83, 247, 28);
 		panel.add(txtSLMT);
 		
 		JButton btnNext = new JButton("Next");
@@ -109,6 +136,7 @@ public class v_New_Data {
 				boolean ck = true;
 				String ten_de_tai = "";
 				int so_mt = 0;
+				int so_pa = 0;
 				if(txtName.getText().equals("") || txtName.getText().equals(null))
 				{
 					ck = false;
@@ -140,18 +168,62 @@ public class v_New_Data {
 						JOptionPane.showMessageDialog(null, "Yêu cầu nhập số mục tiêu là một số nguyên dương","Lỗi", JOptionPane.ERROR_MESSAGE);
 					}
 				}
+				if(txtSLPA.getText().equals("") || txtSLPA.getText().equals(null))
+				{
+					ck = false;
+					JOptionPane.showMessageDialog(null, "Chưa nhập số lượng phương án","Lỗi", JOptionPane.ERROR_MESSAGE);
+				}
+				else
+				{
+					try
+					{
+						so_pa = Integer.parseInt(txtSLPA.getText());
+						if(so_pa<=0)
+						{
+							ck = false;
+							JOptionPane.showMessageDialog(null, "Yêu cầu nhập số phương án là một số nguyên dương","Lỗi", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+					catch(Exception c)
+					{
+						ck = false;
+						JOptionPane.showMessageDialog(null, "Yêu cầu nhập số phương án là một số nguyên dương","Lỗi", JOptionPane.ERROR_MESSAGE);
+					}
+				}
 				
 				if(ck)
 				{
 					frame_1.setVisible(false);
 					frame.setVisible(false);
-					new v_Add_Data().main(link,ten_de_tai,so_mt);
+					new v_Add_Data().main(link,ten_de_tai,so_mt,so_pa);
 					
 				}
 				
 			}
 		});
-		btnNext.setBounds(307, 160, 90, 28);
+		btnNext.setBounds(307, 178, 90, 28);
 		panel.add(btnNext);
+		
+		JButton btnBack = new JButton("Trở lại");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame_1.setVisible(false);
+				frame.setVisible(false);
+				new v_SelectMT().main(link);
+			}
+		});
+		btnBack.setBounds(207, 178, 90, 28);
+		panel.add(btnBack);
+		
+		txtSLPA = new JTextField();
+		txtSLPA.setHorizontalAlignment(SwingConstants.CENTER);
+		txtSLPA.setColumns(10);
+		txtSLPA.setBounds(150, 130, 247, 28);
+		panel.add(txtSLPA);
+		
+		JLabel lblSPhngAn = new JLabel("Số phương án :");
+		lblSPhngAn.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		lblSPhngAn.setBounds(56, 135, 96, 16);
+		panel.add(lblSPhngAn);
 	}
 }

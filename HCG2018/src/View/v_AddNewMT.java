@@ -4,15 +4,18 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
@@ -74,11 +77,11 @@ public class v_AddNewMT {
  
             // get sheet to write
             WritableSheet sheet1 = writeWorkbook.getSheet(0);
-            int colcontinus = sheet1.getRows();
+            int colcontinus = sheet1.getColumns();
             //int rowcontinus = sheet1.getRows();
             for(int i =0;i<hihi.size();i++)
             {
-            	sheet1.addCell(new Label(colcontinus+1, i, hihi.get(i).getText()));
+            	sheet1.addCell(new Label(colcontinus, i, hihi.get(i).getText()));
             }
             	
                 //sheet1.addCell(new Label(2, rowcontinus, String.valueOf("1")));
@@ -138,11 +141,34 @@ public class v_AddNewMT {
 		lblPhnMmH.setHorizontalAlignment(SwingConstants.CENTER);
 		frame.getContentPane().add(lblPhnMmH);
 		
+		test ts = new test();
+		String fileName = ts.readFileExcel(link,1,2);
+		int len = fileName.length();
+		int last = fileName.lastIndexOf('\\');
+		String folderName = fileName.substring( 0,last+1);
+		BufferedImage image = null;
+        try
+        {
+        	
+          image = ImageIO.read(new File(folderName+"image.png"));
+        }
+        catch (Exception e)
+        {
+          e.printStackTrace();
+          System.exit(1);
+        }
+        
+        frame.setIconImage(image);
+		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Th\u00EAm mu\u0323c ti\u00EAu:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(66, 103, 466, 90+so_mt*40);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
+		
+		JScrollPane jsc = new JScrollPane(panel);
+        jsc.setBounds(66, 103, 466, 90+so_mt*40);
+        frame.getContentPane().add(jsc);
 		
 		ArrayList<JTextField> hihi = new ArrayList<JTextField>();
 		
@@ -196,7 +222,7 @@ public class v_AddNewMT {
 				if(ck)
 				{
 					test ts = new test();
-					String fileName = ts.readFileExcel(link);
+					String fileName = ts.readFileExcel(link,1,2);
 					openAndWriteContinusFileExcel(fileName,hihi);
 					for(JTextField jt : hihi)
 					{

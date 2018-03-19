@@ -23,8 +23,10 @@ import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -37,7 +39,7 @@ public class v_Add_Data {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String link,String ten_de_tai,int so_mt) {
+	public static void main(String link,String ten_de_tai,int so_mt,int so_pa) {
 		try
 		{
 			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -48,7 +50,7 @@ public class v_Add_Data {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					v_Add_Data window = new v_Add_Data(link,ten_de_tai, so_mt);
+					v_Add_Data window = new v_Add_Data(link,ten_de_tai, so_mt,so_pa);
 					window.frmThmMiMuc.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -60,9 +62,9 @@ public class v_Add_Data {
 	/**
 	 * Create the application.
 	 */
-	public v_Add_Data(String link,String ten_de_tai,int so_mt) {
+	public v_Add_Data(String link,String ten_de_tai,int so_mt,int so_pa) {
 		//String linksavelinkDB = "G:\\Link.xls";
-		initialize(link,ten_de_tai, so_mt);
+		initialize(link,ten_de_tai, so_mt,so_pa);
 	}
 	public v_Add_Data() {
 		//initialize( ten_de_tai, so_mt);
@@ -107,7 +109,7 @@ public class v_Add_Data {
         }
        
     }
-	private void initialize(String link,String ten_de_tai,int so_mt) {
+	private void initialize(String link,String ten_de_tai,int so_mt,int so_pa) {
 		frmThmMiMuc = new JFrame();
 		frmThmMiMuc.setTitle("Thêm mới mục tiêu");
 		frmThmMiMuc.setBounds(400, 100, 592, 316+(so_mt-1)*40);
@@ -119,6 +121,25 @@ public class v_Add_Data {
 		lblPhnMmH.setFont(new Font("SansSerif", Font.BOLD, 18));
 		lblPhnMmH.setHorizontalAlignment(SwingConstants.CENTER);
 		frmThmMiMuc.getContentPane().add(lblPhnMmH);
+		
+		test ts = new test();
+		String fileName = ts.readFileExcel(link,1,2);
+		int len = fileName.length();
+		int last = fileName.lastIndexOf('\\');
+		String folderName = fileName.substring( 0,last+1);
+		BufferedImage image = null;
+        try
+        {
+        	
+          image = ImageIO.read(new File(folderName+"image.png"));
+        }
+        catch (Exception e)
+        {
+          e.printStackTrace();
+          System.exit(1);
+        }
+        
+        frmThmMiMuc.setIconImage(image);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Th\u00EAm mu\u0323c ti\u00EAu:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -165,7 +186,7 @@ public class v_Add_Data {
 				if(ck)
 				{
 					test ts = new test();
-					String fileName = ts.readFileExcel(link);
+					String fileName = ts.readFileExcel(link,1,2);
 					
 					int last = fileName.lastIndexOf('\\');
 					String folderName = fileName.substring(0, last+1);
@@ -174,14 +195,16 @@ public class v_Add_Data {
 					{
 						newfileName = folderName+ten_de_tai+"-1.xls";
 					}
-					writeNewFileExcel(ten_de_tai,newfileName,hihi);
+					//writeNewFileExcel(ten_de_tai,newfileName,hihi);
 					frmThmMiMuc.setVisible(false);
 					ArrayList<String> hehe = new ArrayList<String>();
 					for(JTextField ee : hihi)
 					{
 						hehe.add(ee.getText());
 					}
-					new v_Add_PA().main(link,newfileName, hehe);
+					//new v_Add_PA().main(link,newfileName, hehe);
+					frmThmMiMuc.setVisible(false);
+					new v_Add_Table_PA().main(ten_de_tai,link,newfileName, hehe,so_pa);
 				}
 			}
 		});

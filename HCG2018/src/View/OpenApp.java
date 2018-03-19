@@ -3,8 +3,10 @@ package View;
 import java.awt.EventQueue;
 import java.awt.Font;
 
+import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,6 +23,8 @@ import java.awt.Color;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.awt.event.ActionEvent;
@@ -34,7 +38,7 @@ public class OpenApp {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String link,String name_de_tai,String strch) {
+	public static void main(String saveLink,String link,String name_de_tai,String strch) {
 		try
 		{
 			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -45,7 +49,7 @@ public class OpenApp {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					OpenApp window = new OpenApp(link,name_de_tai,strch);
+					OpenApp window = new OpenApp(saveLink,link,name_de_tai,strch);
 					window.frmHChuynGia.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,9 +61,9 @@ public class OpenApp {
 	/**
 	 * Create the application.
 	 */
-	public OpenApp(String link,String name_de_tai,String strch/*,ArrayList<String> nameMTs,ArrayList<String> namePAs,ArrayList<Phuongan> arr*/) {
+	public OpenApp(String saveLink,String link,String name_de_tai,String strch/*,ArrayList<String> nameMTs,ArrayList<String> namePAs,ArrayList<Phuongan> arr*/) {
 		
-		initialize(link,name_de_tai,strch);
+		initialize(saveLink,link,name_de_tai,strch);
 	}
 	public OpenApp() {
 		//initialize(paList,name_de_tai, nameMTs, namePAs, arr);
@@ -67,7 +71,7 @@ public class OpenApp {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(String link,String name_de_tai,String strch) {
+	private void initialize(String saveLink,String link,String name_de_tai,String strch) {
 		
 		 
 		frmHChuynGia = new JFrame();
@@ -79,16 +83,41 @@ public class OpenApp {
 		JLabel lblPhnMmH = new JLabel("PHẦN MỀM HỖ TRỢ QUYẾT ĐỊNH 2018");
 		lblPhnMmH.setFont(new Font("SansSerif", Font.BOLD, 18));
 		lblPhnMmH.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPhnMmH.setBounds(67, 18, 402, 43);
+		lblPhnMmH.setBounds(67+50, 18, 402, 43);
 		frmHChuynGia.getContentPane().add(lblPhnMmH);
 		
 		JLabel lblDanhSachChon = new JLabel("Danh sách các mục tiêu chọn lựa cho việc");
-		lblDanhSachChon.setBounds(123, 60, 237, 14);
+		lblDanhSachChon.setBounds(123+50, 60, 237, 14);
 		frmHChuynGia.getContentPane().add(lblDanhSachChon);
 		
 		JLabel lbliDuLich = new JLabel(name_de_tai.toLowerCase());
-		lbliDuLich.setBounds(357, 59, 91, 16);
+		lbliDuLich.setBounds(357+50, 59, 91, 16);
 		frmHChuynGia.getContentPane().add(lbliDuLich);
+		
+		test ts = new test();
+		String fileName = link;
+		int len = fileName.length();
+		int last = fileName.lastIndexOf('\\');
+		String folderName = fileName.substring( 0,last+1);
+		BufferedImage image = null;
+        try
+        {
+        	
+          image = ImageIO.read(new File(folderName+"image.png"));
+        }
+        catch (Exception e)
+        {
+          e.printStackTrace();
+          System.exit(1);
+        }
+        
+        frmHChuynGia.setIconImage(image);
+        ImageIcon imageIcon = new ImageIcon(image);
+        frmHChuynGia.getContentPane().setLayout(null);
+		JLabel jLabel = new JLabel();
+		jLabel.setBounds(38+45, 18, 82, 73);
+		frmHChuynGia.getContentPane().add(jLabel);
+		jLabel.setIcon(imageIcon);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Ph\u01B0\u01A1ng pha\u0301p l\u01B0\u0323a cho\u0323n :", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -144,7 +173,7 @@ public class OpenApp {
 				
 				PhuongAnList paList = new PhuongAnList();
 				test ts = new test();
-				String fileName = ts.readFileExcel(link);
+				String fileName = link;
 				paList.ReadFromExcel(fileName);
 				 ArrayList<String> nameMTs = new ArrayList<>();
 				 ArrayList<String> nameMTs_root = new ArrayList<>();
@@ -218,7 +247,7 @@ public class OpenApp {
 						 ArrayList<Phuongan>arr1 = new ArrayList<Phuongan>();
 							if (!paList.KtraChuanhoa(paList.getArrGoc())) {
 								arr1 = paList.Chuanhoa(paList.getArrGoc(), paList.getNameMTsGoc());
-								new v_View_PA_ChuanHoa().main(420,link,"Danh sách các phương án sau chuẩn hoá", nameMTs_root, namePAs_root, arr1);
+								new v_View_PA_ChuanHoa().main(420,saveLink,"Danh sách các phương án sau chuẩn hoá", nameMTs_root, namePAs_root, arr1);
 							
 							} else arr1 = paList.getArrGoc();
 						
@@ -230,5 +259,16 @@ public class OpenApp {
 		});
 		btnNewButton.setBounds(352, 313, 133, 34);
 		frmHChuynGia.getContentPane().add(btnNewButton);
+		
+		JButton btnNewButton1 = new JButton("Trở về");
+		btnNewButton1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				frmHChuynGia.setVisible(false);
+				new v_SelectMT().main(saveLink);
+			}
+		});
+		btnNewButton1.setBounds(199, 313, 133, 34);
+		frmHChuynGia.getContentPane().add(btnNewButton1);
 	}
 }

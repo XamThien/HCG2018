@@ -16,8 +16,11 @@ import javax.swing.table.DefaultTableModel;
 import controller.Phuongan;
 import controller.test;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.awt.event.ActionEvent;
 
 
@@ -77,6 +80,25 @@ public class v_View_PA {
 		table.setEnabled(false);
 		frmDanhSachCac.getContentPane().add(table);
 		
+		test ts = new test();
+		String fileName = ts.readFileExcel(link,1,2);
+		int len = fileName.length();
+		int last = fileName.lastIndexOf('\\');
+		String folderName = fileName.substring( 0,last+1);
+		BufferedImage image = null;
+        try
+        {
+        	
+          image = ImageIO.read(new File(folderName+"image.png"));
+        }
+        catch (Exception e)
+        {
+          e.printStackTrace();
+          System.exit(1);
+        }
+        
+        frmDanhSachCac.setIconImage(image);
+		
 		JLabel lblDanhSachCac = new JLabel(title);
 		lblDanhSachCac.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDanhSachCac.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -130,7 +152,7 @@ public class v_View_PA {
         btnNewPA.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
 				test ts = new test();
-				String fileName = ts.readFileExcel(link);
+				String fileName = ts.readFileExcel(link,1,2);
 				
 				frmDanhSachCac.setVisible(false);
 				new v_Add_PA().main(link,fileName, nameMTs);

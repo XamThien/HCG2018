@@ -60,17 +60,18 @@ public class BeforeOpenApp {
 	 */
 	public BeforeOpenApp() {
 		test ts = new test();
-		// tạo file excel luu địa chỉ của file database, nếu không tồn tại file này, sẽ dc tạo mới theo địa chỉ này
-		String link = "G:\\Link.xls";
+		// tạo file excel luu địa chỉ của file database, c:\\users\\user-name
+		String link = System.getProperty("user.home")+"\\Link.xls";
 		if(!ts.checkFileExcel(link))
 		{
 			initialize(link);
 		}
 		else
 		{
-			new v_SelectMT().main(link);
+			new v_SelectFile().main(link);
 		}
 	}
+	
 
 	/**
 	 * Initialize the contents of the frame.
@@ -90,83 +91,115 @@ public class BeforeOpenApp {
 		
 		textField = new JTextField();
 		textField.setEditable(false);
-		textField.setBounds(29, 46, 296, 28);
+		textField.setBounds(29, 46, 259, 37);
 		panel.add(textField);
 		textField.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Chọn excel");
+		JButton btnNewButton = new JButton("Chọn thư mục giải nén");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFileChooser fileChooser = new JFileChooser();
-				fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-				int result = fileChooser.showOpenDialog(null);
-				if (result == JFileChooser.APPROVE_OPTION) 
-				{
-					String path = fileChooser.getSelectedFile().getAbsolutePath();
-			        
-			        if (path!=null)
-			        {
-			        	String cklink = path;
-			        	if(test.checkFileExcel(cklink))
-			        	{
-			        			boolean ck = true;
-			        			int len = cklink.length();
-			        			int last = cklink.lastIndexOf('.');
-			        			String filettpe = cklink.substring( last+1,len);
-			        			if(filettpe.equals("xls"))
-			        			{
-			        				try {
-			        					PhuongAnList paList = new PhuongAnList();
-			        					test ts = new test();
-			        					
-			        					try {
-			        						paList.ReadFromExcel(cklink);
-			        						ck = true;
-										} catch (Exception e2) {
-											ck = false;
-											JOptionPane.showMessageDialog(null, "File lỗi. Yêu cầu chọn file khác","Lỗi", JOptionPane.ERROR_MESSAGE);
-										}
-			        					
-			        					
-
-			        				}
-					        		catch (Exception eq)
-					        		{
-					        			ck = false;
-					        			JOptionPane.showMessageDialog(null, "File lỗi. Yêu cầu chọn file khác","Lỗi", JOptionPane.ERROR_MESSAGE);
-					        		}
-			        				if(ck==true)
-			        				{
-				        				textField.setText(fileChooser.getSelectedFile().getAbsolutePath());
-						        		test.writeNewFileExcel(Link,cklink);
-						        		frmChonViTri.setVisible(false);
-						        		new v_SelectMT().main(Link);
-			        				}
-			        			}
-			        			else
-			        			{
-			        				ck = false;
-			        				JOptionPane.showMessageDialog(null, "File lỗi. Yêu cầu chọn file khác","Lỗi", JOptionPane.ERROR_MESSAGE);
-			        			}
-			        			
-			        		
-			        		
-			        		
-			        	}
-			        	else
-			        	{
-			        		JOptionPane.showMessageDialog(null, "Folder không chứa các file cần thiết","Lỗi", JOptionPane.ERROR_MESSAGE);
-			        	}
-			        }
-				}
-				else {
-			    	JOptionPane.showMessageDialog(null, "Chưa chọn vị trí tệp","Lỗi", JOptionPane.ERROR_MESSAGE);
-			      }
+//				JFileChooser fileChooser = new JFileChooser();
+//				fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+//				int result = fileChooser.showOpenDialog(null);
+//				if (result == JFileChooser.APPROVE_OPTION) 
+//				{
+//					String path = fileChooser.getSelectedFile().getAbsolutePath();
+//			        
+//			        if (path!=null)
+//			        {
+//			        	String cklink = path;
+//			        	if(test.checkFileExcel(cklink))
+//			        	{
+//			        			boolean ck = true;
+//			        			int len = cklink.length();
+//			        			int last = cklink.lastIndexOf('.');
+//			        			String filettpe = cklink.substring( last+1,len);
+//			        			if(filettpe.equals("xls"))
+//			        			{
+//			        				try {
+//			        					PhuongAnList paList = new PhuongAnList();
+//			        					test ts = new test();
+//			        					
+//			        					try {
+//			        						paList.ReadFromExcel(cklink);
+//			        						ck = true;
+//										} catch (Exception e2) {
+//											ck = false;
+//											JOptionPane.showMessageDialog(null, "File lỗi. Yêu cầu chọn file khác","Lỗi", JOptionPane.ERROR_MESSAGE);
+//										}
+//			        					
+//			        					
+//
+//			        				}
+//					        		catch (Exception eq)
+//					        		{
+//					        			ck = false;
+//					        			JOptionPane.showMessageDialog(null, "File lỗi. Yêu cầu chọn file khác","Lỗi", JOptionPane.ERROR_MESSAGE);
+//					        		}
+//			        				if(ck==true)
+//			        				{
+//				        				textField.setText(fileChooser.getSelectedFile().getAbsolutePath());
+//						        		test.writeNewFileExcel(Link,cklink);
+//						        		frmChonViTri.setVisible(false);
+//						        		new v_SelectMT().main(Link);
+//			        				}
+//			        			}
+//			        			else
+//			        			{
+//			        				ck = false;
+//			        				JOptionPane.showMessageDialog(null, "File lỗi. Yêu cầu chọn file khác","Lỗi", JOptionPane.ERROR_MESSAGE);
+//			        			}
+//			        			
+//			        		
+//			        		
+//			        		
+//			        	}
+//			        	else
+//			        	{
+//			        		JOptionPane.showMessageDialog(null, "Folder không chứa các file cần thiết","Lỗi", JOptionPane.ERROR_MESSAGE);
+//			        	}
+//			        }
+//				}
+//				else {
+//			    	JOptionPane.showMessageDialog(null, "Chưa chọn vị trí tệp","Lỗi", JOptionPane.ERROR_MESSAGE);
+//			      }
 				
+				JFileChooser chooser = new JFileChooser(); 
+			    chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+			    
+			    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			    chooser.setAcceptAllFileFilterUsed(false);
+			       
+			    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) { 
+			      
+			    	String path =  chooser.getSelectedFile().getAbsolutePath();
+			    	if (path!=null)
+				        {
+				        	String cklink = path+"\\image.png";
+				        	if(test.checkFileExcel(cklink))
+				        	{
+				        		textField.setText(chooser.getSelectedFile().getAbsolutePath());
+				        		test.writeNewFileExcel(Link,path,1,1);
+				        		frmChonViTri.setVisible(false);
+				        		new v_SelectFile().main(Link);
+				        		
+				        		
+				        	}
+				        	else
+				        	{
+				        		JOptionPane.showMessageDialog(null, "Đây không phải thư mục giải nén Hệ Chuyên Gia","Lỗi", JOptionPane.ERROR_MESSAGE);
+				        	}
+				        }
+			    	
+			      }
+			    else 
+			    {
+			    	JOptionPane.showMessageDialog(null, "Chưa chọn vị trí tệp","Lỗi", JOptionPane.ERROR_MESSAGE);
+			    }
 
 			}
 		});
-		btnNewButton.setBounds(351, 46, 112, 28);
+		btnNewButton.setBounds(300, 46, 163, 37);
 		panel.add(btnNewButton);
 		
 		JLabel lblPhnMmH = new JLabel("PHẦN MỀM HỖ TRỢ QUYẾT ĐỊNH 2018");

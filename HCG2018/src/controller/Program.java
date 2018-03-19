@@ -10,7 +10,7 @@ public class Program {
 		Scanner nhap = new Scanner(System.in);
 		//System.out.print("Nhap ten file :");
 		String dA="";
-		String fileName = "Book1.xls";//nhap.nextLine();
+		String fileName = "G:\\dhmt2\\khánh.xls";//nhap.nextLine();
 		String as;
 		do{
 			PhuongAnList paList = new PhuongAnList();

@@ -22,7 +22,7 @@ import jxl.write.biff.RowsExceededException;
 
 public class test {
 	// mo file excel len va doc noi dung
-	public static  String readFileExcel(String fileName) {
+	public static  String readFileExcel(String fileName,int cot,int hang) {
         Workbook workbook;
         
         String xx= null;
@@ -32,7 +32,7 @@ public class test {
             
             Sheet sheet = workbook.getSheet(0);
             
-            Cell cell = sheet.getCell(1, 1);
+            Cell cell = sheet.getCell(cot, hang);
             xx = cell.getContents();
             
             workbook.close();
@@ -43,8 +43,8 @@ public class test {
         }
 		return xx;
     }
-    // tao moi file excel
-    public static void writeNewFileExcel(String fileName,String link) {
+    // tao moi file excel : vi tri file,noi dung, vi tri cot,vi tri hang
+    public static void writeNewFileExcel(String fileName,String link,int cot,int hang) {
         WritableWorkbook workbook;
         // create workbook
         try {
@@ -53,7 +53,7 @@ public class test {
             // create sheet
             WritableSheet sheet1 = workbook.createSheet("Link lưu file CSDL HCG2018", 0);
  
-            sheet1.addCell(new Label(1, 1,link));
+            sheet1.addCell(new Label(cot, hang,link));
            
             // write file
             workbook.write();
@@ -70,7 +70,7 @@ public class test {
        
     }
     // mo file excel va ghi de mot 
-    public static void openAndWriteFileExcel(String fileName, int dongghi) {
+    public static void openAndWriteFileExcel(String fileName, String content, int cot, int hang) {
         Workbook workbook;
         WritableWorkbook writeWorkbook;
         try {
@@ -85,18 +85,8 @@ public class test {
             // get sheet to write
             WritableSheet sheet1 = writeWorkbook.getSheet(0);
 
-            int countrows = sheet1.getRows();
-            int col = 2;
-            int rowBegin = 1;
-            // write data (formula)
             
-            Cell cell = sheet1.getCell(col, dongghi);
-            int curval= Integer.parseInt(cell.getContents())+1;
-            
-            for (int row = rowBegin; row < countrows; row++) {
-                Formula f = new Formula(col, dongghi, Integer.toString(curval));
-                sheet1.addCell(f);
-            }
+        	sheet1.addCell(new Label(cot, hang, content));
             writeWorkbook.write();
  
             // close
@@ -151,13 +141,7 @@ public class test {
     	File file = new File(fileName);
         return file.exists();
     }
-	public static void main(String[] args) {
-		 
-		test ts = new test();
-		 
-		 String fileName = ts.readFileExcel("G:\\Link.xls");
-		 System.out.println(fileName);
-	}
+	
 	
 	
 	

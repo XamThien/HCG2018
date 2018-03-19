@@ -12,6 +12,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
+import controller.test;
 import jxl.Cell;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -23,8 +24,10 @@ import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
 import javax.swing.JTextField;
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
@@ -60,7 +63,7 @@ public class v_Add_PA {
 	 * Create the application.
 	 */
 	public v_Add_PA(String link,String newfileName,ArrayList<String> hihi) {
-		//String linksavelinkDB = "G:\\Link.xls";
+		
 		initialize(link,newfileName,hihi);
 	}
 	public v_Add_PA() {
@@ -152,6 +155,25 @@ public class v_Add_PA {
 		lblPhnMmH.setFont(new Font("SansSerif", Font.BOLD, 18));
 		lblPhnMmH.setHorizontalAlignment(SwingConstants.CENTER);
 		frmThmPhngAn.getContentPane().add(lblPhnMmH);
+		
+		test ts = new test();
+		String fileName = ts.readFileExcel(link,1,2);
+		int len = fileName.length();
+		int last = fileName.lastIndexOf('\\');
+		String folderName = fileName.substring( 0,last+1);
+		BufferedImage image = null;
+        try
+        {
+        	
+          image = ImageIO.read(new File(folderName+"image.png"));
+        }
+        catch (Exception e)
+        {
+          e.printStackTrace();
+          System.exit(1);
+        }
+        
+        frmThmPhngAn.setIconImage(image);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Th\u00EAm mu\u0323c ti\u00EAu:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -271,7 +293,7 @@ public class v_Add_PA {
 		
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				openAndWriteFileExcel( link,  newfileName);
+				
 				frmThmPhngAn.setVisible(false);
 				//new BeforeOpenApp().main(null);
 				new v_SelectMT().main(link);
