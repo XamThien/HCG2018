@@ -31,13 +31,14 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class v_Add_Data {
 
 	private JFrame frmThmMiMuc;
 
 	/**
-	 * Launch the application.
+	 * Launch the application. Là để nhập tên các mục tiêu
 	 */
 	public static void main(String link,String ten_de_tai,int so_mt,int so_pa) {
 		try
@@ -67,7 +68,7 @@ public class v_Add_Data {
 		initialize(link,ten_de_tai, so_mt,so_pa);
 	}
 	public v_Add_Data() {
-		//initialize( ten_de_tai, so_mt);
+		//initialize( );
 	}
 
 	/**
@@ -142,7 +143,7 @@ public class v_Add_Data {
         frmThmMiMuc.setIconImage(image);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Th\u00EAm mu\u0323c ti\u00EAu:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBorder(new TitledBorder(null, "Nh\u00E2\u0323p t\u00EAn các mu\u0323c ti\u00EAu:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(59, 59, 59)));
 		panel.setBounds(66, 103, 466, 90+(so_mt-1)*40);
 		frmThmMiMuc.getContentPane().add(panel);
 		panel.setLayout(null);
@@ -210,6 +211,16 @@ public class v_Add_Data {
 		});
 		btnNext.setBounds(442, 215+(so_mt-1)*40, 90, 28);
 		frmThmMiMuc.getContentPane().add(btnNext);
+		
+		JButton btnback = new JButton("Trở lại");
+		btnback.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmThmMiMuc.setVisible(false);
+				new v_New_Data().main(link);
+			}
+		});
+		btnback.setBounds(342, 215+(so_mt-1)*40, 90, 28);
+		frmThmMiMuc.getContentPane().add(btnback);
 	}
 
 }

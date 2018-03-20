@@ -71,7 +71,7 @@ public class v_SelectFile {
 	}
 	public v_SelectFile() {
 		
-
+		//initialize();
 	}
 
 	/**
@@ -116,6 +116,7 @@ public class v_SelectFile {
 		frmLaChonDatabase.getContentPane().add(lblLaChonC);
 		
 		JTable table = new JTable();
+		
 		
 		table.setCellSelectionEnabled(true);
 		table.setBounds(27, 69, 380, 159);
@@ -165,6 +166,7 @@ public class v_SelectFile {
         }
         
         JButton btnOk = new JButton("Chọn");
+        btnOk.setEnabled(false);
         btnOk.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		int currentRow = table.getSelectedRow();
@@ -182,10 +184,10 @@ public class v_SelectFile {
         JButton btnong = new JButton("Đóng");
         btnong.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		frmLaChonDatabase.setVisible(false);
+        		System.exit(0);
         	}
         });
-        btnong.setBounds(109, 256, 90, 28);
+        btnong.setBounds(25, 256, 90, 28);
         frmLaChonDatabase.getContentPane().add(btnong);
         
         JButton btnNewButton = new JButton("Thêm mới");
@@ -196,9 +198,43 @@ public class v_SelectFile {
         		new v_New_Data().main(Link);
         	}
         });
-        btnNewButton.setBounds(211, 256, 90, 28);
+        btnNewButton.setBounds(220, 256, 90, 28);
         frmLaChonDatabase.getContentPane().add(btnNewButton);
         
+        JButton btnDelete = new JButton("Xoá");
+        btnDelete.setEnabled(false);
+        btnDelete.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+				int check = JOptionPane.showConfirmDialog(frmLaChonDatabase, "Xác nhận xoá?", "Xác Nhận", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				
+                if (check == JOptionPane.YES_OPTION) {
+                	int currentRow = table.getSelectedRow();
+    				String name = dtm.getValueAt(currentRow, 0).toString();
+    				String name1= xx+"\\"+name+".xls";
+    				File file = new File(name1);
+    				if(file.delete()){
+    					JOptionPane.showMessageDialog(null, "Xoá thành công CSDL : "+name,"Thành công", JOptionPane.INFORMATION_MESSAGE);
+    					frmLaChonDatabase.setVisible(false);
+    					new v_SelectFile().main(Link);
+    				}
+    				else
+    				{
+    					JOptionPane.showMessageDialog(null, "Xoá thành công CSDL : "+name,"Lỗi", JOptionPane.WARNING_MESSAGE);
+    				}
+                }
+        	}
+        });
+        btnDelete.setBounds(123, 256, 90, 28);
+        frmLaChonDatabase.getContentPane().add(btnDelete);
+        
+        table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				btnDelete.setEnabled(true);
+				btnOk.setEnabled(true);
+			}
+		});
         
 	}
 }

@@ -30,7 +30,7 @@ public class v_New_Data {
 	private JTextField txtSLPA;
 
 	/**
-	 * Launch the application.
+	 * Launch the application. là để thêm đề tài, số mục tiêu và số phương án
 	 */
 	public static void main(String link) {
 		try
@@ -209,7 +209,8 @@ public class v_New_Data {
 			public void actionPerformed(ActionEvent e) {
 				frame_1.setVisible(false);
 				frame.setVisible(false);
-				new v_SelectMT().main(link);
+				new v_SelectFile().main(link);
+				//new v_SelectMT().main(link);
 			}
 		});
 		btnBack.setBounds(207, 178, 90, 28);
