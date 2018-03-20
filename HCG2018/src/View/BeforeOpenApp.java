@@ -62,14 +62,36 @@ public class BeforeOpenApp {
 	public BeforeOpenApp() {
 		test ts = new test();
 		// tạo file excel luu địa chỉ của file database, c:\\users\\user-name
-		String link = System.getProperty("user.home")+"\\Link.xls";
-		if(!ts.checkFileExcel(link))
+		String folder = System.getProperty("user.home")+"\\HeChuyenGia";
+		//File f=new File(folder);
+		 //boolean flag=f.mkdir();
+		if(ts.checkFileExcel(folder))
 		{
-			initialize(link);
+			String link = folder+"\\Link.xls";
+			if(!ts.checkFileExcel(link))
+			{
+				
+				initialize(link);
+			}
+			else
+			{
+				new v_SelectFile().main(link);
+			}
 		}
 		else
 		{
-			new v_SelectFile().main(link);
+			File f=new File(folder);
+			boolean flag=f.mkdir();
+			String link = folder+"\\Link.xls";
+			if(ts.checkFileExcel(link))
+			{
+				
+				new v_SelectFile().main(link);
+			}
+			else
+			{
+				initialize(link);
+			}
 		}
 	}
 	
@@ -78,31 +100,31 @@ public class BeforeOpenApp {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(String Link) {
-		frmChonViTri = new JFrame();
-		frmChonViTri.setTitle("Chọn vị trí lưu các file");
-		frmChonViTri.setBounds(500, 150, 541, 296);
-		frmChonViTri.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmChonViTri.getContentPane().setLayout(null);
-
-		String path = "/image/image.png";
-        ImageIcon imageIcon = new ImageIcon(getClass().getResource(path));
-        frmChonViTri.setIconImage(imageIcon.getImage());
-		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Cho\u0323n folder l\u01B0u ca\u0301c file gia\u0309i ne\u0301n :", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(59, 59, 59)));
-		panel.setBounds(19, 88, 487, 116);
-		frmChonViTri.getContentPane().add(panel);
-		panel.setLayout(null);
-		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setBounds(29, 46, 259, 37);
-		panel.add(textField);
-		textField.setColumns(10);
-		
-		JButton btnNewButton = new JButton("Chọn thư mục giải nén");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+//		frmChonViTri = new JFrame();
+//		frmChonViTri.setTitle("Chọn vị trí lưu các file");
+//		frmChonViTri.setBounds(500, 150, 541, 296);
+//		frmChonViTri.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frmChonViTri.getContentPane().setLayout(null);
+//
+//		String path = "/image/image.png";
+//        ImageIcon imageIcon = new ImageIcon(getClass().getResource(path));
+//        frmChonViTri.setIconImage(imageIcon.getImage());
+//		
+//		JPanel panel = new JPanel();
+//		panel.setBorder(new TitledBorder(null, "Cho\u0323n folder l\u01B0u ca\u0301c file gia\u0309i ne\u0301n :", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(59, 59, 59)));
+//		panel.setBounds(19, 88, 487, 116);
+//		frmChonViTri.getContentPane().add(panel);
+//		panel.setLayout(null);
+//		
+//		textField = new JTextField();
+//		textField.setEditable(false);
+//		textField.setBounds(29, 46, 259, 37);
+//		panel.add(textField);
+//		textField.setColumns(10);
+//		
+//		JButton btnNewButton = new JButton("Chọn thư mục giải nén");
+//		btnNewButton.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
 //				JFileChooser fileChooser = new JFileChooser();
 //				fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
 //				int result = fileChooser.showOpenDialog(null);
@@ -169,24 +191,25 @@ public class BeforeOpenApp {
 //			    	JOptionPane.showMessageDialog(null, "Chưa chọn vị trí tệp","Lỗi", JOptionPane.ERROR_MESSAGE);
 //			      }
 				
-				JFileChooser chooser = new JFileChooser(); 
-			    chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-			    
-			    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-			    chooser.setAcceptAllFileFilterUsed(false);
-			       
-			    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) { 
+//				JFileChooser chooser = new JFileChooser(); 
+//			    chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+//			    
+//			    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+//			    chooser.setAcceptAllFileFilterUsed(false);
+//			       
+//			    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) { 
 			      
-			    	String path =  chooser.getSelectedFile().getAbsolutePath();
-			    	if (path!=null)
-				        {
+			    	String path =  System.getProperty("user.home")+"\\HeChuyenGia";
+			    	
 				        	/*String cklink = path+"\\image.png";
 				        	if(test.checkFileExcel(cklink))
 				        	{
 				        		textField.setText(chooser.getSelectedFile().getAbsolutePath());
 				        	*/	test.writeNewFileExcel(Link,path,1,1);
-				        		frmChonViTri.setVisible(false);
-				        		new v_SelectFile().main(Link);/*
+				        		//frmChonViTri.setVisible(false);
+				        		new v_SelectFile().main(Link);
+				        		
+				        		/*
 				        		
 				        		
 				        	}
@@ -194,23 +217,24 @@ public class BeforeOpenApp {
 				        	{
 				        		JOptionPane.showMessageDialog(null, "Đây không phải thư mục giải nén Hệ Chuyên Gia","Lỗi", JOptionPane.ERROR_MESSAGE);
 				        	}*/
-				        }
-			    	
-			      }
-			    else 
-			    {
-			    	JOptionPane.showMessageDialog(null, "Chưa chọn vị trí tệp","Lỗi", JOptionPane.ERROR_MESSAGE);
-			    }
-
-			}
-		});
-		btnNewButton.setBounds(300, 46, 163, 37);
-		panel.add(btnNewButton);
-		
-		JLabel lblPhnMmH = new JLabel("PHẦN MỀM HỖ TRỢ QUYẾT ĐỊNH 2018");
-		lblPhnMmH.setFont(new Font("SansSerif", Font.BOLD, 18));
-		lblPhnMmH.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPhnMmH.setBounds(67, 18, 402, 43);
-		frmChonViTri.getContentPane().add(lblPhnMmH);
+//				        }
+//			    	
+//			      }
+//			    else 
+//			    {
+//			    	JOptionPane.showMessageDialog(null, "Chưa chọn vị trí tệp","Lỗi", JOptionPane.ERROR_MESSAGE);
+//			    }
+//
+//			}
+//		});
+//		btnNewButton.setBounds(300, 46, 163, 37);
+//		panel.add(btnNewButton);
+//		
+//		JLabel lblPhnMmH = new JLabel("PHẦN MỀM HỖ TRỢ QUYẾT ĐỊNH 2018");
+//		lblPhnMmH.setFont(new Font("SansSerif", Font.BOLD, 18));
+//		lblPhnMmH.setHorizontalAlignment(SwingConstants.CENTER);
+//		lblPhnMmH.setBounds(67, 18, 402, 43);
+//		frmChonViTri.getContentPane().add(lblPhnMmH);
 	}
+
 }

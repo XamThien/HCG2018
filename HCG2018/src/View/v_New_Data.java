@@ -84,7 +84,7 @@ public class v_New_Data {
 		frame_1.getContentPane().add(lblPhnMmH);
 		
 		test ts = new test();
-		String fileName = ts.readFileExcel(link,1,2);
+		String fileName = ts.readFileExcel(link,1,1);
 		int len = fileName.length();
 		int last = fileName.lastIndexOf('\\');
 		/*String folderName = fileName.substring( 0,last+1);

@@ -125,7 +125,7 @@ public class v_Add_Data {
 		frmThmMiMuc.getContentPane().add(lblPhnMmH);
 		
 		test ts = new test();
-		String fileName = ts.readFileExcel(link,1,2);
+		String fileName = ts.readFileExcel(link,1,1);
 		int len = fileName.length();
 		int last = fileName.lastIndexOf('\\');
 		/*String folderName = fileName.substring( 0,last+1);
@@ -190,14 +190,13 @@ public class v_Add_Data {
 				if(ck)
 				{
 					test ts = new test();
-					String fileName = ts.readFileExcel(link,1,2);
+					String fileName = ts.readFileExcel(link,1,1);
 					
-					int last = fileName.lastIndexOf('\\');
-					String folderName = fileName.substring(0, last+1);
-					String newfileName = folderName+ten_de_tai+".xls";
+					
+					String newfileName = fileName+"\\"+ten_de_tai+".xls";
 					if(ts.checkFileExcel(newfileName))
 					{
-						newfileName = folderName+ten_de_tai+"-1.xls";
+						newfileName = fileName+"\\"+ten_de_tai+"-1.xls";
 					}
 					//writeNewFileExcel(ten_de_tai,newfileName,hihi);
 					frmThmMiMuc.setVisible(false);

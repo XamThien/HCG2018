@@ -140,7 +140,7 @@ public class v_SelectFile {
         for(int i = 0; i < files.length; i++)
         {
             
-            if(files[i].getName().contains("xls"))
+            if(files[i].getName().contains("xls") && !files[i].getName().contains("Link.xls"))
             {
             	String fileName = files[i].getName();
         		
