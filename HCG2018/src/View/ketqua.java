@@ -75,15 +75,17 @@ public class ketqua {
 			}
 		}
 
-		String path = "/image/image.png";
-        ImageIcon imageIcon = new ImageIcon(getClass().getResource(path));
-        frmKtQua.setIconImage(imageIcon.getImage());
+		
 		frmKtQua = new JFrame();
 		frmKtQua.setTitle("Kết quả");
 		int sl = hihi.size();
 		frmKtQua.setBounds(100, 100, 450, 240+(sl-1)*45);
 		frmKtQua.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmKtQua.getContentPane().setLayout(null);
+		
+		String path = "/image/image.png";
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource(path));
+        frmKtQua.setIconImage(imageIcon.getImage());
 		
 		String labelname = "Kết quả của lựa chọn là phương án : "+namePA;
 		JLabel lblNewLabel = new JLabel(labelname);
