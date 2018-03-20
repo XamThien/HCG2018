@@ -17,6 +17,7 @@ import controller.Phuongan;
 import controller.test;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -83,22 +84,24 @@ public class v_View_PA {
 		test ts = new test();
 		String fileName = ts.readFileExcel(link,1,2);
 		int len = fileName.length();
-		int last = fileName.lastIndexOf('\\');
+		/*int last = fileName.lastIndexOf('\\');
 		String folderName = fileName.substring( 0,last+1);
 		BufferedImage image = null;
         try
         {
         	
-          image = ImageIO.read(new File(folderName+"image.png"));
+   //       image = ImageIO.read(new File(folderName+"image.png"));
         }
         catch (Exception e)
         {
           e.printStackTrace();
           System.exit(1);
-        }
+        }*/
         
-        frmDanhSachCac.setIconImage(image);
-		
+      //  frmDanhSachCac.setIconImage(image);
+        String path = "/image/image.png";
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource(path));
+        frmDanhSachCac.setIconImage(imageIcon.getImage());
 		JLabel lblDanhSachCac = new JLabel(title);
 		lblDanhSachCac.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDanhSachCac.setFont(new Font("Tahoma", Font.BOLD, 13));

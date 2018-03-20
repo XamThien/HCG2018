@@ -85,24 +85,25 @@ public class v_SelectFile {
 		frmLaChonDatabase.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmLaChonDatabase.getContentPane().setLayout(null);
 		
-		test ts = new test();
+		/*test ts = new test();
 		String xxx = filename;
 		
 		BufferedImage image = null;
         try
         {
         	
-          image = ImageIO.read(new File(xxx+"\\image.png"));
+         // image = ImageIO.read(new File(xxx+"\\image.png"));
         }
         catch (Exception e)
         {
           e.printStackTrace();
           System.exit(1);
-        }
+        }*/
         
-        frmLaChonDatabase.setIconImage(image);
-        ImageIcon imageIcon = new ImageIcon(image);
-		
+       // frmLaChonDatabase.setIconImage(image);
+        String path = "/image/image.png";
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource(path));
+        frmLaChonDatabase.setIconImage(imageIcon.getImage());
 		JLabel lblPhnMmH = new JLabel("PHẦN MỀM HỖ TRỢ QUYẾT ĐỊNH 2018");
 		lblPhnMmH.setFont(new Font("SansSerif", Font.BOLD, 18));
 		lblPhnMmH.setHorizontalAlignment(SwingConstants.CENTER);

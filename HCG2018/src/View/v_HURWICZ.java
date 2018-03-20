@@ -12,6 +12,7 @@ import controller.PhuongAnList;
 import controller.Phuongan;
 
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -67,6 +68,9 @@ public class v_HURWICZ {
 	private void initialize(ArrayList<String> namePAs,ArrayList<Phuongan> arr) {
 		frmPhngPhapHurwicz = new JFrame();
 		frmPhngPhapHurwicz.setTitle("Phương pháp HURWICZ");
+		String path = "/image/image.png";
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource(path));
+        frmPhngPhapHurwicz.setIconImage(imageIcon.getImage());
 		frmPhngPhapHurwicz.setBounds(100, 100, 450, 279);
 		frmPhngPhapHurwicz.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPhngPhapHurwicz.getContentPane().setLayout(null);

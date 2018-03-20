@@ -14,6 +14,7 @@ import controller.Phuongan;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -73,7 +74,9 @@ public class v_QDMoTG {
 		frmTrngThiTrung.setBounds(100, 100, 450, 300+(sl-1)*95);
 		frmTrngThiTrung.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTrngThiTrung.getContentPane().setLayout(null);
-		
+		String path = "/image/image.png";
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource(path));
+        frmTrngThiTrung.setIconImage(imageIcon.getImage());
 		
 		
 		JButton btnNewButton_1 = new JButton("Thoát");

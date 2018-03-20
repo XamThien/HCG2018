@@ -24,6 +24,7 @@ import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -127,21 +128,23 @@ public class v_Add_Data {
 		String fileName = ts.readFileExcel(link,1,2);
 		int len = fileName.length();
 		int last = fileName.lastIndexOf('\\');
-		String folderName = fileName.substring( 0,last+1);
+		/*String folderName = fileName.substring( 0,last+1);
 		BufferedImage image = null;
         try
         {
         	
-          image = ImageIO.read(new File(folderName+"image.png"));
+        //  image = ImageIO.read(new File(folderName+"image.png"));
         }
         catch (Exception e)
         {
           e.printStackTrace();
           System.exit(1);
-        }
+        }*/
         
-        frmThmMiMuc.setIconImage(image);
-		
+      //  frmThmMiMuc.setIconImage(image);
+        String path = "/image/image.png";
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource(path));
+        frmThmMiMuc.setIconImage(imageIcon.getImage());
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Nh\u00E2\u0323p t\u00EAn các mu\u0323c ti\u00EAu:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(59, 59, 59)));
 		panel.setBounds(66, 103, 466, 90+(so_mt-1)*40);

@@ -97,22 +97,25 @@ public class OpenApp {
 		test ts = new test();
 		String fileName = link;
 		int len = fileName.length();
-		int last = fileName.lastIndexOf('\\');
+		/*int last = fileName.lastIndexOf('\\');
 		String folderName = fileName.substring( 0,last+1);
 		BufferedImage image = null;
         try
         {
         	
-          image = ImageIO.read(new File(folderName+"image.png"));
+          //image = ImageIO.read(new File(folderName+"image.png"));
         }
         catch (Exception e)
         {
           e.printStackTrace();
           System.exit(1);
-        }
+        }*/
         
-        frmHChuynGia.setIconImage(image);
-        ImageIcon imageIcon = new ImageIcon(image);
+     //   frmHChuynGia.setIconImage(image);
+       // ImageIcon imageIcon = new ImageIcon(image);
+        String path = "/image/image.png";
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource(path));
+        frmHChuynGia.setIconImage(imageIcon.getImage());
         frmHChuynGia.getContentPane().setLayout(null);
 		JLabel jLabel = new JLabel();
 		jLabel.setBounds(38+45, 18, 82, 73);

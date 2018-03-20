@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -145,21 +146,23 @@ public class v_AddNewMT {
 		String fileName = ts.readFileExcel(link,1,2);
 		int len = fileName.length();
 		int last = fileName.lastIndexOf('\\');
-		String folderName = fileName.substring( 0,last+1);
+		/*String folderName = fileName.substring( 0,last+1);
 		BufferedImage image = null;
         try
         {
         	
-          image = ImageIO.read(new File(folderName+"image.png"));
+        //  image = ImageIO.read(new File(folderName+"image.png"));
         }
         catch (Exception e)
         {
           e.printStackTrace();
           System.exit(1);
-        }
+        }*/
         
-        frame.setIconImage(image);
-		
+        //frame.setIconImage(image);
+        String path = "/image/image.png";
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource(path));
+        frame.setIconImage(imageIcon.getImage());
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Th\u00EAm mu\u0323c ti\u00EAu:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(66, 103, 466, 90+so_mt*40);

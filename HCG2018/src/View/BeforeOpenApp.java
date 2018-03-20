@@ -12,6 +12,7 @@ import controller.Phuongan;
 import controller.test;
 
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
@@ -82,6 +83,10 @@ public class BeforeOpenApp {
 		frmChonViTri.setBounds(500, 150, 541, 296);
 		frmChonViTri.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmChonViTri.getContentPane().setLayout(null);
+
+		String path = "/image/image.png";
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource(path));
+        frmChonViTri.setIconImage(imageIcon.getImage());
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Cho\u0323n folder l\u01B0u ca\u0301c file gia\u0309i ne\u0301n :", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(59, 59, 59)));
@@ -175,20 +180,20 @@ public class BeforeOpenApp {
 			    	String path =  chooser.getSelectedFile().getAbsolutePath();
 			    	if (path!=null)
 				        {
-				        	String cklink = path+"\\image.png";
+				        	/*String cklink = path+"\\image.png";
 				        	if(test.checkFileExcel(cklink))
 				        	{
 				        		textField.setText(chooser.getSelectedFile().getAbsolutePath());
-				        		test.writeNewFileExcel(Link,path,1,1);
+				        	*/	test.writeNewFileExcel(Link,path,1,1);
 				        		frmChonViTri.setVisible(false);
-				        		new v_SelectFile().main(Link);
+				        		new v_SelectFile().main(Link);/*
 				        		
 				        		
 				        	}
 				        	else
 				        	{
 				        		JOptionPane.showMessageDialog(null, "Đây không phải thư mục giải nén Hệ Chuyên Gia","Lỗi", JOptionPane.ERROR_MESSAGE);
-				        	}
+				        	}*/
 				        }
 			    	
 			      }

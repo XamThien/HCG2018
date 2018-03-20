@@ -13,6 +13,7 @@ import javax.swing.border.TitledBorder;
 
 import controller.Phuongan;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -74,7 +75,9 @@ public class ketqua {
 			}
 		}
 
-		
+		String path = "/image/image.png";
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource(path));
+        frmKtQua.setIconImage(imageIcon.getImage());
 		frmKtQua = new JFrame();
 		frmKtQua.setTitle("Kết quả");
 		int sl = hihi.size();

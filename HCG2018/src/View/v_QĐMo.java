@@ -14,6 +14,7 @@ import controller.Phuongan;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -65,6 +66,9 @@ public class v_QĐMo {
 		frmChnThi = new JFrame();
 		frmChnThi.setTitle("Chọn thái độ muốn quyết định");
 		frmChnThi.setBounds(100, 100, 509, 300);
+		String path = "/image/image.png";
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource(path));
+        frmChnThi.setIconImage(imageIcon.getImage());
 		frmChnThi.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmChnThi.getContentPane().setLayout(null);
 		

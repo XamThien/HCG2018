@@ -14,6 +14,7 @@ import controller.Phuongan;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -73,7 +74,9 @@ public class v_Bayes {
 		frmPhngPhapBayes.getContentPane().setLayout(null);
 		int sl = nameMTs.size();
 		frmPhngPhapBayes.setBounds(100, 100, 450, 300+(sl-1)*95);
-		
+		String path = "/image/image.png";
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource(path));
+        frmPhngPhapBayes.setIconImage(imageIcon.getImage());
 		JButton btnNewButton_1 = new JButton("Thoát");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -134,21 +134,24 @@ public class v_Add_Table_PA {
 		String fileName = newfileName;
 		
 		int last = fileName.lastIndexOf('\\');
-		String folderName = fileName.substring( 0,last+1);
+		/*String folderName = fileName.substring( 0,last+1);
 		BufferedImage image = null;
         try
         {
         	
-          image = ImageIO.read(new File(folderName+"image.png"));
+        //  image = ImageIO.read(new File(folderName+"image.png"));
         }
         catch (Exception e)
         {
           e.printStackTrace();
           System.exit(1);
-        }
+        }*/
         
-        frmThmPhngAn.setIconImage(image);
-        ImageIcon imageIcon = new ImageIcon(image);
+     //   frmThmPhngAn.setIconImage(image);
+        String path = "/image/image.png";
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource(path));
+        frmThmPhngAn.setIconImage(imageIcon.getImage());
+     //   ImageIcon imageIcon = new ImageIcon(image);
 		
 		JLabel lblPhnMmH = new JLabel("PHẦN MỀM HỖ TRỢ QUYẾT ĐỊNH 2018");
 		lblPhnMmH.setFont(new Font("SansSerif", Font.BOLD, 18));

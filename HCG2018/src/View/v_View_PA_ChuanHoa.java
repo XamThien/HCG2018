@@ -17,6 +17,7 @@ import controller.Phuongan;
 import controller.test;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -74,11 +75,13 @@ public class v_View_PA_ChuanHoa {
 		frmDanhSachCac.setBounds(850, y, 450, 308);
 		frmDanhSachCac.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDanhSachCac.getContentPane().setLayout(null);
-		
+		String path = "/image/image.png";
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource(path));
+        frmDanhSachCac.setIconImage(imageIcon.getImage());
 		test ts = new test();
 		String fileName = ts.readFileExcel(link,1,2);
 		int len = fileName.length();
-		int last = fileName.lastIndexOf('\\');
+		/*int last = fileName.lastIndexOf('\\');
 		String folderName = fileName.substring( 0,last+1);
 		BufferedImage image = null;
         try
@@ -90,9 +93,10 @@ public class v_View_PA_ChuanHoa {
         {
           e.printStackTrace();
           System.exit(1);
-        }
+        }*/
         
-        frmDanhSachCac.setIconImage(image);
+        
+      //  frmDanhSachCac.setIconImage(image);
 		
 		table = new JTable();
 		table.setBounds(27, 69, 380, 159);

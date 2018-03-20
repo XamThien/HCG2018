@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -67,6 +68,9 @@ public class v_Hodges_Lehmann {
 		frmPhngPhapHodges = new JFrame();
 		frmPhngPhapHodges.setTitle("Phương pháp Hodges Lehmann");
 		int sl = nameMTs.size();
+		String path = "/image/image.png";
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource(path));
+        frmPhngPhapHodges.setIconImage(imageIcon.getImage());
 		frmPhngPhapHodges.setBounds(100, 100, 450, 333+(sl-1)*95);
 		frmPhngPhapHodges.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPhngPhapHodges.getContentPane().setLayout(null);

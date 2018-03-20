@@ -129,7 +129,7 @@ public class v_SelectMT {
 		int len = fileName.length();
 		int last = fileName.lastIndexOf('\\');
 		String folderName = fileName.substring( 0,last+1);
-		BufferedImage image = null;
+		/*BufferedImage image = null;
         try
         {
         	
@@ -142,7 +142,10 @@ public class v_SelectMT {
         }
         
         frame.setIconImage(image);
-        ImageIcon imageIcon = new ImageIcon(image);
+        ImageIcon imageIcon = new ImageIcon(image);*/
+		String path = "/image/image.png";
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource(path));
+        frame.setIconImage(imageIcon.getImage());
         frame.getContentPane().setLayout(null);
 		JLabel jLabel = new JLabel();
 		jLabel.setBounds(38+45, 18, 82, 73);
