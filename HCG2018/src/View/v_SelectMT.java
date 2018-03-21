@@ -251,7 +251,7 @@ public class v_SelectMT {
 				
 			}
 		});
-		btnNewMT.setBounds(289, 196+(so_dong-1)*40, 114, 36);
+		btnNewMT.setBounds(292, 196+(so_dong-1)*40, 114, 36);
 		frame.getContentPane().add(btnNewMT);
 		
 		JButton btnChuyen = new JButton("Chuyển CSDL");
@@ -262,7 +262,7 @@ public class v_SelectMT {
 				new v_SelectFile().main(Link);
 			}
 		});
-		btnChuyen.setBounds(160, 196+(so_dong-1)*40, 114, 36);
+		btnChuyen.setBounds(169, 196+(so_dong-1)*40, 114, 36);
 		frame.getContentPane().add(btnChuyen);
 		
 		JButton btnNewCSDL = new JButton("Thêm phương án");
@@ -278,7 +278,7 @@ public class v_SelectMT {
 				
 			}
 		});
-		btnNewCSDL.setBounds(32, 196+(so_dong-1)*40, 114, 36);
+		btnNewCSDL.setBounds(34, 196+(so_dong-1)*40, 125, 36);
 		frame.getContentPane().add(btnNewCSDL);
 	}
 }

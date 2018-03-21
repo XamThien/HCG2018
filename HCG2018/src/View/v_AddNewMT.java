@@ -132,7 +132,7 @@ public class v_AddNewMT {
 		frame = new JFrame();
 		frame.setTitle("Thêm mới mục tiêu");
 		int so_mt = namePAs.size();
-		frame.setBounds(400, 100, 592, 316+so_mt*40);
+		frame.setBounds(255, 100, 592, 316+so_mt*40);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
