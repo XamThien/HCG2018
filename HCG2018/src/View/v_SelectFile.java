@@ -84,6 +84,7 @@ public class v_SelectFile {
 		frmLaChonDatabase.setBounds(500, 100, 450, 340);
 		frmLaChonDatabase.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmLaChonDatabase.getContentPane().setLayout(null);
+		frmLaChonDatabase.setResizable(false);
 		
 		/*test ts = new test();
 		String xxx = filename;

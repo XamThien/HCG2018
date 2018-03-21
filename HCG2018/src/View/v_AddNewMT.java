@@ -141,6 +141,7 @@ public class v_AddNewMT {
 		lblPhnMmH.setFont(new Font("SansSerif", Font.BOLD, 18));
 		lblPhnMmH.setHorizontalAlignment(SwingConstants.CENTER);
 		frame.getContentPane().add(lblPhnMmH);
+		frame.setResizable(false);
 		
 		test ts = new test();
 		String fileName = ts.readFileExcel(link,1,2);

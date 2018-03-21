@@ -77,7 +77,8 @@ public class BeforeOpenApp {
 			String link = folder+"\\Link.xls";
 			if(!ts.checkFileExcel(link))
 			{
-				
+				String test = folder+"\\ExampleCSDL.xls";
+				writeNewFileExcel(test);
 				initialize(link);
 			}
 			else

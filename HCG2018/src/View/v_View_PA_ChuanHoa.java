@@ -75,6 +75,8 @@ public class v_View_PA_ChuanHoa {
 		frmDanhSachCac.setBounds(850, y, 450, 308);
 		frmDanhSachCac.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDanhSachCac.getContentPane().setLayout(null);
+		frmDanhSachCac.setResizable(false);
+		
 		String path = "/image/image.png";
         ImageIcon imageIcon = new ImageIcon(getClass().getResource(path));
         frmDanhSachCac.setIconImage(imageIcon.getImage());

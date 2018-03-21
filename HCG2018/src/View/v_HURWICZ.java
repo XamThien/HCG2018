@@ -74,6 +74,7 @@ public class v_HURWICZ {
 		frmPhngPhapHurwicz.setBounds(100, 100, 450, 279);
 		frmPhngPhapHurwicz.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPhngPhapHurwicz.getContentPane().setLayout(null);
+		frmPhngPhapHurwicz.setResizable(false);
 		
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.CENTER);

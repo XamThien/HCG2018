@@ -150,6 +150,7 @@ public class v_Add_PA {
 		frmThmPhngAn.setBounds(100, 100, 592, 316+so_mt*40);
 		frmThmPhngAn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmThmPhngAn.getContentPane().setLayout(null);
+		frmThmPhngAn.setResizable(false);
 		
 		JLabel lblPhnMmH = new JLabel("PHẦN MỀM HỖ TRỢ QUYẾT ĐỊNH 2018");
 		lblPhnMmH.setBounds(92, 23, 402, 43);

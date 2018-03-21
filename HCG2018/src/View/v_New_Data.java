@@ -76,6 +76,8 @@ public class v_New_Data {
 		frame_1.setBounds(400, 100, 592, 413);
 		frame_1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame_1.getContentPane().setLayout(null);
+		frame_1.setResizable(false);
+		frame.setResizable(false);
 		
 		JLabel lblPhnMmH = new JLabel("PHẦN MỀM HỖ TRỢ QUYẾT ĐỊNH 2018");
 		lblPhnMmH.setFont(new Font("SansSerif", Font.BOLD, 18));

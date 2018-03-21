@@ -74,6 +74,7 @@ public class v_Hodges_Lehmann {
 		frmPhngPhapHodges.setBounds(100, 100, 450, 333+(sl-1)*95);
 		frmPhngPhapHodges.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPhngPhapHodges.getContentPane().setLayout(null);
+		frmPhngPhapHodges.setResizable(false);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Nh\u00E2\u0323p ca\u0301c h\u00EA\u0323 s\u00F4\u0301 sau \u0111\u00E2y :", TitledBorder.LEADING, TitledBorder.TOP, null, null));

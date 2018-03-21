@@ -130,6 +130,7 @@ public class v_Add_Table_PA {
 		frmThmPhngAn.setBounds(450-((socot-2)*bonus)/2, 100, 561+(socot-3)*bonus, 343);
 		frmThmPhngAn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmThmPhngAn.getContentPane().setLayout(null);
+		frmThmPhngAn.setResizable(false);
 		
 		String fileName = newfileName;
 		

@@ -75,6 +75,7 @@ public class v_View_PA {
 		frmDanhSachCac.setBounds(850, y, 450, 308);
 		frmDanhSachCac.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDanhSachCac.getContentPane().setLayout(null);
+		frmDanhSachCac.setResizable(false);
 		
 		table = new JTable();
 		table.setBounds(27, 69, 380, 159);

@@ -79,6 +79,7 @@ public class OpenApp {
 		frmHChuynGia.setBounds(400, 100, 592, 413);
 		frmHChuynGia.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmHChuynGia.getContentPane().setLayout(null);
+		frmHChuynGia.setResizable(false);
 		
 		JLabel lblPhnMmH = new JLabel("PHẦN MỀM HỖ TRỢ QUYẾT ĐỊNH 2018");
 		lblPhnMmH.setFont(new Font("SansSerif", Font.BOLD, 18));

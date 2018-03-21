@@ -71,6 +71,7 @@ public class v_QĐMo {
         frmChnThi.setIconImage(imageIcon.getImage());
 		frmChnThi.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmChnThi.getContentPane().setLayout(null);
+		frmChnThi.setResizable(false);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "L\u01B0\u0323a cho\u0323n tra\u0323ng tha\u0301i", TitledBorder.LEADING, TitledBorder.TOP, null, null));

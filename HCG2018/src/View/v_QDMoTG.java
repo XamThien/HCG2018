@@ -77,7 +77,7 @@ public class v_QDMoTG {
 		String path = "/image/image.png";
         ImageIcon imageIcon = new ImageIcon(getClass().getResource(path));
         frmTrngThiTrung.setIconImage(imageIcon.getImage());
-		
+        frmTrngThiTrung.setResizable(false);
 		
 		JButton btnNewButton_1 = new JButton("Thoát");
 		btnNewButton_1.addActionListener(new ActionListener() {

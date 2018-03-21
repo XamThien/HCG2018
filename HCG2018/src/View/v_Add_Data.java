@@ -117,6 +117,7 @@ public class v_Add_Data {
 		frmThmMiMuc.setBounds(400, 100, 592, 316+(so_mt-1)*40);
 		frmThmMiMuc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmThmMiMuc.getContentPane().setLayout(null);
+		frmThmMiMuc.setResizable(false);
 		
 		JLabel lblPhnMmH = new JLabel("PHẦN MỀM HỖ TRỢ QUYẾT ĐỊNH 2018");
 		lblPhnMmH.setBounds(92, 23, 402, 43);

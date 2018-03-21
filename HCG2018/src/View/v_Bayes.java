@@ -72,6 +72,8 @@ public class v_Bayes {
 		frmPhngPhapBayes.setTitle("Phương pháp Bayes");
 		frmPhngPhapBayes.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPhngPhapBayes.getContentPane().setLayout(null);
+		frmPhngPhapBayes.setResizable(false);
+		
 		int sl = nameMTs.size();
 		frmPhngPhapBayes.setBounds(100, 100, 450, 300+(sl-1)*95);
 		String path = "/image/image.png";

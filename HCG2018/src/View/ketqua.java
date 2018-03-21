@@ -82,6 +82,7 @@ public class ketqua {
 		frmKtQua.setBounds(100, 100, 450, 240+(sl-1)*45);
 		frmKtQua.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmKtQua.getContentPane().setLayout(null);
+		frmKtQua.setResizable(false);
 		
 		String path = "/image/image.png";
         ImageIcon imageIcon = new ImageIcon(getClass().getResource(path));

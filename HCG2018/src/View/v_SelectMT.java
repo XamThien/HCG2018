@@ -109,6 +109,8 @@ public class v_SelectMT {
 		frame.setBounds(400, 100, 592, 293+(so_dong-1)*40);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setResizable(false);
+		
 		//frame.getContentPane().setBackground(new Color(255,255,255));
 		JLabel lblPhnMmH = new JLabel("PHẦN MỀM HỖ TRỢ QUYẾT ĐỊNH 2018");
 		lblPhnMmH.setFont(new Font("SansSerif", Font.BOLD, 18));
