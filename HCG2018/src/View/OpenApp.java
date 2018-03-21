@@ -76,7 +76,7 @@ public class OpenApp {
 		 
 		frmHChuynGia = new JFrame();
 		frmHChuynGia.setTitle("Hệ Chuyên Gia 2018");
-		frmHChuynGia.setBounds(400, 100, 592, 413);
+		frmHChuynGia.setBounds(100, 100, 592, 413);
 		frmHChuynGia.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmHChuynGia.getContentPane().setLayout(null);
 		frmHChuynGia.setResizable(false);
@@ -87,13 +87,14 @@ public class OpenApp {
 		lblPhnMmH.setBounds(67+50, 18, 402, 43);
 		frmHChuynGia.getContentPane().add(lblPhnMmH);
 		
-		JLabel lblDanhSachChon = new JLabel("Danh sách các mục tiêu chọn lựa cho việc");
-		lblDanhSachChon.setBounds(123+50, 60, 237, 14);
+		JLabel lblDanhSachChon = new JLabel("Danh sách các mục tiêu chọn lựa cho bài toán "+ name_de_tai.toLowerCase());
+		lblDanhSachChon.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDanhSachChon.setBounds(127, 60, 392, 14);
 		frmHChuynGia.getContentPane().add(lblDanhSachChon);
 		
-		JLabel lbliDuLich = new JLabel(name_de_tai.toLowerCase());
-		lbliDuLich.setBounds(357+50, 59, 91, 16);
-		frmHChuynGia.getContentPane().add(lbliDuLich);
+//		JLabel lbliDuLich = new JLabel(name_de_tai.toLowerCase());
+//		lbliDuLich.setBounds(357+50, 59, 91, 16);
+//		frmHChuynGia.getContentPane().add(lbliDuLich);
 		
 		test ts = new test();
 		String fileName = link;

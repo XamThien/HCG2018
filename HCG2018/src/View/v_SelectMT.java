@@ -87,7 +87,7 @@ public class v_SelectMT {
 	public v_SelectMT() {
 		
 		
-		
+		//initialize();
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class v_SelectMT {
 			so_dong =so_dong +1;
 		}
 		
-		frame.setBounds(400, 100, 592, 293+(so_dong-1)*40);
+		frame.setBounds(100, 100, 592, 293+(so_dong-1)*40);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setResizable(false);
@@ -118,13 +118,14 @@ public class v_SelectMT {
 		lblPhnMmH.setBounds(67+50, 18, 402, 43);
 		frame.getContentPane().add(lblPhnMmH);
 		
-		JLabel lblDanhSachChon = new JLabel("Danh sách các mục tiêu chọn lựa cho việc");
-		lblDanhSachChon.setBounds(123+50, 60, 237, 14);
+		JLabel lblDanhSachChon = new JLabel("Danh sách các mục tiêu chọn lựa cho bài toán "+ name_de_tai.toLowerCase());
+		lblDanhSachChon.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDanhSachChon.setBounds(127, 60, 392, 14);
 		frame.getContentPane().add(lblDanhSachChon);
 		
-		JLabel lbliDuLich = new JLabel(name_de_tai.toLowerCase());
-		lbliDuLich.setBounds(357+50, 59, 91, 16);
-		frame.getContentPane().add(lbliDuLich);
+//		JLabel lbliDuLich = new JLabel("đi làm"/*name_de_tai.toLowerCase()*/);
+//		lbliDuLich.setBounds(418, 59, 138, 16);
+//		frame.getContentPane().add(lbliDuLich);
 		
 		test ts = new test();
 		String fileName = link;
@@ -262,7 +263,7 @@ public class v_SelectMT {
 				new v_SelectFile().main(Link);
 			}
 		});
-		btnChuyen.setBounds(169, 196+(so_dong-1)*40, 114, 36);
+		btnChuyen.setBounds(34, 196+(so_dong-1)*40, 114, 36);
 		frame.getContentPane().add(btnChuyen);
 		
 		JButton btnNewCSDL = new JButton("Thêm phương án");
@@ -278,7 +279,7 @@ public class v_SelectMT {
 				
 			}
 		});
-		btnNewCSDL.setBounds(34, 196+(so_dong-1)*40, 125, 36);
+		btnNewCSDL.setBounds(160, 196+(so_dong-1)*40, 125, 36);
 		frame.getContentPane().add(btnNewCSDL);
 	}
 }

@@ -242,7 +242,12 @@ public class PhuongAnList {
 			for (Phuongan pa : matrixTV) {
 				if (nameMTsGoc.get(i).contains(pa.getNameMT())) {
 					float value =(pa.getValue()-minMT.get(i).getValue())/(maxMT.get(i).getValue()-minMT.get(i).getValue());
-					pa.setValue(value);
+					double tg1 = (double) value;
+					System.out.println(tg1);
+					
+					float tg2 = (float) tg1;
+					System.out.println(tg2);
+					pa.setValue(tg2);
 				}
 			}
 		}

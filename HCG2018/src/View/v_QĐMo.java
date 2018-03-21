@@ -120,7 +120,7 @@ public class v_QĐMo {
 		// hien thi thuoc do cua slider 0 10 20 30 40 50 ..
 		//slider.setLabelTable(slider.createStandardLabels(1));
 		
-		JButton btnNewButton = new JButton("Xác nhận");
+		JButton btnNewButton = new JButton("Kết quả");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int sel = slider.getValue();

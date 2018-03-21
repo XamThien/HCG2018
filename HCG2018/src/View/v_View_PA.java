@@ -72,13 +72,13 @@ public class v_View_PA {
 	private void initialize(int y,String link,String title,ArrayList<String> nameMTs,ArrayList<String> namePAs,ArrayList<Phuongan> arr) {
 		frmDanhSachCac = new JFrame();
 		frmDanhSachCac.setTitle("Danh sách các phương án");
-		frmDanhSachCac.setBounds(850, y, 450, 308);
+		frmDanhSachCac.setBounds(750, y, 550, 308);
 		frmDanhSachCac.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDanhSachCac.getContentPane().setLayout(null);
 		frmDanhSachCac.setResizable(false);
 		
 		table = new JTable();
-		table.setBounds(27, 69, 380, 159);
+		table.setBounds(27, 69, 380+100, 159);
 		table.setEnabled(false);
 		frmDanhSachCac.getContentPane().add(table);
 		
@@ -106,11 +106,11 @@ public class v_View_PA {
 		JLabel lblDanhSachCac = new JLabel(title);
 		lblDanhSachCac.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDanhSachCac.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblDanhSachCac.setBounds(34, 11, 373, 28);
+		lblDanhSachCac.setBounds(1, 11, 550, 28);
 		frmDanhSachCac.getContentPane().add(lblDanhSachCac);
 		
 		JScrollPane jsc = new JScrollPane(table);
-        jsc.setBounds(27, 69, 380, 159);
+        jsc.setBounds(27, 69, 380+100, 159);
         frmDanhSachCac.getContentPane().add(jsc);
         
         DefaultTableModel dtm = new DefaultTableModel();
@@ -150,7 +150,7 @@ public class v_View_PA {
         		frmDanhSachCac.setVisible(false);
         	}
         });
-        btnNewButton.setBounds(317, 239, 90, 28);
+        btnNewButton.setBounds(317+100, 239, 90, 28);
         frmDanhSachCac.getContentPane().add(btnNewButton);
 //        JButton btnNewPA = new JButton("Thêm phương án");
 //        btnNewPA.addActionListener(new ActionListener() {

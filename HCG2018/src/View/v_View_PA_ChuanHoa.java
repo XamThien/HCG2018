@@ -34,6 +34,31 @@ public class v_View_PA_ChuanHoa {
 	/**
 	 * Launch the application.
 	 */
+	public static String remove(String xxx)
+	{
+		
+		
+		if(!xxx.startsWith("1,0"))
+		{
+			while(xxx.endsWith("0"))
+			{
+				if(!xxx.endsWith(".00") || !xxx.endsWith(",00") )
+				{
+					 int last = xxx.lastIndexOf('0');
+					 xxx = xxx.substring(0, last-1);
+					 remove(xxx);
+				 }
+				
+			}
+		}
+		else 
+		{
+			return "1";
+		}
+		if(xxx.equals("0,"))
+		{xxx="0";}
+		return xxx;
+	}
 	public static void main(int y ,String link,String title,ArrayList<String> nameMTs,ArrayList<String> namePAs,ArrayList<Phuongan> arr) {
 		try
 		{
@@ -71,8 +96,8 @@ public class v_View_PA_ChuanHoa {
 	 */
 	private void initialize(int y,String link,String title,ArrayList<String> nameMTs,ArrayList<String> namePAs,ArrayList<Phuongan> arr) {
 		frmDanhSachCac = new JFrame();
-		frmDanhSachCac.setTitle("Danh sách các phương án");
-		frmDanhSachCac.setBounds(850, y, 450, 308);
+		frmDanhSachCac.setTitle("Danh sách các phương án sau chuẩn hoá");
+		frmDanhSachCac.setBounds(750, y, 550, 308);
 		frmDanhSachCac.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDanhSachCac.getContentPane().setLayout(null);
 		frmDanhSachCac.setResizable(false);
@@ -101,18 +126,18 @@ public class v_View_PA_ChuanHoa {
       //  frmDanhSachCac.setIconImage(image);
 		
 		table = new JTable();
-		table.setBounds(27, 69, 380, 159);
+		table.setBounds(27, 69, 380+100, 159);
 		table.setEnabled(false);
 		frmDanhSachCac.getContentPane().add(table);
 		
 		JLabel lblDanhSachCac = new JLabel(title);
 		lblDanhSachCac.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDanhSachCac.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblDanhSachCac.setBounds(34, 11, 373, 28);
+		lblDanhSachCac.setBounds(1, 11, 550, 28);
 		frmDanhSachCac.getContentPane().add(lblDanhSachCac);
 		
 		JScrollPane jsc = new JScrollPane(table);
-        jsc.setBounds(27, 69, 380, 159);
+        jsc.setBounds(27, 69, 380+100, 159);
         frmDanhSachCac.getContentPane().add(jsc);
         
         DefaultTableModel dtm = new DefaultTableModel();
@@ -142,7 +167,9 @@ public class v_View_PA_ChuanHoa {
         	rows[0]=mt;
         	for(int i=1; i<so_cot+1;i++)
         	{
-        		rows[i]=String.valueOf(lst.get(i-1).getValue());
+        		Float currency = Float.valueOf(lst.get(i-1).getValue());
+	       		String xxx = String.format("%,.10f", currency);
+	       		rows[i]=remove(xxx);
         	}
         	dtm.addRow(rows);
         }
@@ -154,7 +181,7 @@ public class v_View_PA_ChuanHoa {
         		frmDanhSachCac.setVisible(false);
         	}
         });
-        btnNewButton.setBounds(317, 239, 90, 28);
+        btnNewButton.setBounds(317+100, 239, 90, 28);
         frmDanhSachCac.getContentPane().add(btnNewButton);
         
 
