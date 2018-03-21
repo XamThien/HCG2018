@@ -32,6 +32,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.Color;
 
 public class BeforeOpenApp {
@@ -67,6 +69,8 @@ public class BeforeOpenApp {
 	 * Create the application.
 	 */
 	public BeforeOpenApp() {
+		
+		
 		test ts = new test();
 		// tạo file excel luu địa chỉ của file database, c:\\users\\user-name
 		String folder = System.getProperty("user.home")+"\\HeChuyenGia";
@@ -191,8 +195,11 @@ public class BeforeOpenApp {
     }
 	
 	private void initialize(String Link) {
-//		frmChonViTri = new JFrame();
-//		frmChonViTri.setTitle("Chọn vị trí lưu các file");
+		
+		
+		frmChonViTri = new JFrame();
+		frmChonViTri.setTitle("Chọn vị trí lưu các file");
+		
 //		frmChonViTri.setBounds(500, 150, 541, 296);
 //		frmChonViTri.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		frmChonViTri.getContentPane().setLayout(null);
