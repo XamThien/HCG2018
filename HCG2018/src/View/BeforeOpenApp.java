@@ -197,9 +197,9 @@ public class BeforeOpenApp {
 	private void initialize(String Link) {
 		
 		
-		frmChonViTri = new JFrame();
-		frmChonViTri.setTitle("Chọn vị trí lưu các file");
-		
+//		frmChonViTri = new JFrame();
+//		frmChonViTri.setTitle("Chọn vị trí lưu các file");
+//		
 //		frmChonViTri.setBounds(500, 150, 541, 296);
 //		frmChonViTri.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		frmChonViTri.getContentPane().setLayout(null);

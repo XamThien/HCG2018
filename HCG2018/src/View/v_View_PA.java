@@ -152,18 +152,18 @@ public class v_View_PA {
         });
         btnNewButton.setBounds(317, 239, 90, 28);
         frmDanhSachCac.getContentPane().add(btnNewButton);
-        JButton btnNewPA = new JButton("Thêm phương án");
-        btnNewPA.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-				test ts = new test();
-				String fileName = ts.readFileExcel(link,1,2);
-				
-				frmDanhSachCac.setVisible(false);
-				new v_Add_PA().main(link,fileName, nameMTs);
-        	}
-        });
-        btnNewPA.setBounds(177, 239, 130, 28);
-        frmDanhSachCac.getContentPane().add(btnNewPA);
+//        JButton btnNewPA = new JButton("Thêm phương án");
+//        btnNewPA.addActionListener(new ActionListener() {
+//        	public void actionPerformed(ActionEvent e) {
+//				test ts = new test();
+//				String fileName = ts.readFileExcel(link,1,2);
+//				
+//				frmDanhSachCac.setVisible(false);
+//				new v_Add_PA().main(link,fileName, nameMTs);
+//        	}
+//        });
+//        btnNewPA.setBounds(177, 239, 130, 28);
+//        frmDanhSachCac.getContentPane().add(btnNewPA);
 
 	}
 }

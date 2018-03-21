@@ -225,7 +225,7 @@ public class v_Add_PA {
 		
 		
 		JButton btnBack = new JButton("Trang chủ");
-		btnBack.setEnabled(false);
+		//btnBack.setEnabled(true);
 		btnBack.setBounds(342, 255+(so_mt-1)*40, 90, 28);
 		frmThmPhngAn.getContentPane().add(btnBack);
 		

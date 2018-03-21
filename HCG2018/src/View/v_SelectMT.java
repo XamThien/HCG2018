@@ -265,15 +265,20 @@ public class v_SelectMT {
 		btnChuyen.setBounds(160, 196+(so_dong-1)*40, 114, 36);
 		frame.getContentPane().add(btnChuyen);
 		
-//		JButton btnNewCSDL = new JButton("Làm mới");
-//		btnNewCSDL.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
+		JButton btnNewCSDL = new JButton("Thêm phương án");
+		btnNewCSDL.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 //				frame.setVisible(false);
 //				new v_SelectMT().main(Link);
-//				
-//			}
-//		});
-//		btnNewCSDL.setBounds(32, 196+(so_dong-1)*40, 114, 36);
-//		frame.getContentPane().add(btnNewCSDL);
+				test ts = new test();
+				String fileName = ts.readFileExcel(Link,1,2);
+				
+				frame.setVisible(false);
+				new v_Add_PA().main(Link,fileName, nameMTs);
+				
+			}
+		});
+		btnNewCSDL.setBounds(32, 196+(so_dong-1)*40, 114, 36);
+		frame.getContentPane().add(btnNewCSDL);
 	}
 }
