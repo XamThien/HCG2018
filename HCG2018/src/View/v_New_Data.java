@@ -191,6 +191,7 @@ public class v_New_Data {
 		rdbtnSMucTiu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				txtSLMT.setEnabled(true);
+				txtSLMT.setCursor(null);
 				textField.setText(null);
 				textField.setEnabled(false);
 			}
@@ -200,7 +201,8 @@ public class v_New_Data {
 				txtSLMT.setText(null);
 				txtSLMT.setEnabled(false);
 				textField.setEnabled(true);
-			}
+				textField.setCursor(null);
+				}
 		});
 		
 		btnNext.addActionListener(new ActionListener() {
@@ -274,7 +276,11 @@ public class v_New_Data {
 						}
 					}
 				}
-
+				if(soluong_mt_tt==0)
+				{
+					ck = false;
+					JOptionPane.showMessageDialog(null, "Hãy nhập số mục tiêu hoặc phương án.","Lỗi", JOptionPane.ERROR_MESSAGE);
+				}
 				if(txtSLPA.getText().equals("") || txtSLPA.getText().equals(null))
 				{
 					ck = false;
