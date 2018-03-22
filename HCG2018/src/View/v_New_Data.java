@@ -15,12 +15,14 @@ import controller.test;
 
 import javax.swing.JTextField;
 import javax.imageio.ImageIO;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.awt.event.ActionEvent;
+import javax.swing.JRadioButton;
 
 public class v_New_Data {
 
@@ -29,6 +31,7 @@ public class v_New_Data {
 	private JTextField txtName;
 	private JTextField txtSLMT;
 	private JTextField txtSLPA;
+	private JTextField textField;
 
 	/**
 	 * Launch the application. là để thêm đề tài, số mục tiêu và số phương án
@@ -60,7 +63,7 @@ public class v_New_Data {
 		initialize(link);
 	}
 	public v_New_Data() {
-//		initialize();
+		//initialize();
 	}
 
 	/**
@@ -73,7 +76,7 @@ public class v_New_Data {
 		
 		frame_1 = new JFrame();
 		frame_1.setTitle("Hệ Chuyên Gia 2018");
-		frame_1.setBounds(400, 100, 592, 413);
+		frame_1.setBounds(400, 100, 592, 475);
 		frame_1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame_1.getContentPane().setLayout(null);
 		frame_1.setResizable(false);
@@ -109,33 +112,97 @@ public class v_New_Data {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Th\u00EAm m\u01A1\u0301i CSDL :", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(61, 98, 467, 232);
+		panel.setBounds(61, 98, 467, 326);
 		frame_1.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		txtName = new JTextField();
 		txtName.setHorizontalAlignment(SwingConstants.CENTER);
-		txtName.setBounds(150, 33, 247, 28);
+		txtName.setBounds(205, 33, 205, 28);
 		panel.add(txtName);
 		txtName.setColumns(10);
 		
-		JLabel lblTnTai = new JLabel("Tên đề tài :");
+		JLabel lblTnTai = new JLabel("1: Nhập tên đề tài ");
 		lblTnTai.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		lblTnTai.setBounds(56, 38, 75, 16);
+		lblTnTai.setBounds(56, 38, 122, 16);
 		panel.add(lblTnTai);
 		
-		JLabel lblSMucTiu = new JLabel("Số mục tiêu :");
-		lblSMucTiu.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		lblSMucTiu.setBounds(56, 88, 96, 16);
-		panel.add(lblSMucTiu);
+		JButton btnNext = new JButton("Next");
+
+		btnNext.setBounds(320, 265, 90, 28);
+		panel.add(btnNext);
+		
+		JButton btnBack = new JButton("Trở lại");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame_1.setVisible(false);
+				frame.setVisible(false);
+				new v_SelectFile().main(link);
+				//new v_SelectMT().main(link);
+			}
+		});
+		btnBack.setBounds(220, 265, 90, 28);
+		panel.add(btnBack);
+		
+		txtSLPA = new JTextField();
+		txtSLPA.setBounds(207, 212, 203, 28);
+		panel.add(txtSLPA);
+		txtSLPA.setHorizontalAlignment(SwingConstants.CENTER);
+		txtSLPA.setColumns(10);
+		
+		JLabel lblSPhngAn = new JLabel("3: Nhập số phương án ");
+		lblSPhngAn.setBounds(56, 217, 150, 23);
+		panel.add(lblSPhngAn);
+		lblSPhngAn.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		
+		JLabel lblNhpSMuc = new JLabel("2: Chọn nhập số mục tiêu hoặc trạng thái ");
+		lblNhpSMuc.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		lblNhpSMuc.setBounds(56, 85, 325, 23);
+		panel.add(lblNhpSMuc);
 		
 		txtSLMT = new JTextField();
+		txtSLMT.setBounds(207, 121, 203, 28);
+		panel.add(txtSLMT);
+		txtSLMT.setEnabled(false);
 		txtSLMT.setHorizontalAlignment(SwingConstants.CENTER);
 		txtSLMT.setColumns(10);
-		txtSLMT.setBounds(150, 83, 247, 28);
-		panel.add(txtSLMT);
 		
-		JButton btnNext = new JButton("Next");
+		textField = new JTextField();
+		textField.setBounds(207, 160, 203, 28);
+		panel.add(textField);
+		textField.setEnabled(false);
+		textField.setHorizontalAlignment(SwingConstants.CENTER);
+		textField.setColumns(10);
+		
+		JRadioButton rdbtnSMucTiu = new JRadioButton("Số mục tiêu");
+		rdbtnSMucTiu.setBounds(77, 124, 105, 23);
+		panel.add(rdbtnSMucTiu);
+		
+		
+		JRadioButton rdbtnSTrangThai = new JRadioButton("Số trạng thái");
+		rdbtnSTrangThai.setBounds(77, 163, 105, 23);
+		panel.add(rdbtnSTrangThai);
+		
+		
+		ButtonGroup btnGroup = new ButtonGroup();
+		btnGroup.add(rdbtnSMucTiu);
+		btnGroup.add(rdbtnSTrangThai);
+		
+		rdbtnSMucTiu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtSLMT.setEnabled(true);
+				textField.setText(null);
+				textField.setEnabled(false);
+			}
+		});
+		rdbtnSTrangThai.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtSLMT.setText(null);
+				txtSLMT.setEnabled(false);
+				textField.setEnabled(true);
+			}
+		});
+		
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean ck = true;
@@ -151,28 +218,63 @@ public class v_New_Data {
 				{
 					ten_de_tai = txtName.getText();
 				}
-				if(txtSLMT.getText().equals("") || txtSLMT.getText().equals(null))
+				int soluong_mt_tt =0;
+				String LoaiCot = "";
+				if(rdbtnSTrangThai.isSelected())
 				{
-					ck = false;
-					JOptionPane.showMessageDialog(null, "Chưa nhập số lượng mục tiêu","Lỗi", JOptionPane.ERROR_MESSAGE);
-				}
-				else
-				{
-					try
-					{
-						so_mt = Integer.parseInt(txtSLMT.getText());
-						if(so_mt<=0)
-						{
-							ck = false;
-							JOptionPane.showMessageDialog(null, "Yêu cầu nhập số mục tiêu là một số nguyên dương","Lỗi", JOptionPane.ERROR_MESSAGE);
-						}
-					}
-					catch(Exception c)
+					if(textField.getText().equals("") || textField.getText().equals(null))
 					{
 						ck = false;
-						JOptionPane.showMessageDialog(null, "Yêu cầu nhập số mục tiêu là một số nguyên dương","Lỗi", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Chưa nhập số trạng thái","Lỗi", JOptionPane.ERROR_MESSAGE);
+					}
+					else
+					{
+						try
+						{
+							soluong_mt_tt = Integer.parseInt(textField.getText());
+							LoaiCot = "Trạng thái";
+							if(soluong_mt_tt<=0)
+							{
+								ck = false;
+								JOptionPane.showMessageDialog(null, "Yêu cầu nhập số trạng thái là một số nguyên dương","Lỗi", JOptionPane.ERROR_MESSAGE);
+							}
+								
+						}
+						catch (Exception eee)
+						{
+							ck = false;
+							JOptionPane.showMessageDialog(null, "Nhập số trạng thái là số nguyên","Lỗi", JOptionPane.ERROR_MESSAGE);
+						}
 					}
 				}
+				if(rdbtnSMucTiu.isSelected())
+				{
+					if(txtSLMT.getText().equals("") || txtSLMT.getText().equals(null))
+					{
+						ck = false;
+						JOptionPane.showMessageDialog(null, "Chưa nhập số mục tiêu","Lỗi", JOptionPane.ERROR_MESSAGE);
+					}
+					else
+					{
+						try
+						{
+							soluong_mt_tt = Integer.parseInt(txtSLMT.getText());
+							LoaiCot = "Mục tiêu";
+							if(soluong_mt_tt<=0)
+							{
+								ck = false;
+								JOptionPane.showMessageDialog(null, "Yêu cầu nhập số mục tiêu là một số nguyên dương","Lỗi", JOptionPane.ERROR_MESSAGE);
+							}
+								
+						}
+						catch (Exception eee)
+						{
+							ck = false;
+							JOptionPane.showMessageDialog(null, "Nhập số mục tiêu là số nguyên","Lỗi", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+				}
+
 				if(txtSLPA.getText().equals("") || txtSLPA.getText().equals(null))
 				{
 					ck = false;
@@ -200,36 +302,11 @@ public class v_New_Data {
 				{
 					frame_1.setVisible(false);
 					frame.setVisible(false);
-					new v_Add_Data().main(link,ten_de_tai,so_mt,so_pa);
+					new v_Add_Data().main(link,ten_de_tai,soluong_mt_tt,so_pa,LoaiCot);
 					
 				}
 				
 			}
 		});
-		btnNext.setBounds(307, 178, 90, 28);
-		panel.add(btnNext);
-		
-		JButton btnBack = new JButton("Trở lại");
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame_1.setVisible(false);
-				frame.setVisible(false);
-				new v_SelectFile().main(link);
-				//new v_SelectMT().main(link);
-			}
-		});
-		btnBack.setBounds(207, 178, 90, 28);
-		panel.add(btnBack);
-		
-		txtSLPA = new JTextField();
-		txtSLPA.setHorizontalAlignment(SwingConstants.CENTER);
-		txtSLPA.setColumns(10);
-		txtSLPA.setBounds(150, 130, 247, 28);
-		panel.add(txtSLPA);
-		
-		JLabel lblSPhngAn = new JLabel("Số phương án :");
-		lblSPhngAn.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		lblSPhngAn.setBounds(56, 135, 96, 16);
-		panel.add(lblSPhngAn);
 	}
 }

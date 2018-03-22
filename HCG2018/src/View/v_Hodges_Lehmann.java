@@ -116,7 +116,7 @@ public class v_Hodges_Lehmann {
 			panel.add(tt);
 		}
 		
-		JButton btnXacNhn = new JButton("Xác nhận ");
+		JButton btnXacNhn = new JButton("Kết quả");
 		btnXacNhn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean ck = true;
@@ -135,6 +135,7 @@ public class v_Hodges_Lehmann {
 						ck = false;
 					}
 				}
+				
 				if (ck == false)
 				{
 					JOptionPane.showMessageDialog(null, "Hãy nhập đầy đủ các ô !!!!","Lỗi", JOptionPane.ERROR_MESSAGE);
@@ -153,6 +154,13 @@ public class v_Hodges_Lehmann {
 						Double lamdatg = Double.parseDouble(txt1);
 						double lamdatg1 = lamdatg;
 						float lamda = (float)lamdatg1;
+						boolean ckk = true;
+						if (lamda<=0 || lamda>=1)
+							{
+								ckk = false;
+								JOptionPane.showMessageDialog(null, "Hệ số tin cậy phải lớn hơn 0 và nhỏ hơn 1 !!!!","Lỗi", JOptionPane.ERROR_MESSAGE);
+							}
+						
 						// kiểm tra các xác suất
 						ArrayList<XacSuat_Bayes_hodges_lehmann> xacSuat = new ArrayList<XacSuat_Bayes_hodges_lehmann>();
 						ArrayList<Float> xacSuatF = new ArrayList<Float>();
@@ -191,18 +199,13 @@ public class v_Hodges_Lehmann {
 						}
 						
 						
-						boolean ckk = true;
-						if (lamda<=0 || lamda>=1)
-							{
-								ckk = false;
-								JOptionPane.showMessageDialog(null, "Hệ số tin cậy phải lớn hơn 0 và nhỏ hơn 1 !!!!","Lỗi", JOptionPane.ERROR_MESSAGE);
-							}
+						
 						
 						if(ckk== true)
 						{
 							if(ck1)
 							{
-								boolean ckx = true;
+								
 								float tong = 0;
 								for(XacSuat_Bayes_hodges_lehmann xss : xacSuat)
 								{
@@ -211,10 +214,10 @@ public class v_Hodges_Lehmann {
 								
 								if(tong!=1)
 								{
-									ckx = false;
+									
 									JOptionPane.showMessageDialog(null, "Yêu cầu nhập tổng các xác suất phải bằng 1 !","Lỗi", JOptionPane.ERROR_MESSAGE);
 								}
-								if(ck)
+								else
 								{
 									PhuongAnList paList = new PhuongAnList();
 									String dA = paList.Hodges_Lehmann(lamda,xacSuatF, namePAs, arr, nameMTs);
@@ -231,7 +234,7 @@ public class v_Hodges_Lehmann {
 				}
 			}
 		});
-		btnXacNhn.setBounds(184, 248+(sl-1)*95, 112, 33);
+		btnXacNhn.setBounds(300, 248+(sl-1)*95, 112, 33);
 		frmPhngPhapHodges.getContentPane().add(btnXacNhn);
 		
 		JButton btnThoat = new JButton("Thoát");
@@ -245,7 +248,7 @@ public class v_Hodges_Lehmann {
                 }
 			}
 		});
-		btnThoat.setBounds(300, 248+(sl-1)*95, 112, 33);
+		btnThoat.setBounds(184, 248+(sl-1)*95, 112, 33);
 		frmPhngPhapHodges.getContentPane().add(btnThoat);
 	}
 	

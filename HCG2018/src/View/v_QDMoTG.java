@@ -112,13 +112,10 @@ public class v_QDMoTG {
 		
 		for(int i =0 ; i <sl ; i ++)
 		{
-			JLabel lblNhpMc = new JLabel("Nhập mức độ xảy ra trạng thái cho : ");
-			lblNhpMc.setBounds(21, 31+i*95, 232, 16);
+			JLabel lblNhpMc = new JLabel("Nhập trọng số xảy ra trạng thái : " +nameMTs.get(i));
+			lblNhpMc.setBounds(21, 31+i*95, 270, 16);
 			panel.add(lblNhpMc);
-			/*nameMTs.get(0)*/
-			JLabel lblHpDn = new JLabel(nameMTs.get(i));
-			lblHpDn.setBounds(221, 31+i*95, 91, 16);
-			panel.add(lblHpDn);
+			
 			
 			JTextField textField = new JTextField();
 			textField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -128,7 +125,7 @@ public class v_QDMoTG {
 			
 			JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
 			slider.setBounds(21, 50+i*95, 338, 73);
-			
+		
 			slider.setMinorTickSpacing(1);
 			slider.setMajorTickSpacing(10);
 			slider.setPaintTicks(true);

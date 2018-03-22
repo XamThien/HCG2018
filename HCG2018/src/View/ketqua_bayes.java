@@ -82,7 +82,7 @@ public class ketqua_bayes {
 		
 		frmKtQua = new JFrame();
 		frmKtQua.setTitle("Kết quả");
-		int sl = hihi.size();
+		int sl = 4;
 		frmKtQua.setBounds(100, 100, 450, 240+(sl-1)*45);
 		frmKtQua.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmKtQua.getContentPane().setLayout(null);
@@ -130,7 +130,7 @@ public class ketqua_bayes {
         colsName[2]="Giá trị";
 		dtm.setColumnIdentifiers(colsName);
 		
-		for (int i = 0; i<sl; i++)
+		for (int i = 0; i<hihi.size(); i++)
 		{
 			String rows[] = new String[3];
 			rows[0]=hihi.get(i).getNameMT();

@@ -41,7 +41,7 @@ public class v_Add_Data {
 	/**
 	 * Launch the application. Là để nhập tên các mục tiêu
 	 */
-	public static void main(String link,String ten_de_tai,int so_mt,int so_pa) {
+	public static void main(String link,String ten_de_tai,int so_mt,int so_pa,String LoaiCot) {
 		try
 		{
 			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -52,7 +52,7 @@ public class v_Add_Data {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					v_Add_Data window = new v_Add_Data(link,ten_de_tai, so_mt,so_pa);
+					v_Add_Data window = new v_Add_Data(link,ten_de_tai, so_mt,so_pa, LoaiCot);
 					window.frmThmMiMuc.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -64,9 +64,9 @@ public class v_Add_Data {
 	/**
 	 * Create the application.
 	 */
-	public v_Add_Data(String link,String ten_de_tai,int so_mt,int so_pa) {
+	public v_Add_Data(String link,String ten_de_tai,int so_mt,int so_pa,String LoaiCot) {
 		//String linksavelinkDB = "G:\\Link.xls";
-		initialize(link,ten_de_tai, so_mt,so_pa);
+		initialize(link,ten_de_tai, so_mt,so_pa,LoaiCot);
 	}
 	public v_Add_Data() {
 		//initialize( );
@@ -111,7 +111,7 @@ public class v_Add_Data {
         }
        
     }
-	private void initialize(String link,String ten_de_tai,int so_mt,int so_pa) {
+	private void initialize(String link,String ten_de_tai,int so_mt,int so_pa,String LoaiCot) {
 		frmThmMiMuc = new JFrame();
 		frmThmMiMuc.setTitle("Thêm mới mục tiêu");
 		frmThmMiMuc.setBounds(400, 100, 592, 316+(so_mt-1)*40);
@@ -147,7 +147,7 @@ public class v_Add_Data {
         ImageIcon imageIcon = new ImageIcon(getClass().getResource(path));
         frmThmMiMuc.setIconImage(imageIcon.getImage());
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Nh\u00E2\u0323p t\u00EAn các mu\u0323c ti\u00EAu:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(59, 59, 59)));
+		panel.setBorder(new TitledBorder(null, "Nh\u00E2\u0323p t\u00EAn các "+LoaiCot.toLowerCase()+" :", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(59, 59, 59)));
 		panel.setBounds(66, 103, 466, 90+(so_mt-1)*40);
 		frmThmMiMuc.getContentPane().add(panel);
 		panel.setLayout(null);
@@ -156,15 +156,12 @@ public class v_Add_Data {
 		
 		for(int i = 1; i<=so_mt;i++)
 		{
-			JLabel lblTnTai = new JLabel("Mục tiêu");
+			JLabel lblTnTai = new JLabel(LoaiCot+" "+String.valueOf(i) );
 			lblTnTai.setFont(new Font("SansSerif", Font.PLAIN, 14));
-			lblTnTai.setBounds(36, 38+(i-1)*40, 75, 16);
+			lblTnTai.setBounds(36, 38+(i-1)*40, 85, 16);
 			panel.add(lblTnTai);
 			
-			JLabel label = new JLabel(String.valueOf(i));
-			label.setFont(new Font("SansSerif", Font.PLAIN, 14));
-			label.setBounds(94, 38+(i-1)*40, 75, 16);
-			panel.add(label);
+			
 			
 			JTextField txtName = new JTextField();
 			txtName.setHorizontalAlignment(SwingConstants.CENTER);
