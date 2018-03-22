@@ -10,6 +10,7 @@ import javax.swing.border.TitledBorder;
 
 import controller.PhuongAnList;
 import controller.Phuongan;
+import controller.XacSuat_Bayes_hodges_lehmann;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -92,52 +93,23 @@ public class v_Hodges_Lehmann {
 		panel.add(textField1);
 		textField1.setColumns(10);
 		
-		ArrayList<JSlider> hihi = new ArrayList<JSlider>();
 		ArrayList<JTextField> txtLst = new ArrayList<JTextField>();
 		
-		for(int i =0; i<sl; i++)
+		for(int i = 0; i< sl;i++)
 		{
-			JLabel lblNhpMc = new JLabel("Nhập mức độ xảy ra trạng thái cho : ");
-			lblNhpMc.setBounds(31, 106+i*95, 232, 16);
+			
+			JLabel lblNhpMc = new JLabel("Nhập xác suất xảy ra trạng thái cho : "+nameMTs.get(i));
+			lblNhpMc.setBounds(31, 106+i*95, 300, 16);
 			panel.add(lblNhpMc);
-			
-			
-			JLabel lblHpDn = new JLabel(nameMTs.get(i));
-			lblHpDn.setBounds(231, 106+i*95, 91, 16);
-			panel.add(lblHpDn);
-			
-			JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
-			slider.setBounds(31, 125+i*95, 316, 73);
-			panel.add(slider);
-			slider.setMinorTickSpacing(1);
-			slider.setMajorTickSpacing(10);
-			slider.setPaintTicks(true);
-			slider.setPaintLabels(true);
 			
 			JTextField textField = new JTextField();
 			textField.setHorizontalAlignment(SwingConstants.CENTER);
-			//textField.setEnabled(false);
-			textField.setEditable(false);
-			textField.setBounds(296, 102+i*95, 60, 28);
 			
-				    
-			slider.setLabelTable(slider.createStandardLabels(10));
-			slider.addMouseMotionListener(new MouseMotionAdapter() {
-				@Override
-				public void mouseDragged(MouseEvent e) {
-					textField.setText(String.valueOf(slider.getValue()));
-					
-				}
-			});
+			textField.setBounds(31, 106+39+i*95, 316, 35);
 			txtLst.add(textField);
-			hihi.add(slider);
-		}
-		
-		for (JSlider er : hihi)
-		{
 			
-			panel.add(er);
-		}
+			}
+
 		for (JTextField tt : txtLst)
 		{
 			
@@ -151,11 +123,23 @@ public class v_Hodges_Lehmann {
 				if (textField1.getText().equals(null) || textField1.getText().equals(""))
 				{
 					
-					JOptionPane.showMessageDialog(null, "Bạn Chưa Nhập Hệ Số Tin Cậy !!!!","Lỗi", JOptionPane.ERROR_MESSAGE);
+					//JOptionPane.showMessageDialog(null, "Bạn Chưa Nhập Hệ Số Tin Cậy !!!!","Lỗi", JOptionPane.ERROR_MESSAGE);
 					ck = false;
 				}
-				
-				if (ck == true)
+				for (JTextField tt : txtLst)
+				{
+					if (tt.getText().equals(null) || tt.getText().equals(""))
+					{
+						
+						
+						ck = false;
+					}
+				}
+				if (ck == false)
+				{
+					JOptionPane.showMessageDialog(null, "Hãy nhập đầy đủ các ô !!!!","Lỗi", JOptionPane.ERROR_MESSAGE);
+				}
+				else
 				{
 					try
 					{
@@ -169,17 +153,46 @@ public class v_Hodges_Lehmann {
 						Double lamdatg = Double.parseDouble(txt1);
 						double lamdatg1 = lamdatg;
 						float lamda = (float)lamdatg1;
-						
-						ArrayList<Float> xacSuat = new ArrayList<Float>();
-						for (JSlider er : hihi)
+						// kiểm tra các xác suất
+						ArrayList<XacSuat_Bayes_hodges_lehmann> xacSuat = new ArrayList<XacSuat_Bayes_hodges_lehmann>();
+						ArrayList<Float> xacSuatF = new ArrayList<Float>();
+						boolean ck1 = true;
+						for (int i=0;i< txtLst.size();i++)
 						{
-							xacSuat.add(Float.parseFloat(String.valueOf(er.getValue())));
-							
+							JTextField er = txtLst.get(i);
+							String value = er.getText();
+							if(value.contains(","))
+							{
+								value = value.replace(',', '.');
+							}
+							try
+							{
+								double p = Double.valueOf(value);
+								float pp = (float) p;
+								if(pp>=0 && pp <=1)
+								{
+									XacSuat_Bayes_hodges_lehmann xs = new XacSuat_Bayes_hodges_lehmann();
+									xs.setNamemt(nameMTs.get(i));
+									xs.setXacsuat(pp);
+									xacSuatF.add(pp);
+									xacSuat.add(xs);
+								}
+								else
+								{
+									ck1 = false;
+									JOptionPane.showMessageDialog(null, "Nhập giá trị xác suất của \"" +nameMTs.get(i)+"\" từ 0-1","Lỗi", JOptionPane.ERROR_MESSAGE);
+								}
+							}
+							catch(Exception eer)
+							{
+								ck1 = false;
+								JOptionPane.showMessageDialog(null, "Nhập giá trị xác suất của \"" +nameMTs.get(i)+"\" từ 0-1","Lỗi", JOptionPane.ERROR_MESSAGE);
+							}
 						}
 						
 						
 						boolean ckk = true;
-						if (lamda<0 || lamda>=1)
+						if (lamda<=0 || lamda>=1)
 							{
 								ckk = false;
 								JOptionPane.showMessageDialog(null, "Hệ số tin cậy phải lớn hơn 0 và nhỏ hơn 1 !!!!","Lỗi", JOptionPane.ERROR_MESSAGE);
@@ -187,10 +200,28 @@ public class v_Hodges_Lehmann {
 						
 						if(ckk== true)
 						{
-							PhuongAnList paList = new PhuongAnList();
-							String dA = paList.Hodges_Lehmann(lamda, xacSuat, namePAs, arr, nameMTs);
-							frmPhngPhapHodges.setVisible(false);
-							new ketqua().main(arr,dA);
+							if(ck1)
+							{
+								boolean ckx = true;
+								float tong = 0;
+								for(XacSuat_Bayes_hodges_lehmann xss : xacSuat)
+								{
+									tong+=xss.getXacsuat();
+								}
+								
+								if(tong!=1)
+								{
+									ckx = false;
+									JOptionPane.showMessageDialog(null, "Yêu cầu nhập tổng các xác suất phải bằng 1 !","Lỗi", JOptionPane.ERROR_MESSAGE);
+								}
+								if(ck)
+								{
+									PhuongAnList paList = new PhuongAnList();
+									String dA = paList.Hodges_Lehmann(lamda,xacSuatF, namePAs, arr, nameMTs);
+									frmPhngPhapHodges.setVisible(false);
+									new ketqua_bayes().main(xacSuat,arr,dA,"với hệ số tin cậy là "+lamda);
+								}
+							}
 						}
 					}
 					catch (Exception ex)

@@ -10,6 +10,7 @@ import javax.swing.border.TitledBorder;
 
 import controller.PhuongAnList;
 import controller.Phuongan;
+import controller.XacSuat_Bayes_hodges_lehmann;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -90,11 +91,11 @@ public class v_Bayes {
                 }
 			}
 		});
-		btnNewButton_1.setBounds(278, 182+(sl-1)*95, 117, 36);
+		btnNewButton_1.setBounds(145, 182+(sl-1)*95, 126, 36);
 		frmPhngPhapBayes.getContentPane().add(btnNewButton_1);
 		
-		JButton btnNewButton = new JButton("Xác nhận");
-		btnNewButton.setBounds(145, 182+(sl-1)*95, 126, 36);
+		JButton btnNewButton = new JButton("Kết quả");
+		btnNewButton.setBounds(278, 182+(sl-1)*95, 117, 36);
 		frmPhngPhapBayes.getContentPane().add(btnNewButton);
 		
 		JPanel panel = new JPanel();
@@ -107,54 +108,49 @@ public class v_Bayes {
         jsc.setBounds(15, 26, 395, 144+sl*95);
         frmPhngPhapBayes.getContentPane().add(jsc);
 		
-		ArrayList<JSlider> hihi = new ArrayList<JSlider>();
+		//ArrayList<JSlider> hihi = new ArrayList<JSlider>();
 		ArrayList<JTextField> txtLst = new ArrayList<JTextField>();
 		
 		for(int i = 0; i< sl;i++)
 		{
 			
-			JLabel lblNhpMc = new JLabel("Nhập mức độ xảy ra trạng thái cho : ");
-			lblNhpMc.setBounds(21, 31+i*95, 232, 16);
+			JLabel lblNhpMc = new JLabel("Nhập xác suất xảy ra trạng thái cho : "+ nameMTs.get(i));
+			lblNhpMc.setBounds(21, 31+i*95, 300, 16);
 			panel.add(lblNhpMc);
-			/*nameMTs.get(0)*/
-			JLabel lblHpDn = new JLabel(nameMTs.get(i));
-			lblHpDn.setBounds(221, 31+i*95, 91, 16);
-			panel.add(lblHpDn);
 			
 			JTextField textField = new JTextField();
 			textField.setHorizontalAlignment(SwingConstants.CENTER);
-			//textField.setEnabled(false);
-			textField.setEditable(false);
-			textField.setBounds(296, 27+i*95, 60, 28);
 			
-			JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
-			slider.setBounds(21, 50+i*95, 338, 73);
+			textField.setBounds(21, 70+i*95, 338, 35);
 			
-			slider.setMinorTickSpacing(1);
-			slider.setMajorTickSpacing(10);
-			slider.setPaintTicks(true);
-			slider.setPaintLabels(true);
-			
-			
-			
-			// hien thi thuoc do cua slider 0 10 20 30 40 50 ..
-			slider.setLabelTable(slider.createStandardLabels(10));
-			slider.addMouseMotionListener(new MouseMotionAdapter() {
-				@Override
-				public void mouseDragged(MouseEvent e) {
-					textField.setText(String.valueOf(slider.getValue()));
-					
-				}
-			});
+//			JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
+//			slider.setBounds(21, 50+i*95, 338, 73);
+//			
+//			slider.setMinorTickSpacing(1);
+//			slider.setMajorTickSpacing(10);
+//			slider.setPaintTicks(true);
+//			slider.setPaintLabels(true);
+//			
+//			
+//			
+//			// hien thi thuoc do cua slider 0 10 20 30 40 50 ..
+//			slider.setLabelTable(slider.createStandardLabels(10));
+//			slider.addMouseMotionListener(new MouseMotionAdapter() {
+//				@Override
+//				public void mouseDragged(MouseEvent e) {
+//					textField.setText(String.valueOf(slider.getValue()));
+//					
+//				}
+//			});
 			txtLst.add(textField);
-			hihi.add(slider);
+			//hihi.add(slider);
 			}
-		//panel.add(slider);
-		for (JSlider er : hihi)
-		{
-			
-			panel.add(er);
-		}
+//		panel.add(slider);
+//		for (JSlider er : hihi)
+//		{
+//			
+//			panel.add(er);
+//		}
 		for (JTextField tt : txtLst)
 		{
 			
@@ -162,18 +158,67 @@ public class v_Bayes {
 		}
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ArrayList<Float> xacSuat = new ArrayList<Float>();
-				
-				for (JSlider er : hihi)
+				ArrayList<XacSuat_Bayes_hodges_lehmann> xacSuat = new ArrayList<XacSuat_Bayes_hodges_lehmann>();
+				ArrayList<Float> xacSuatF = new ArrayList<Float>();
+				boolean ck1 = true;
+				for (int i=0;i< txtLst.size();i++)
 				{
-					float p = (float)er.getValue();
-					
-					xacSuat.add(p);
+					JTextField er = txtLst.get(i);
+					String value = er.getText();
+					if(value.contains(","))
+					{
+						value = value.replace(',', '.');
+					}
+					try
+					{
+						double p = Double.valueOf(value);
+						float pp = (float) p;
+						if(pp>=0 && pp <=1)
+						{
+							XacSuat_Bayes_hodges_lehmann xs = new XacSuat_Bayes_hodges_lehmann();
+							xs.setNamemt(nameMTs.get(i));
+							xs.setXacsuat(pp);
+							xacSuatF.add(pp);
+							xacSuat.add(xs);
+						}
+						else
+						{
+							ck1 = false;
+							JOptionPane.showMessageDialog(null, "Nhập giá trị xác suất của \"" +nameMTs.get(i)+"\" từ 0-1","Lỗi", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+					catch(Exception eer)
+					{
+						ck1 = false;
+						JOptionPane.showMessageDialog(null, "Nhập giá trị xác suất của \"" +nameMTs.get(i)+"\" từ 0-1","Lỗi", JOptionPane.ERROR_MESSAGE);
+					}
 				}
-				PhuongAnList paList = new PhuongAnList();
-				String dA = paList.Bayes(xacSuat, namePAs, arr, nameMTs);
-				frmPhngPhapBayes.setVisible(false);
-				new ketqua().main(arr,dA);
+//				PhuongAnList paList = new PhuongAnList();
+//				String dA = paList.Bayes(xacSuat, namePAs, arr, nameMTs);
+//				frmPhngPhapBayes.setVisible(false);
+//				new ketqua().main(arr,dA);
+				if(ck1)
+				{
+					boolean ck = true;
+					float tong = 0;
+					for(XacSuat_Bayes_hodges_lehmann xss : xacSuat)
+					{
+						tong+=xss.getXacsuat();
+					}
+					
+					if(tong!=1)
+					{
+						ck = false;
+						JOptionPane.showMessageDialog(null, "Yêu cầu nhập tổng các xác suất phải bằng 1 !","Lỗi", JOptionPane.ERROR_MESSAGE);
+					}
+					if(ck)
+					{
+						PhuongAnList paList = new PhuongAnList();
+						String dA = paList.Bayes(xacSuatF, namePAs, arr, nameMTs);
+						frmPhngPhapBayes.setVisible(false);
+						new ketqua_bayes().main(xacSuat,arr,dA,"");
+					}
+				}
 			}
 		});
 			

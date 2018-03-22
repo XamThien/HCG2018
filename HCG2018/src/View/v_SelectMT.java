@@ -154,10 +154,11 @@ public class v_SelectMT {
 		jLabel.setBounds(38+45, 18, 82, 73);
 		frame.getContentPane().add(jLabel);
 		jLabel.setIcon(imageIcon);
+		jLabel.setToolTipText("Nhấn vào đây để thoát chương trình :))");
 		jLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				frame.setVisible(false);
+				System.exit(1);
 			}
 		});
 		

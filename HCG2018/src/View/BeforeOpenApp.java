@@ -103,7 +103,7 @@ public class BeforeOpenApp {
 			}
 			else
 			{
-				String test = folder+"\\ExampleCSDL.xls";
+				String test = folder+"\\ExampleDatabase.xls";
 				writeNewFileExcel(test);
 				initialize(link);
 				
@@ -152,7 +152,7 @@ public class BeforeOpenApp {
             workbook = Workbook.createWorkbook(new File(fileName));
  
             // create sheet
-            WritableSheet sheet1 = workbook.createSheet("Link lưu file CSDL HCG2018", 0);
+            WritableSheet sheet1 = workbook.createSheet("CSDL Mẫu HCG2018", 0);
  
             //sheet1.addCell(new Label(cot, hang,link));
            for(int i=0; i<arr1.size();i++)

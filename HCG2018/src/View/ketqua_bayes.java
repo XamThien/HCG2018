@@ -15,6 +15,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controller.Phuongan;
+import controller.XacSuat_Bayes_hodges_lehmann;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,14 +24,14 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
-public class ketqua {
+public class ketqua_bayes {
 
 	private JFrame frmKtQua;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(ArrayList<Phuongan> arr,String namePA) {
+	public static void main(ArrayList<XacSuat_Bayes_hodges_lehmann> xacSuat,ArrayList<Phuongan> arr,String namePA,String title) {
 		try
 		{
 			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -41,7 +42,7 @@ public class ketqua {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ketqua window = new ketqua(arr,namePA);
+					ketqua_bayes window = new ketqua_bayes(xacSuat,arr,namePA,title);
 					window.frmKtQua.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,17 +54,17 @@ public class ketqua {
 	/**
 	 * Create the application.
 	 */
-	public ketqua() {
+	public ketqua_bayes() {
 		//initialize();
 	}
-	public ketqua(ArrayList<Phuongan> arr,String namePA) {
-		initialize(arr,namePA);
+	public ketqua_bayes(ArrayList<XacSuat_Bayes_hodges_lehmann> xacSuat,ArrayList<Phuongan> arr,String namePA,String title) {
+		initialize(xacSuat,arr,namePA,title);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(ArrayList<Phuongan> arr,String namePA) {
+	private void initialize(ArrayList<XacSuat_Bayes_hodges_lehmann> xacSuat,ArrayList<Phuongan> arr,String namePA,String title) {
 		
 		ArrayList<Phuongan> hihi = new ArrayList<Phuongan>();
 		
@@ -107,8 +108,8 @@ public class ketqua {
 //		frmKtQua.getContentPane().add(label);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Chi ti\u00EA\u0301t ph\u01B0\u01A1ng a\u0301n l\u01B0\u0323a cho\u0323n : "+namePA, TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(34, 95, 377, 175);
+		panel.setBorder(new TitledBorder(null, "Chi ti\u00EA\u0301t ph\u01B0\u01A1ng a\u0301n l\u01B0\u0323a cho\u0323n : "+namePA +" "+title, TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(34, 95, 377, 178);
 		frmKtQua.getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -123,16 +124,35 @@ public class ketqua {
 		
         DefaultTableModel dtm = new DefaultTableModel();
         
-        String [] colsName = new String [2];
+        String [] colsName = new String [3];
         colsName[0]="Mục tiêu";
-        colsName[1]="Giá trị";
+        colsName[1]="Xác suất";
+        colsName[2]="Giá trị";
 		dtm.setColumnIdentifiers(colsName);
 		
 		for (int i = 0; i<sl; i++)
 		{
-			String rows[] = new String[2];
+			String rows[] = new String[3];
 			rows[0]=hihi.get(i).getNameMT();
-			rows[1]=String.valueOf(hihi.get(i).getValue());
+			int dem = 0;
+			for(XacSuat_Bayes_hodges_lehmann xs : xacSuat)
+			{
+				
+				if(rows[0].equals(xs.getNamemt()))
+				{
+					rows[1]= String.valueOf(xs.getXacsuat());
+					continue;
+				}
+				else
+				{
+					dem++;
+				}
+			}
+			if(dem == xacSuat.size())
+			{
+				rows[1] = "0";
+			}
+			rows[2]=String.valueOf(hihi.get(i).getValue());
 			dtm.addRow(rows);
 			
 			
