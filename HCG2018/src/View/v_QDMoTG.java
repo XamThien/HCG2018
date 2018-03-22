@@ -90,11 +90,11 @@ public class v_QDMoTG {
                 }
 			}
 		});
-		btnNewButton_1.setBounds(278, 182+(sl-1)*95, 117, 36);
+		btnNewButton_1.setBounds(145, 182+(sl-1)*95, 126, 36);
 		frmTrngThiTrung.getContentPane().add(btnNewButton_1);
 		
-		JButton btnNewButton = new JButton("Xác nhận");
-		btnNewButton.setBounds(145, 182+(sl-1)*95, 126, 36);
+		JButton btnNewButton = new JButton("Kết quả");
+		btnNewButton.setBounds(278, 182+(sl-1)*95, 117, 36);
 		frmTrngThiTrung.getContentPane().add(btnNewButton);
 		
 		JPanel panel = new JPanel();
